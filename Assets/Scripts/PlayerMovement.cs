@@ -19,9 +19,37 @@ public class PlayerMovement : MonoBehaviour
     
     public float moveLerpSpeed;
     public float stopLerpSpeed;
+
+    [Space] 
+    
+    public float checkGroundDistance;
+    public float gravityStrength;
+
+
+    [Space] 
+    
+    public Transform visualsObject;
+    public Transform visualsParent;
+    public float visualsLerpSpeed;
+
+
+    [Space] 
+    
+    public float YKILL;
+
+    [Space] 
+    
+    public List<GameObject> objects = new List<GameObject>();
+
+    private List<Vector3> offsets = new List<Vector3>();
+
+    public Transform lastObject;
     
     
-    
+    [Space] 
+    public Transform footTransform;
+    public Transform hipsTransform;
+    public Transform headTransform;
     
     //Internal Data
 
@@ -29,14 +57,21 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector3 movement;
     private Vector3 direction;
-    
-    // Start is called before the first frame update
+
+    private float gravityValue;
+
+    public bool grounded;
+
+    public bool lerpVisuals;
+
     void Start()
     {
-        
-    }
+        if(lerpVisuals)
+        visualsObject.parent = null;
 
-    // Update is called once per frame
+        lastObject = visualsObject.GetChild(0);
+    }
+    
     void Update()
     {
         CheckInputs();
@@ -48,15 +83,40 @@ public class PlayerMovement : MonoBehaviour
         {
             Move();
             Turn();
+
         }
         else
         {
             Stop();
         }
 
+        if (!grounded)
+        {
+            rb.velocity += Vector3.down * gravityStrength;
+        }
+        
         movement.y = rb.velocity.y;
 
         rb.velocity = movement;
+
+
+        if (lerpVisuals)
+            LerpVisuals();
+
+
+
+        if (transform.position.y < YKILL)
+        {
+            transform.position = Vector3.zero;
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    void LerpVisuals()
+    {
+        visualsObject.transform.eulerAngles = visualsParent.transform.eulerAngles;
+
+        visualsObject.transform.position = Vector3.Lerp(visualsObject.position, visualsParent.position,visualsLerpSpeed);
     }
 
     void CheckInputs()
@@ -66,11 +126,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            if (!CheckGround())
+            {
+                Jump();
+            }
         }
-        
-        
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Possess();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            UnPossess();
+        }
     }
 
     void Move()
@@ -97,5 +167,96 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.velocity += new Vector3(0,jumpForce,0);
+    }
+
+    bool CheckGround()
+    {
+        //if(Physics.Raycast(transform.position, Vector3.down, checkGroundDistance))
+        RaycastHit hit;
+        if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
+        {
+            return false;
+        }
+            return true;
+    }
+
+    void DetectObstacle()
+    {
+        if (Physics.Raycast(footTransform.position, transform.forward, 1))
+        {
+            print("Foot");
+            if (Physics.Raycast(hipsTransform.position, transform.forward, 1))
+            {
+                print("hips");
+                if (Physics.Raycast(headTransform.position, transform.forward, 1))
+                {
+                    print("head");
+                }
+            }
+        }
+    }
+
+    void Possess()
+    {
+        RaycastHit hit;
+        if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
+        {
+            if (hit.collider.gameObject.CompareTag("Ground"))
+            {
+                rb.isKinematic = true;
+            }
+            
+            
+            GameObject _block = hit.collider.gameObject;
+
+            Vector3 _offset = hit.point - _block.transform.position;
+            _offset.x = 0;
+            _offset.z = 0;
+            
+            offsets.Add(_offset);
+            
+            objects.Add(_block);
+
+            lastObject.transform.localPosition += _offset;
+            _block.transform.SetParent(visualsObject);
+            
+            _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);
+            
+            lastObject.SetParent(_block.transform);
+
+            lastObject = _block.transform;
+        }
+    }
+
+    void UnPossess()
+    {
+        if (objects.Count < 1)
+        {
+            return;
+        }
+        
+        
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, .45f, Vector3.down, out hit, checkGroundDistance))
+        {
+            Transform _object = lastObject.GetChild(0);
+            
+            lastObject.parent = null;
+     
+            _object.SetParent(visualsObject);
+            
+            lastObject.position = hit.point;
+
+            _object.localPosition = Vector3.zero;
+
+            offsets.RemoveAt(offsets.Count - 1);
+
+            objects.Remove(lastObject.gameObject);
+
+            lastObject = visualsObject.GetChild(0);            
+
+            Jump();
+        }
+
     }
 }
