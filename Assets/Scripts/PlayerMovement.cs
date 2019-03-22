@@ -317,8 +317,8 @@ public class PlayerMovement : MonoBehaviour
                 
                 lastObject.SetParent(_block.transform);
 
-                lastObject.transform.localPosition -= _offset/2;
-
+                //lastObject.transform.localPosition -= _offset/2;
+                   lastObject.localPosition = new Vector3(lastObject.localPosition.x, _offset.y, lastObject.localPosition.z);
                 lastObject = _block.transform;
 
                 //transform.position -= offsets[offsets.Count - 1]; //
