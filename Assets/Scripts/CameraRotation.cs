@@ -34,7 +34,7 @@ public class CameraRotation : MonoBehaviour
 
     void CheckInputs()
     {
-        input.x = Input.GetAxis("Mouse X");
-        input.y = Input.GetAxis("Mouse Y");
+        input.x = Input.GetAxis("Mouse X") + Input.GetAxis("RightX");
+        input.y = Input.GetAxis("Mouse Y") - Input.GetAxis("RightY");
     }
 }

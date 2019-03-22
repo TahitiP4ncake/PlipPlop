@@ -6,11 +6,7 @@ public class Block : MonoBehaviour
 {
    private void Start()
    {
-      RaycastHit hit;
-      if (Physics.Raycast(transform.position + new Vector3(0,.1f,0), Vector3.down, out hit, 1))
-      {
-         transform.SetParent(hit.collider.gameObject.transform);
-      }
+      Ground();
    }
 
 
@@ -21,6 +17,15 @@ public class Block : MonoBehaviour
 
    public void Drop()
    {
-      
+      Ground();
+   }
+
+   void Ground()
+   {
+      RaycastHit hit;
+      if (Physics.Raycast(transform.position + new Vector3(0,.1f,0), Vector3.down, out hit, 1))
+      {
+         transform.SetParent(hit.collider.gameObject.transform);
+      }
    }
 }

@@ -41,9 +41,11 @@ public class PlayerMovement : MonoBehaviour
     
     public List<GameObject> objects = new List<GameObject>();
 
-    private List<Vector3> offsets = new List<Vector3>();
+    public  List<Vector3> offsets = new List<Vector3>();
 
     public Transform lastObject;
+
+    public Transform baseObject;
     
     
     [Space] 
@@ -124,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"))
         {
             if (!CheckGround())
             {
@@ -132,12 +134,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
         {
             Possess();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
         {
             UnPossess();
         }
@@ -225,13 +227,16 @@ public class PlayerMovement : MonoBehaviour
             lastObject.SetParent(_block.transform);
 
             lastObject = _block.transform;
+
+            transform.position -= offsets[offsets.Count - 1];
         }
     }
 
     void UnPossess()
     {
-        if (objects.Count < 1)
+        if (objects.Count < 2)
         {
+            print("No Blocks to remove");
             return;
         }
         
@@ -239,24 +244,33 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, .45f, Vector3.down, out hit, checkGroundDistance))
         {
-            Transform _object = lastObject.GetChild(0);
+
+
+            Transform _object = objects[objects.Count - 2].transform;
+
+            print(_object.gameObject);
+            print(lastObject.gameObject);
             
             lastObject.parent = null;
      
             _object.SetParent(visualsObject);
-            
-            lastObject.position = hit.point;
+
+            lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
 
             _object.localPosition = Vector3.zero;
 
+            transform.position += offsets[offsets.Count - 1];
+            
             offsets.RemoveAt(offsets.Count - 1);
 
             objects.Remove(lastObject.gameObject);
 
-            lastObject = visualsObject.GetChild(0);            
+            //lastObject = _object;
+            lastObject = objects[objects.Count - 1].transform;
+                
+            print(lastObject.gameObject);
 
-            Jump();
+            //Jump();
         }
-
     }
 }
