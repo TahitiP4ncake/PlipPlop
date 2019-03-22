@@ -63,6 +63,12 @@ public class PlayerMovement : MonoBehaviour
     
     public Transform cameraZObject;
     public Vector2 cameraZ;
+
+
+    [Space] 
+    
+    public Animator anim;
+    public bool walking;
     
     //Internal Data
 
@@ -81,6 +87,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float jumpBufferTimer;
     private bool pressedJump;
+    
+    
+    
 
     void Start()
     {
@@ -101,6 +110,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (input.x != 0 || input.y != 0)
         {
+
+            if (!walking)
+            {
+                walking = true;
+                anim.SetBool("Walking", true);
+            }
+            
             Move();
             
             if (!grounded)
@@ -110,6 +126,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (walking)
+            {
+                walking = false;
+                anim.SetBool("Walking", false);
+            }
+            
             Stop();
         }
 
@@ -292,6 +314,7 @@ public class PlayerMovement : MonoBehaviour
             
                 _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);//
             
+                
                 lastObject.SetParent(_block.transform);
 
                 lastObject.transform.localPosition -= _offset/2;

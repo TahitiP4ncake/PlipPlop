@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
    void Ground()
    {
       RaycastHit hit;
-      if (Physics.Raycast(transform.position + new Vector3(0,.1f,0), Vector3.down, out hit, 1))
+      if (Physics.Raycast(transform.position + new Vector3(0,.1f,0), Vector3.down, out hit, 10))
       {
          transform.SetParent(hit.collider.gameObject.transform);
       }
