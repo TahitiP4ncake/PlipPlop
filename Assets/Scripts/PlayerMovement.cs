@@ -52,6 +52,17 @@ public class PlayerMovement : MonoBehaviour
     public Transform footTransform;
     public Transform hipsTransform;
     public Transform headTransform;
+
+
+    [Space] 
+    
+    public float jumpBufferTime;
+
+
+    [Space] 
+    
+    public Transform cameraZObject;
+    public Vector2 cameraZ;
     
     //Internal Data
 
@@ -61,10 +72,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
 
     private float gravityValue;
+    
+    [Space]
 
     public bool grounded;
 
     public bool lerpVisuals;
+
+    private float jumpBufferTimer;
+    private bool pressedJump;
 
     void Start()
     {
@@ -77,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckInputs();
+        
+        JumpBuffer();
     }
 
     void FixedUpdate()
@@ -84,17 +102,28 @@ public class PlayerMovement : MonoBehaviour
         if (input.x != 0 || input.y != 0)
         {
             Move();
-            Turn();
-
+            
+            if (!grounded)
+            {
+                Turn();
+            }
         }
         else
         {
             Stop();
         }
 
-        if (!grounded)
+        if (CheckGround())
         {
             rb.velocity += Vector3.down * gravityStrength;
+        }
+        else
+        {
+            if (pressedJump)
+            {
+                pressedJump = false;
+                Jump();
+            }
         }
         
         movement.y = rb.velocity.y;
@@ -111,6 +140,30 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = Vector3.zero;
             rb.velocity = Vector3.zero;
+        }
+
+
+        if (!grounded)
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.x, .3f));
+        }
+        else
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
+
+        }
+    }
+
+    void JumpBuffer()
+    {
+        if (pressedJump)
+        {
+            jumpBufferTimer += Time.deltaTime;
+
+            if (jumpBufferTimer >= jumpBufferTime)
+            {
+                pressedJump = false;
+            }
         }
     }
 
@@ -131,6 +184,11 @@ public class PlayerMovement : MonoBehaviour
             if (!CheckGround())
             {
                 Jump();
+            }
+            else
+            {
+                pressedJump = true;
+                jumpBufferTimer = 0;
             }
         }
 
@@ -168,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        rb.velocity += new Vector3(0,jumpForce,0);
+        rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
     }
 
     bool CheckGround()
@@ -206,10 +264,13 @@ public class PlayerMovement : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
                 rb.isKinematic = true;
+                grounded = true;
             }
             
             
             GameObject _block = hit.collider.gameObject;
+
+            Vector3 _pos = _block.transform.position;
 
             Vector3 _offset = hit.point - _block.transform.position;
             _offset.x = 0;
@@ -219,16 +280,36 @@ public class PlayerMovement : MonoBehaviour
             
             objects.Add(_block);
 
-            lastObject.transform.localPosition += _offset;
-            _block.transform.SetParent(visualsObject);
-            
-            _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);
-            
-            lastObject.SetParent(_block.transform);
+            if (!grounded)
+            {
+                //lastObject.transform.localPosition += _offset;
 
-            lastObject = _block.transform;
+                lastObject.transform.parent = null;//
 
-            transform.position -= offsets[offsets.Count - 1];
+                transform.position = _block.transform.position;//
+                
+                _block.transform.SetParent(visualsObject);
+            
+                _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, _offset.y/2, _block.transform.localPosition.z);//
+            
+                lastObject.SetParent(_block.transform);
+
+                lastObject = _block.transform;
+
+                //transform.position -= offsets[offsets.Count - 1]; //
+            }
+            else
+            {
+                
+                //TEMP
+                visualsObject.transform.localPosition = new Vector3(0,-.5f,0);
+                
+                _block.transform.SetParent(visualsObject);
+
+                lastObject.SetParent(_block.transform);
+
+                lastObject = _block.transform;
+            }
         }
     }
 
@@ -237,6 +318,38 @@ public class PlayerMovement : MonoBehaviour
         if (objects.Count < 2)
         {
             print("No Blocks to remove");
+            return;
+        }
+
+        if (grounded)
+        {
+            Transform _object = objects[objects.Count - 2].transform;
+
+            print(_object.gameObject);
+            print(lastObject.gameObject);
+            
+            lastObject.parent = null;
+     
+            _object.SetParent(visualsObject);
+
+
+            _object.localPosition = Vector3.zero;
+
+            //transform.position += offsets[offsets.Count - 1];
+            
+            offsets.RemoveAt(offsets.Count - 1);
+
+            objects.Remove(lastObject.gameObject);
+
+            //lastObject = _object;
+            lastObject = objects[objects.Count - 1].transform;
+                
+            //TEMP
+            visualsObject.transform.localPosition = Vector3.zero;
+
+            
+            rb.isKinematic = false;
+            grounded = false;
             return;
         }
         
@@ -248,8 +361,6 @@ public class PlayerMovement : MonoBehaviour
 
             Transform _object = objects[objects.Count - 2].transform;
 
-            print(_object.gameObject);
-            print(lastObject.gameObject);
             
             lastObject.parent = null;
      
@@ -257,19 +368,22 @@ public class PlayerMovement : MonoBehaviour
 
             lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
 
-            _object.localPosition = Vector3.zero;
+            //_object.localPosition = Vector3.zero;
 
+            _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
+            
             transform.position += offsets[offsets.Count - 1];
             
             offsets.RemoveAt(offsets.Count - 1);
 
             objects.Remove(lastObject.gameObject);
 
+            lastObject.gameObject.GetComponent<Block>().Drop();
+            
             //lastObject = _object;
             lastObject = objects[objects.Count - 1].transform;
                 
-            print(lastObject.gameObject);
-
+            
             //Jump();
         }
     }
