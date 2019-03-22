@@ -290,9 +290,11 @@ public class PlayerMovement : MonoBehaviour
                 
                 _block.transform.SetParent(visualsObject);
             
-                _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, _offset.y/2, _block.transform.localPosition.z);//
+                _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);//
             
                 lastObject.SetParent(_block.transform);
+
+                lastObject.transform.localPosition -= _offset/2;
 
                 lastObject = _block.transform;
 
@@ -368,11 +370,18 @@ public class PlayerMovement : MonoBehaviour
 
             lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
 
-            //_object.localPosition = Vector3.zero;
-
             _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
+
+            _object.transform.parent = null;
             
-            transform.position += offsets[offsets.Count - 1];
+            
+            
+            transform.position += offsets[offsets.Count - 1]/2;
+            
+            transform.position = new Vector3(_object.transform.position.x, transform.position.y, _object.transform.position.z);//
+            
+            _object.transform.SetParent(visualsObject);
+            _object.transform.localPosition = Vector3.zero;
             
             offsets.RemoveAt(offsets.Count - 1);
 
@@ -380,10 +389,10 @@ public class PlayerMovement : MonoBehaviour
 
             lastObject.gameObject.GetComponent<Block>().Drop();
             
-            //lastObject = _object;
             lastObject = objects[objects.Count - 1].transform;
                 
             
+            //Uniquement si on release tout les cubes
             //Jump();
         }
     }
