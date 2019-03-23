@@ -69,6 +69,18 @@ public class PlayerMovement : MonoBehaviour
     
     public Animator anim;
     public bool walking;
+
+
+    [Space] 
+    
+    
+    public Emotions emotions;
+
+    [Space] 
+    [Header("Particles")] 
+    [Space] 
+    
+    public ParticleSystem landDust;
     
     //Internal Data
 
@@ -81,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     
     [Space]
 
-    public bool grounded;
+    public bool IsGround;
 
     public bool lerpVisuals;
 
@@ -119,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
             
             Move();
             
-            if (!grounded)
+            if (!IsGround)
             {
                 Turn();
             }
@@ -160,12 +172,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.y < YKILL)
         {
-            transform.position = Vector3.zero;
+            transform.position = new Vector3(0,10,0);
             rb.velocity = Vector3.zero;
         }
 
 
-        if (!grounded)
+        if (!IsGround)
         {
             cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.x, .3f));
         }
@@ -283,10 +295,20 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
+
+            
+            
+            if (IsGround)
+            {
+                return;
+            }
+            
+            emotions.ChangeEmotion(Emotion.Smile);
+
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
                 rb.isKinematic = true;
-                grounded = true;
+                IsGround = true;
             }
             
             
@@ -302,7 +324,7 @@ public class PlayerMovement : MonoBehaviour
             
             objects.Add(_block);
 
-            if (!grounded)
+            if (!IsGround)
             {
                 //lastObject.transform.localPosition += _offset;
 
@@ -342,11 +364,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (objects.Count < 2)
         {
+            emotions.ChangeEmotion(Emotion.Sad);
             print("No Blocks to remove");
             return;
         }
 
-        if (grounded)
+        if (IsGround)
         {
             Transform _object = objects[objects.Count - 2].transform;
 
@@ -374,7 +397,10 @@ public class PlayerMovement : MonoBehaviour
 
             
             rb.isKinematic = false;
-            grounded = false;
+            IsGround = false;
+            
+            emotions.ChangeEmotion(Emotion.Smile);
+
             return;
         }
         
@@ -410,13 +436,74 @@ public class PlayerMovement : MonoBehaviour
 
             objects.Remove(lastObject.gameObject);
 
-            lastObject.gameObject.GetComponent<Block>().Drop();
+            lastObject.gameObject.GetComponent<Block>().Drop(true);
             
             lastObject = objects[objects.Count - 1].transform;
                 
+            emotions.ChangeEmotion(Emotion.Smile);
+
             
             //Uniquement si on release tout les cubes
             //Jump();
         }
+        else
+        {
+            if (rb.velocity.y < float.Epsilon && rb.velocity.y > -float.Epsilon)
+            {
+                
+                print("PLAYER IS STATIC ENOUGH TO DEPOP");
+                
+                Transform _object = objects[objects.Count - 2].transform;
+
+            
+                lastObject.parent = null;
+     
+                _object.SetParent(visualsObject);
+
+                //lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
+
+                _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
+
+                _object.transform.parent = null;
+            
+            
+            
+                transform.position += offsets[offsets.Count - 1]/2;
+            
+                transform.position = new Vector3(_object.transform.position.x, transform.position.y, _object.transform.position.z);//
+            
+                _object.transform.SetParent(visualsObject);
+                _object.transform.localPosition = Vector3.zero;
+
+                transform.position += offsets[offsets.Count - 1];
+            
+                offsets.RemoveAt(offsets.Count - 1);
+
+                objects.Remove(lastObject.gameObject);
+
+                lastObject.gameObject.GetComponent<Block>().Drop(false);
+            
+                lastObject = objects[objects.Count - 1].transform;
+                
+                emotions.ChangeEmotion(Emotion.Smile);
+
+            }
+            else
+            {
+                print("STOP MOVING");
+                
+                emotions.ChangeEmotion(Emotion.Sad);
+
+            }
+        }
     }
+
+    void OnCollisionEnter()
+    {
+        if (!CheckGround())
+        {
+            landDust.Play();
+        }
+    }
+    
 }

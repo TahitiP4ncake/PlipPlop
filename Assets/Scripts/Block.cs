@@ -15,9 +15,12 @@ public class Block : MonoBehaviour
       
    }
 
-   public void Drop()
+   public void Drop(bool _grounded)
    {
-      Ground();
+      if (_grounded)
+      {
+         Ground();
+      }
    }
 
    void Ground()
