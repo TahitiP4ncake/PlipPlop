@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraZObject;
     public Vector2 cameraZ;
 
+    private float cameraOffset;
+
     public PostProcessVolume pp;
     public PostProcessProfile profileRef;
     private PostProcessProfile profile;
@@ -115,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float jumpBufferTimer;
     private bool pressedJump;
+
+    private float influence = 1;
     
     
     
@@ -184,12 +188,10 @@ public class PlayerMovement : MonoBehaviour
         
         movement.y = rb.velocity.y;
 
-        rb.velocity = movement;
-
-
+        rb.velocity = Vector3.Lerp(rb.velocity, movement, Mathf.Clamp01(influence));
+        
         if (lerpVisuals)
             LerpVisuals();
-
 
 
         if (transform.position.y < YKILL)
@@ -218,6 +220,21 @@ public class PlayerMovement : MonoBehaviour
             depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, farDistance, .2f);
             depth.aperture.value = Mathf.Lerp(depth.aperture.value, farAperture, .2f);
 
+        }
+        
+        UpdateInfluence();
+    }
+
+    void UpdateInfluence()
+    {
+        if (influence < 1)
+        {
+            influence += Time.fixedDeltaTime;
+
+            if (influence >= 1)
+            {
+                influence = 1;
+            }
         }
     }
 
@@ -343,6 +360,17 @@ public class PlayerMovement : MonoBehaviour
                 rb.isKinematic = true;
                 IsGround = true;
             }
+            else if (hit.collider.gameObject.CompareTag("No"))
+            {
+                print("NO!");
+
+                influence = -.5f;
+                rb.velocity += (transform.forward + Vector3.up) * 10;
+                
+                emotions.ChangeEmotion(Emotion.Sad);
+                
+                return;        
+            }
             
             
             GameObject _block = hit.collider.gameObject;
@@ -384,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 
                 //TEMP
-                visualsObject.transform.localPosition = new Vector3(0,-.5f,0);
+                visualsObject.transform.localPosition = new Vector3(0,-1f,0);
                 
                 _block.transform.SetParent(visualsObject);
 

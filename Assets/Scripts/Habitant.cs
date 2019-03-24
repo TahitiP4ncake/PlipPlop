@@ -24,7 +24,7 @@ public class Habitant : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-print("IN");
+        //print("IN");
         PlayerMovement _player = other.gameObject.GetComponentInParent<PlayerMovement>();
         if (_player)
         {
@@ -35,7 +35,7 @@ print("IN");
     private void OnTriggerExit(Collider other)
     {
         
-        print("OUT");
+        //print("OUT");
         PlayerMovement _player = other.gameObject.GetComponentInParent<PlayerMovement>();
         if (_player)
         {
