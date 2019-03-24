@@ -41,15 +41,46 @@ public class PlayerMovement : MonoBehaviour
     
     public List<GameObject> objects = new List<GameObject>();
 
-    private List<Vector3> offsets = new List<Vector3>();
+    public  List<Vector3> offsets = new List<Vector3>();
 
     public Transform lastObject;
+
+    public Transform baseObject;
     
     
     [Space] 
     public Transform footTransform;
     public Transform hipsTransform;
     public Transform headTransform;
+
+
+    [Space] 
+    
+    public float jumpBufferTime;
+
+
+    [Space] 
+    
+    public Transform cameraZObject;
+    public Vector2 cameraZ;
+
+
+    [Space] 
+    
+    public Animator anim;
+    public bool walking;
+
+
+    [Space] 
+    
+    
+    public Emotions emotions;
+
+    [Space] 
+    [Header("Particles")] 
+    [Space] 
+    
+    public ParticleSystem landDust;
     
     //Internal Data
 
@@ -59,10 +90,18 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
 
     private float gravityValue;
+    
+    [Space]
 
-    public bool grounded;
+    public bool IsGround;
 
     public bool lerpVisuals;
+
+    private float jumpBufferTimer;
+    private bool pressedJump;
+    
+    
+    
 
     void Start()
     {
@@ -75,24 +114,50 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckInputs();
+        
+        JumpBuffer();
     }
 
     void FixedUpdate()
     {
         if (input.x != 0 || input.y != 0)
         {
-            Move();
-            Turn();
 
+            if (!walking)
+            {
+                walking = true;
+                anim.SetBool("Walking", true);
+            }
+            
+            Move();
+            
+            if (!IsGround)
+            {
+                Turn();
+            }
         }
         else
         {
+            if (walking)
+            {
+                walking = false;
+                anim.SetBool("Walking", false);
+            }
+            
             Stop();
         }
 
-        if (!grounded)
+        if (CheckGround())
         {
             rb.velocity += Vector3.down * gravityStrength;
+        }
+        else
+        {
+            if (pressedJump)
+            {
+                pressedJump = false;
+                Jump();
+            }
         }
         
         movement.y = rb.velocity.y;
@@ -107,8 +172,32 @@ public class PlayerMovement : MonoBehaviour
 
         if (transform.position.y < YKILL)
         {
-            transform.position = Vector3.zero;
+            transform.position = new Vector3(0,10,0);
             rb.velocity = Vector3.zero;
+        }
+
+
+        if (!IsGround)
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.x, .3f));
+        }
+        else
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
+
+        }
+    }
+
+    void JumpBuffer()
+    {
+        if (pressedJump)
+        {
+            jumpBufferTimer += Time.deltaTime;
+
+            if (jumpBufferTimer >= jumpBufferTime)
+            {
+                pressedJump = false;
+            }
         }
     }
 
@@ -124,20 +213,25 @@ public class PlayerMovement : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"))
         {
             if (!CheckGround())
             {
                 Jump();
             }
+            else
+            {
+                pressedJump = true;
+                jumpBufferTimer = 0;
+            }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
         {
             Possess();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
         {
             UnPossess();
         }
@@ -166,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        rb.velocity += new Vector3(0,jumpForce,0);
+        rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
     }
 
     bool CheckGround()
@@ -201,13 +295,26 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
+
+            
+            
+            if (IsGround)
+            {
+                return;
+            }
+            
+            emotions.ChangeEmotion(Emotion.Smile);
+
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
                 rb.isKinematic = true;
+                IsGround = true;
             }
             
             
             GameObject _block = hit.collider.gameObject;
+
+            Vector3 _pos = _block.transform.position;
 
             Vector3 _offset = hit.point - _block.transform.position;
             _offset.x = 0;
@@ -217,21 +324,83 @@ public class PlayerMovement : MonoBehaviour
             
             objects.Add(_block);
 
-            lastObject.transform.localPosition += _offset;
-            _block.transform.SetParent(visualsObject);
-            
-            _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);
-            
-            lastObject.SetParent(_block.transform);
+            if (!IsGround)
+            {
+                //lastObject.transform.localPosition += _offset;
 
-            lastObject = _block.transform;
+                lastObject.transform.parent = null;//
+
+                transform.position = _block.transform.position;//
+                
+                _block.transform.SetParent(visualsObject);
+            
+                _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);//
+            
+                
+                lastObject.SetParent(_block.transform);
+
+                //lastObject.transform.localPosition -= _offset/2;
+                   lastObject.localPosition = new Vector3(lastObject.localPosition.x, _offset.y, lastObject.localPosition.z);
+                lastObject = _block.transform;
+
+                //transform.position -= offsets[offsets.Count - 1]; //
+            }
+            else
+            {
+                
+                //TEMP
+                visualsObject.transform.localPosition = new Vector3(0,-.5f,0);
+                
+                _block.transform.SetParent(visualsObject);
+
+                lastObject.SetParent(_block.transform);
+
+                lastObject = _block.transform;
+            }
         }
     }
 
     void UnPossess()
     {
-        if (objects.Count < 1)
+        if (objects.Count < 2)
         {
+            emotions.ChangeEmotion(Emotion.Sad);
+            print("No Blocks to remove");
+            return;
+        }
+
+        if (IsGround)
+        {
+            Transform _object = objects[objects.Count - 2].transform;
+
+            print(_object.gameObject);
+            print(lastObject.gameObject);
+            
+            lastObject.parent = null;
+     
+            _object.SetParent(visualsObject);
+
+
+            _object.localPosition = Vector3.zero;
+
+            //transform.position += offsets[offsets.Count - 1];
+            
+            offsets.RemoveAt(offsets.Count - 1);
+
+            objects.Remove(lastObject.gameObject);
+
+            //lastObject = _object;
+            lastObject = objects[objects.Count - 1].transform;
+                
+            //TEMP
+            visualsObject.transform.localPosition = Vector3.zero;
+
+            
+            rb.isKinematic = false;
+            IsGround = false;
+            
+            emotions.ChangeEmotion(Emotion.Smile);
+
             return;
         }
         
@@ -239,24 +408,102 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, .45f, Vector3.down, out hit, checkGroundDistance))
         {
-            Transform _object = lastObject.GetChild(0);
+
+
+            Transform _object = objects[objects.Count - 2].transform;
+
             
             lastObject.parent = null;
      
             _object.SetParent(visualsObject);
+
+            lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
+
+            _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
+
+            _object.transform.parent = null;
             
-            lastObject.position = hit.point;
-
-            _object.localPosition = Vector3.zero;
-
+            
+            
+            transform.position += offsets[offsets.Count - 1]/2;
+            
+            transform.position = new Vector3(_object.transform.position.x, transform.position.y, _object.transform.position.z);//
+            
+            _object.transform.SetParent(visualsObject);
+            _object.transform.localPosition = Vector3.zero;
+            
             offsets.RemoveAt(offsets.Count - 1);
 
             objects.Remove(lastObject.gameObject);
 
-            lastObject = visualsObject.GetChild(0);            
+            lastObject.gameObject.GetComponent<Block>().Drop(true);
+            
+            lastObject = objects[objects.Count - 1].transform;
+                
+            emotions.ChangeEmotion(Emotion.Smile);
 
-            Jump();
+            
+            //Uniquement si on release tout les cubes
+            //Jump();
         }
+        else
+        {
+            if (rb.velocity.y < float.Epsilon && rb.velocity.y > -float.Epsilon)
+            {
+                
+                print("PLAYER IS STATIC ENOUGH TO DEPOP");
+                
+                Transform _object = objects[objects.Count - 2].transform;
 
+            
+                lastObject.parent = null;
+     
+                _object.SetParent(visualsObject);
+
+                //lastObject.position = new Vector3(lastObject.position.x, hit.point.y, lastObject.position.z);
+
+                _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
+
+                _object.transform.parent = null;
+            
+            
+            
+                transform.position += offsets[offsets.Count - 1]/2;
+            
+                transform.position = new Vector3(_object.transform.position.x, transform.position.y, _object.transform.position.z);//
+            
+                _object.transform.SetParent(visualsObject);
+                _object.transform.localPosition = Vector3.zero;
+
+                transform.position += offsets[offsets.Count - 1];
+            
+                offsets.RemoveAt(offsets.Count - 1);
+
+                objects.Remove(lastObject.gameObject);
+
+                lastObject.gameObject.GetComponent<Block>().Drop(false);
+            
+                lastObject = objects[objects.Count - 1].transform;
+                
+                emotions.ChangeEmotion(Emotion.Smile);
+
+            }
+            else
+            {
+                print("STOP MOVING");
+                
+                emotions.ChangeEmotion(Emotion.Sad);
+
+            }
+        }
     }
+
+    void OnCollisionEnter()
+    {
+        if (!CheckGround())
+        {
+            landDust.Play();
+        }
+    }
+    
 }
