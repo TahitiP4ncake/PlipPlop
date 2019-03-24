@@ -43,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerMovement.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlayerMovement.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="216" column="84" selection-start-line="216" selection-start-column="84" selection-end-line="216" selection-end-column="84" />
+            <state relative-caret-position="-1305">
+              <caret line="364" lean-forward="true" selection-start-line="364" selection-end-line="364" />
               <folding>
                 <marker date="1553430085433" expanded="true" signature="6:122" ph="..." />
                 <marker date="1553430085433" expanded="true" signature="167:13496" ph="{...}" />
@@ -106,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextureAnimation.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TextureAnimation.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/TextureAnimation.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            <state relative-caret-position="210">
+              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
               <folding>
                 <marker date="1553433664611" expanded="false" signature="6:78" ph="..." />
                 <marker date="1553433664611" expanded="true" signature="125:1025" ph="{...}" />
@@ -1029,10 +1029,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/TextureAnimation.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+          <folding>
+            <marker date="1553433664611" expanded="false" signature="6:78" ph="..." />
+            <marker date="1553433664611" expanded="true" signature="125:1025" ph="{...}" />
+            <marker date="1553433664611" expanded="true" signature="292:381" ph="{...}" />
+            <marker date="1553433664611" expanded="true" signature="414:1023" ph="{...}" />
+            <marker date="1553433664611" expanded="true" signature="597:817" ph="{...}" />
+            <marker date="1553433664611" expanded="true" signature="756:807" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="216" column="84" selection-start-line="216" selection-start-column="84" selection-end-line="216" selection-end-column="84" />
+        <state relative-caret-position="-1305">
+          <caret line="364" lean-forward="true" selection-start-line="364" selection-end-line="364" />
           <folding>
             <marker date="1553430085433" expanded="true" signature="6:122" ph="..." />
             <marker date="1553430085433" expanded="true" signature="167:13496" ph="{...}" />
@@ -1086,21 +1101,6 @@
             <marker date="1553430085433" expanded="true" signature="13218:13355" ph="{...}" />
             <marker date="1553430085433" expanded="true" signature="13400:13489" ph="{...}" />
             <marker date="1553430085433" expanded="true" signature="13434:13483" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/TextureAnimation.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-          <folding>
-            <marker date="1553433664611" expanded="false" signature="6:78" ph="..." />
-            <marker date="1553433664611" expanded="true" signature="125:1025" ph="{...}" />
-            <marker date="1553433664611" expanded="true" signature="292:381" ph="{...}" />
-            <marker date="1553433664611" expanded="true" signature="414:1023" ph="{...}" />
-            <marker date="1553433664611" expanded="true" signature="597:817" ph="{...}" />
-            <marker date="1553433664611" expanded="true" signature="756:807" ph="{...}" />
           </folding>
         </state>
       </provider>
