@@ -20,7 +20,7 @@ public class TextureAnimation : MonoBehaviour
 
     public void ChangeTexture()
     {
-        print("Change texture");
+        //print("Change texture");
         
         int _index = Random.Range(0, ARMC.Length);
 

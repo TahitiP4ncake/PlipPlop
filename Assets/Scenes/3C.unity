@@ -286,7 +286,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6491549457554366922}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &223467403
+--- !u!114 &223467405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,11 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c1f6a0c30ba8145aa514e9b9fbfc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 1984856338}
+  rend: {fileID: 1317661907}
   mat: {fileID: 2100000, guid: a5153e9ca80576f4ca9fffa180214c87, type: 2}
   lastTextureIndex: 0
-  ARMC: []
-  normals: []
+  ARMC:
+  - {fileID: 2800000, guid: 871b56c6256649f4e999ad4d09f26165, type: 3}
+  - {fileID: 2800000, guid: be63784d4b39a92428b3baafe7166517, type: 3}
+  normals:
+  - {fileID: 2800000, guid: 93950d3498177374db0688bfd1dc3fa6, type: 3}
+  - {fileID: 2800000, guid: f625f4a25354ef447b30f3944d2ae6ee, type: 3}
 --- !u!1 &288286778
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 7253140e9cb61c4478804d043dab6e6e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a691f0bdf03667a47a7524d33e65f555, type: 2}
+      objectReference: {fileID: 2100000, guid: a5153e9ca80576f4ca9fffa180214c87, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7253140e9cb61c4478804d043dab6e6e, type: 3}
 --- !u!1 &469817087 stripped
@@ -953,6 +957,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be60ffc472e6bf545a7641c7dd9e674e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!137 &1317661907 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6491549458490709139, guid: 985f2ad098daa9c4689ec616a8f97bb3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6491549457554366922}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1678026066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5908,12 +5918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be60ffc472e6bf545a7641c7dd9e674e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!137 &1984856338 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6491549458490709137, guid: 985f2ad098daa9c4689ec616a8f97bb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6491549457554366922}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2090375912
 GameObject:
   m_ObjectHideFlags: 0
@@ -6257,34 +6261,43 @@ PrefabInstance:
     - target: {fileID: 6491549458501780915, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.0000017075472
+      value: 0.35654557
       objectReference: {fileID: 0}
     - target: {fileID: 6491549458501780915, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90.00001
+      value: 114.997604
       objectReference: {fileID: 0}
     - target: {fileID: 6491549458501780915, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -45.843655
+      value: -0.7646107
       objectReference: {fileID: 0}
     - target: {fileID: 6491549458501780917, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.262246
+      value: -0.41687423
       objectReference: {fileID: 0}
     - target: {fileID: 6491549458501780917, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90.10108
+      value: 59.967236
       objectReference: {fileID: 0}
     - target: {fileID: 6491549458501780917, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 43.883125
+      value: -0.7111789
       objectReference: {fileID: 0}
+    - target: {fileID: 899763702, guid: 985f2ad098daa9c4689ec616a8f97bb3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5153e9ca80576f4ca9fffa180214c87, type: 2}
     - target: {fileID: 6491549458490709137, guid: 985f2ad098daa9c4689ec616a8f97bb3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5153e9ca80576f4ca9fffa180214c87, type: 2}
+    - target: {fileID: 6491549458490709139, guid: 985f2ad098daa9c4689ec616a8f97bb3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
