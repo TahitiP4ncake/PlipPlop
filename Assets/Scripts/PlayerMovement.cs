@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -64,6 +65,21 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraZObject;
     public Vector2 cameraZ;
 
+    public PostProcessVolume pp;
+    public PostProcessProfile profileRef;
+    private PostProcessProfile profile;
+
+[Space]
+    private DepthOfField depth;
+
+    public float closeDistance;
+    public float farDistance;
+    
+    public float closeFocal;
+    public float farFocal;
+
+    public float closeAperture;
+    public float farAperture;
 
     [Space] 
     
@@ -109,6 +125,12 @@ public class PlayerMovement : MonoBehaviour
         visualsObject.parent = null;
 
         lastObject = visualsObject.GetChild(0);
+
+        profile = Instantiate(profileRef);
+        pp.profile = profile;
+        
+        profile.TryGetSettings(out depth);
+
     }
     
     void Update()
@@ -180,10 +202,21 @@ public class PlayerMovement : MonoBehaviour
         if (!IsGround)
         {
             cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.x, .3f));
+
+
+            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, closeFocal, .3f);
+            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, closeDistance, .3f);
+            depth.aperture.value = Mathf.Lerp(depth.aperture.value, closeAperture, .3f);
+            
+            
         }
         else
         {
             cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
+            
+            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, farFocal, .2f);
+            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, farDistance, .2f);
+            depth.aperture.value = Mathf.Lerp(depth.aperture.value, farAperture, .2f);
 
         }
     }
@@ -341,6 +374,8 @@ public class PlayerMovement : MonoBehaviour
 
                 //lastObject.transform.localPosition -= _offset/2;
                    lastObject.localPosition = new Vector3(lastObject.localPosition.x, _offset.y, lastObject.localPosition.z);
+                
+                
                 lastObject = _block.transform;
 
                 //transform.position -= offsets[offsets.Count - 1]; //
