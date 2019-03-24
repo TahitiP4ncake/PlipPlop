@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public PostProcessProfile profileRef;
     private PostProcessProfile profile;
 
-[Space]
+    [Space]
     private DepthOfField depth;
 
     public float closeDistance;
@@ -99,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
     [Space] 
     
     public ParticleSystem landDust;
+
+    public ParticleSystem[] walkingDust;
     
     //Internal Data
 
@@ -109,10 +111,13 @@ public class PlayerMovement : MonoBehaviour
 
     private float gravityValue;
     
+    
+    
     [Space]
 
     public bool IsGround;
 
+    public bool grounded;
     public bool lerpVisuals;
 
     private float jumpBufferTimer;
@@ -146,6 +151,40 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        //CAMERA ZOOM
+        if (!IsGround)
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z,cameraZ.x + cameraOffset, .3f));
+//            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, Mathf.Clamp(cameraZ.x + cameraOffset,cameraZ.x,cameraZ.y), .3f));
+
+
+            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, closeFocal, .3f);
+            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, closeDistance, .3f);
+            depth.aperture.value = Mathf.Lerp(depth.aperture.value, closeAperture, .3f);
+            
+            
+        }
+        else
+        {
+            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
+            
+            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, farFocal, .2f);
+            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, farDistance, .2f);
+            depth.aperture.value = Mathf.Lerp(depth.aperture.value, farAperture, .2f);
+
+        }
+        
+        
+        
+        
+        if (IsGround)
+        {
+            return;
+        }
+        
+        
+        //Apply Inputs
+        
         if (input.x != 0 || input.y != 0)
         {
 
@@ -193,34 +232,16 @@ public class PlayerMovement : MonoBehaviour
         if (lerpVisuals)
             LerpVisuals();
 
-
+//YKILL TEMP
         if (transform.position.y < YKILL)
         {
             transform.position = new Vector3(0,10,0);
             rb.velocity = Vector3.zero;
+            grounded = false;
         }
 
 
-        if (!IsGround)
-        {
-            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.x, .3f));
-
-
-            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, closeFocal, .3f);
-            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, closeDistance, .3f);
-            depth.aperture.value = Mathf.Lerp(depth.aperture.value, closeAperture, .3f);
-            
-            
-        }
-        else
-        {
-            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
-            
-            depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, farFocal, .2f);
-            depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, farDistance, .2f);
-            depth.aperture.value = Mathf.Lerp(depth.aperture.value, farAperture, .2f);
-
-        }
+        
         
         UpdateInfluence();
     }
@@ -311,6 +332,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
+        landDust.Play();
     }
 
     bool CheckGround()
@@ -319,9 +341,19 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
+
             return false;
         }
-            return true;
+
+        if (grounded)
+        {
+            grounded = false;
+            print("OFF THE GROUND");
+            
+            //anim.SetTrigger("Air");
+        }
+
+        return true;
     }
 
     void DetectObstacle()
@@ -359,6 +391,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.isKinematic = true;
                 IsGround = true;
+                
+                
+                //Play stuck Animation
+                //anim.SetTrigger("Grounded");
             }
             else if (hit.collider.gameObject.CompareTag("No"))
             {
@@ -389,6 +425,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 //lastObject.transform.localPosition += _offset;
 
+                cameraOffset -= _offset.y;
+                print(cameraOffset);
+                
                 lastObject.transform.parent = null;//
 
                 transform.position = _block.transform.position;//
@@ -412,7 +451,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 
                 //TEMP
-                visualsObject.transform.localPosition = new Vector3(0,-1f,0);
+                visualsObject.transform.localPosition = new Vector3(0,0,-1f);
                 
                 _block.transform.SetParent(visualsObject);
 
@@ -436,8 +475,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Transform _object = objects[objects.Count - 2].transform;
 
-            print(_object.gameObject);
-            print(lastObject.gameObject);
+            //print(_object.gameObject);
+            //print(lastObject.gameObject);
             
             lastObject.parent = null;
      
@@ -447,6 +486,8 @@ public class PlayerMovement : MonoBehaviour
             _object.localPosition = Vector3.zero;
 
             //transform.position += offsets[offsets.Count - 1];
+
+          
             
             offsets.RemoveAt(offsets.Count - 1);
 
@@ -494,6 +535,10 @@ public class PlayerMovement : MonoBehaviour
             
             _object.transform.SetParent(visualsObject);
             _object.transform.localPosition = Vector3.zero;
+            
+            cameraOffset += offsets[offsets.Count - 1].y;
+            
+            print(cameraOffset);
             
             offsets.RemoveAt(offsets.Count - 1);
 
@@ -565,8 +610,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!CheckGround())
         {
-            landDust.Play();
+            if (grounded == false)
+            {
+                print("GROUNDED");
+                //anim.SetTrigger("Land");
+                landDust.Play();
+                grounded = true;
+            }
         }
+    }
+
+    public void FootStep(int _i)
+    {
+        
+        if(grounded)
+        walkingDust[_i].Play();
     }
     
 }
