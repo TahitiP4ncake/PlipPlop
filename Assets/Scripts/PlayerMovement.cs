@@ -87,7 +87,15 @@ public class PlayerMovement : MonoBehaviour
     
     public Animator anim;
     public bool walking;
+    
+    [Space]
 
+    public Transform orientationTransform;
+
+    public float sideTilt;
+    public float frontTilt;
+
+    public float maxTiltAngle;
 
     [Space] 
     
@@ -174,8 +182,9 @@ public class PlayerMovement : MonoBehaviour
 
         }
         
-        
-        
+        //Inclinaison du personnage à tweaker en fonction de la taille
+        orientationTransform.localEulerAngles = new Vector3(Mathf.Lerp(orientationTransform.localEulerAngles.x, Mathf.Clamp(movement.magnitude*frontTilt, -maxTiltAngle, maxTiltAngle), .5f),0,orientationTransform.localEulerAngles.z);
+
         
         if (IsGround)
         {
@@ -209,6 +218,9 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Walking", false);
             }
             
+            orientationTransform.localEulerAngles = new Vector3(orientationTransform.localEulerAngles.x,0,0);
+
+            
             Stop();
         }
 
@@ -235,9 +247,9 @@ public class PlayerMovement : MonoBehaviour
 //YKILL TEMP
         if (transform.position.y < YKILL)
         {
-            transform.position = new Vector3(0,10,0);
+            transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
-            grounded = false;
+            Jump();
         }
 
 
@@ -281,9 +293,26 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckInputs()
     {
+        if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
+        {
+            Possess();
+        }
+
+        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
+        {
+            UnPossess();
+        }
+        
+        
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
+
+        if (IsGround)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"))
         {
             if (!CheckGround())
@@ -297,20 +326,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
-        {
-            Possess();
-        }
-
-        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
-        {
-            UnPossess();
-        }
+        
     }
 
     void Move()
     {
         movement = Vector3.Lerp(movement, Vector3.ClampMagnitude(camTransform.right*input.x + camTransform.forward* input.y, 1f) * speed, moveLerpSpeed);
+        
+
     }
 
     void Stop()
@@ -322,7 +345,16 @@ public class PlayerMovement : MonoBehaviour
     {
         direction = new Vector3(0, Mathf.Atan2(-input.y, input.x) * 180 / Mathf.PI-90 + camTransform.eulerAngles.y, 0);
 
-        float step = rotationSpeed;
+        float _rotation = Mathf.DeltaAngle (transform.eulerAngles.y, direction.y);
+        
+        
+        float step = rotationSpeed * Mathf.Abs (_rotation)/180;
+        
+        _rotation = (_rotation > 180) ? _rotation - 360 : _rotation;
+        
+        orientationTransform.localEulerAngles = new Vector3(orientationTransform.localEulerAngles.x,0,Mathf.Clamp(_rotation*sideTilt,  -maxTiltAngle, maxTiltAngle));
+
+        
 		
         Quaternion turnRotation = Quaternion.Euler(0f, direction.y, 0f);
 				
@@ -345,6 +377,16 @@ public class PlayerMovement : MonoBehaviour
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
 
+            if (!grounded)
+            {
+                grounded = true;
+                anim.SetBool("Grounded", true);
+                
+                landDust.Play();
+
+            }
+            
+            
             return false;
         }
 
@@ -353,7 +395,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
             print("OFF THE GROUND");
             
-            //anim.SetTrigger("Air");
+            anim.SetBool("Grounded", false);
         }
 
         return true;
@@ -436,6 +478,8 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = _block.transform.position;//
                 
                 _block.transform.SetParent(visualsObject);
+                
+                _block.transform.localEulerAngles = new Vector3(0,_block.transform.localEulerAngles.y,0);
             
                 _block.transform.localPosition = new Vector3(_block.transform.localPosition.x, 0, _block.transform.localPosition.z);//
             
@@ -457,6 +501,9 @@ public class PlayerMovement : MonoBehaviour
                 visualsObject.transform.localPosition = new Vector3(0,0,-1f);
                 
                 _block.transform.SetParent(visualsObject);
+                
+                _block.transform.localEulerAngles = new Vector3(0,_block.transform.localEulerAngles.y,0);
+
 
                 lastObject.SetParent(_block.transform);
 
@@ -489,6 +536,8 @@ public class PlayerMovement : MonoBehaviour
             _object.localPosition = Vector3.zero;
 
             //transform.position += offsets[offsets.Count - 1];
+
+            lastObject.transform.localEulerAngles = new Vector3(0, lastObject.transform.localEulerAngles.y, 0);
 
           
             
@@ -529,8 +578,8 @@ public class PlayerMovement : MonoBehaviour
             _object.localPosition = new Vector3(_object.localPosition.x, 0, _object.localPosition.z);
 
             _object.transform.parent = null;
-            
-            
+
+            lastObject.transform.localEulerAngles = new Vector3(0, lastObject.transform.localEulerAngles.y, 0);
             
             transform.position += offsets[offsets.Count - 1]/2;
             
@@ -578,7 +627,7 @@ public class PlayerMovement : MonoBehaviour
 
                 _object.transform.parent = null;
             
-            
+                lastObject.transform.localEulerAngles = new Vector3(0, lastObject.transform.localEulerAngles.y, 0);
             
                 transform.position += offsets[offsets.Count - 1]/2;
             
