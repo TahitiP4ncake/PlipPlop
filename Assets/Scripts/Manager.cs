@@ -50,12 +50,11 @@ public class Manager : MonoBehaviour
     void Start()
     {
 
-        if (!Application.isEditor)
-        {
+      
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-        }
+        
 
         StartLevel();
 
