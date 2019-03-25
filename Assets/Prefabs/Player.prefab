@@ -10205,7 +10205,7 @@ MonoBehaviour:
   camTransform: {fileID: 6491549458406774401}
   rb: {fileID: 6491549458664670170}
   speed: 7
-  rotationSpeed: 10
+  rotationSpeed: 25
   jumpForce: 12
   moveLerpSpeed: 0.3
   stopLerpSpeed: 10
@@ -10237,6 +10237,10 @@ MonoBehaviour:
   farAperture: 4.2
   anim: {fileID: 6491549458494794321}
   walking: 0
+  orientationTransform: {fileID: 8636880543732502810}
+  sideTilt: 0.2
+  frontTilt: 2
+  maxTiltAngle: 10
   emotions: {fileID: 1781894890}
   landDust: {fileID: 1915212921}
   walkingDust:
@@ -15313,27 +15317,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.15518254
+      value: 0.000010245283
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 88.05783
+      value: 89.99999
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 36.692493
+      value: -52.959457
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.000015657057
+      value: 0.0000051226416
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 90.00003
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -31.25879
+      value: 121.03134
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 1ff9a81e2fc8d494f82846faf7750a6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
