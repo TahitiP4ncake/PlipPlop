@@ -430,6 +430,8 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
             
+            anim.SetTrigger("Plip");
+            
             emotions.ChangeEmotion(Emotion.Smile);
 
             if (hit.collider.gameObject.CompareTag("Ground"))
@@ -520,6 +522,9 @@ public class PlayerMovement : MonoBehaviour
             print("No Blocks to remove");
             return;
         }
+        
+        anim.SetTrigger("Plop");
+
 
         if (IsGround)
         {
