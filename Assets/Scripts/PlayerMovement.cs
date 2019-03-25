@@ -331,6 +331,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        anim.SetTrigger("Jump");
+        anim.SetBool("Grounded", false);
+        
         rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
         landDust.Play();
     }
@@ -538,7 +541,7 @@ public class PlayerMovement : MonoBehaviour
             
             cameraOffset += offsets[offsets.Count - 1].y;
             
-            print(cameraOffset);
+            //print(cameraOffset);
             
             offsets.RemoveAt(offsets.Count - 1);
 
@@ -559,6 +562,7 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.y < float.Epsilon && rb.velocity.y > -float.Epsilon)
             {
                 
+                //A FIX PARCE QUE ANIM maintenant
                 print("PLAYER IS STATIC ENOUGH TO DEPOP");
                 
                 Transform _object = objects[objects.Count - 2].transform;
@@ -616,13 +620,14 @@ public class PlayerMovement : MonoBehaviour
                 //anim.SetTrigger("Land");
                 landDust.Play();
                 grounded = true;
+                anim.SetBool("Grounded", true);
             }
         }
     }
 
     public void FootStep(int _i)
     {
-        
+       
         if(grounded)
         walkingDust[_i].Play();
     }
