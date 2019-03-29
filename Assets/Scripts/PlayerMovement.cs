@@ -132,7 +132,11 @@ public class PlayerMovement : MonoBehaviour
     private bool pressedJump;
 
     private float influence = 1;
-    
+
+
+    public bool controlled = true;
+
+    public Transport lastTransport;
     
     
 
@@ -152,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+      
+        
         CheckInputs();
         
         JumpBuffer();
@@ -159,6 +165,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+        if (!controlled)
+        {
+            
+            orientationTransform.localEulerAngles = new Vector3(0,0,0);
+
+            return;
+        }
+        
         //CAMERA ZOOM
         if (!IsGround)
         {
@@ -188,9 +203,12 @@ public class PlayerMovement : MonoBehaviour
         
         if (IsGround)
         {
+            
+            
+            orientationTransform.localEulerAngles = new Vector3(0,0,0);
+
             return;
         }
-        
         
         //Apply Inputs
         
@@ -308,7 +326,7 @@ public class PlayerMovement : MonoBehaviour
         input.y = Input.GetAxis("Vertical");
 
 
-        if (IsGround)
+        if (IsGround || !controlled)
         {
             return;
         }
@@ -393,7 +411,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             grounded = false;
-            print("OFF THE GROUND");
+            //print("OFF THE GROUND");
             
             anim.SetBool("Grounded", false);
         }
@@ -423,8 +441,6 @@ public class PlayerMovement : MonoBehaviour
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
 
-            
-            
             if (IsGround)
             {
                 return;
@@ -436,6 +452,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
+                print("GROUND");
+                anim.SetBool("IsGround", true);
                 rb.isKinematic = true;
                 IsGround = true;
                 
@@ -453,6 +471,28 @@ public class PlayerMovement : MonoBehaviour
                 emotions.ChangeEmotion(Emotion.Sad);
                 
                 return;        
+            }
+            else if(hit.collider.gameObject.CompareTag("Boat"))
+            {
+                //Attach to boat
+
+                print("BOAT");
+                
+                anim.SetBool("IsGround", true);
+
+                
+                rb.isKinematic = true;
+                
+                transform.parent = hit.collider.transform;
+                
+                transform.localPosition-=new Vector3(0,1,0);
+
+                controlled = false;
+
+                lastTransport = hit.collider.GetComponent<Transport>();
+                lastTransport.GetIn();
+
+                return;
             }
             
             
@@ -473,7 +513,7 @@ public class PlayerMovement : MonoBehaviour
                 //lastObject.transform.localPosition += _offset;
 
                 cameraOffset -= _offset.y;
-                print(cameraOffset);
+                //print(cameraOffset);
                 
                 lastObject.transform.parent = null;//
 
@@ -516,6 +556,30 @@ public class PlayerMovement : MonoBehaviour
 
     void UnPossess()
     {
+        if (!controlled)
+        {
+            anim.SetTrigger("Plop");
+
+            print("FREE!");
+
+            rb.isKinematic = false;
+
+            transform.localPosition+=new Vector3(0,1,0);
+
+            transform.parent = null;
+                
+
+            controlled = true;
+            
+            lastTransport.GetOut();
+            lastTransport = null;
+            
+            anim.SetBool("IsGround", false);
+            emotions.ChangeEmotion(Emotion.Smile);
+            return;
+        }
+        
+        
         if (objects.Count < 2)
         {
             emotions.ChangeEmotion(Emotion.Sad);
@@ -525,6 +589,10 @@ public class PlayerMovement : MonoBehaviour
         
         anim.SetTrigger("Plop");
 
+
+       
+        
+        
 
         if (IsGround)
         {
@@ -561,6 +629,9 @@ public class PlayerMovement : MonoBehaviour
             IsGround = false;
             
             emotions.ChangeEmotion(Emotion.Smile);
+            
+            anim.SetBool("IsGround", false);
+
 
             return;
         }
@@ -601,7 +672,11 @@ public class PlayerMovement : MonoBehaviour
 
             objects.Remove(lastObject.gameObject);
 
+            lastObject.localScale = Vector3.one;
+
+            
             lastObject.gameObject.GetComponent<Block>().Drop(true);
+            
             
             lastObject = objects[objects.Count - 1].transform;
                 
@@ -647,7 +722,11 @@ public class PlayerMovement : MonoBehaviour
 
                 objects.Remove(lastObject.gameObject);
 
+                lastObject.localScale = Vector3.one;
+
+                
                 lastObject.gameObject.GetComponent<Block>().Drop(false);
+
             
                 lastObject = objects[objects.Count - 1].transform;
                 
