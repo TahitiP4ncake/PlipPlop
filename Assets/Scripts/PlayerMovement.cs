@@ -139,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
     public Transport lastTransport;
 
     private Vector3 groundPosition;
+
+    public Collider bodyCol;
     
     
 
@@ -481,6 +483,8 @@ public class PlayerMovement : MonoBehaviour
                 //Attach to boat
 
                 print("BOAT");
+
+                bodyCol.enabled = false;
                 
                 anim.SetBool("IsGround", true);
 
@@ -575,6 +579,9 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Plop");
 
             print("FREE!");
+            
+            bodyCol.enabled = true;
+
 
             rb.isKinematic = false;
 
