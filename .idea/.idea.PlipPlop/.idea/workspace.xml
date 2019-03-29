@@ -127,27 +127,28 @@
       <file leaf-file-name="Boat.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+            <state relative-caret-position="663">
+              <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
               <folding>
-                <marker date="1553890482371" expanded="false" signature="6:78" ph="..." />
-                <marker date="1553890482371" expanded="true" signature="109:3963" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="586:669" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="616:663" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="693:890" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="836:884" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="922:2269" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="969:1135" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="1060:1124" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="1148:1694" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="1210:1275" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="2287:2620" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
-                <marker date="1553890482371" expanded="true" signature="2641:2724" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="2741:3630" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="3648:3669" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="3723:3819" ph="{...}" />
-                <marker date="1553890482371" expanded="true" signature="3854:3961" ph="{...}" />
+                <marker date="1553890776519" expanded="false" signature="6:78" ph="..." />
+                <marker date="1553890776519" expanded="true" signature="109:4087" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="586:669" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="616:663" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="693:890" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="836:884" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="922:2269" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="969:1135" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="1060:1124" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="1148:1694" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="1210:1275" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="2287:2620" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
+                <marker date="1553890776519" expanded="true" signature="2641:2724" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="2741:3630" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="3648:3669" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="3723:3943" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="3784:3880" ph="{...}" />
+                <marker date="1553890776519" expanded="true" signature="3978:4085" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -1829,27 +1830,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+        <state relative-caret-position="663">
+          <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
           <folding>
-            <marker date="1553890482371" expanded="false" signature="6:78" ph="..." />
-            <marker date="1553890482371" expanded="true" signature="109:3963" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="586:669" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="616:663" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="693:890" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="836:884" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="922:2269" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="969:1135" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="1060:1124" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="1148:1694" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="1210:1275" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="2287:2620" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
-            <marker date="1553890482371" expanded="true" signature="2641:2724" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="2741:3630" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="3648:3669" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="3723:3819" ph="{...}" />
-            <marker date="1553890482371" expanded="true" signature="3854:3961" ph="{...}" />
+            <marker date="1553890776519" expanded="false" signature="6:78" ph="..." />
+            <marker date="1553890776519" expanded="true" signature="109:4087" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="586:669" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="616:663" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="693:890" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="836:884" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="922:2269" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="969:1135" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1060:1124" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1148:1694" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1210:1275" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2287:2620" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
+            <marker date="1553890776519" expanded="true" signature="2641:2724" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2741:3630" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3648:3669" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3723:3943" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3784:3880" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3978:4085" ph="{...}" />
           </folding>
         </state>
       </provider>

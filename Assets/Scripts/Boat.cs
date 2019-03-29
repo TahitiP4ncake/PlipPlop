@@ -139,6 +139,11 @@ public class Boat : Transport
     {
         controlled = true;
 
+        if (!camTransform)
+        {
+            camTransform = FindObjectOfType<PlayerMovement>().camTransform;
+        }
+
         rb.isKinematic = false;
         print("GETIN");
     }
