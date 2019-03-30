@@ -43,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerMovement.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlayerMovement.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="204" selection-start-line="204" selection-end-line="205" />
+            <state relative-caret-position="101">
+              <caret line="319" column="19" selection-start-line="319" selection-start-column="12" selection-end-line="319" selection-end-column="19" />
               <folding>
                 <marker date="1553873598887" expanded="false" signature="6:122" ph="..." />
                 <marker date="1553873598887" expanded="true" signature="167:20244" ph="{...}" />
@@ -124,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Boat.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Boat.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
+            <state relative-caret-position="2115">
               <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
               <folding>
                 <marker date="1553890776519" expanded="false" signature="6:78" ph="..." />
@@ -315,18 +315,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TextureAnimation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationListener.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TextureAnimation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Transport.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Manager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Transport.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Manager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Neighboors/Assets/Scripts/Voisin.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Habitant.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Habitant.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Shaders/S_UVScaleCenter.shader" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Emotions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Emotions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -367,6 +367,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="SolutionExplorer" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -384,7 +385,6 @@
         </subPane>
         <option name="show-hidden-items" value="false" />
       </pane>
-      <pane id="SolutionExplorer" />
       <pane id="FileSystemExplorer" />
     </panes>
   </component>
@@ -449,7 +449,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Errors In Solution" order="3" />
@@ -1749,10 +1748,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2115">
+          <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
+          <folding>
+            <marker date="1553890776519" expanded="false" signature="6:78" ph="..." />
+            <marker date="1553890776519" expanded="true" signature="109:4087" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="586:669" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="616:663" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="693:890" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="836:884" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="922:2269" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="969:1135" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1060:1124" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1148:1694" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="1210:1275" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2287:2620" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
+            <marker date="1553890776519" expanded="true" signature="2641:2724" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="2741:3630" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3648:3669" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3723:3943" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3784:3880" ph="{...}" />
+            <marker date="1553890776519" expanded="true" signature="3978:4085" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="204" selection-start-line="204" selection-end-line="205" />
+        <state relative-caret-position="101">
+          <caret line="319" column="19" selection-start-line="319" selection-start-column="12" selection-end-line="319" selection-end-column="19" />
           <folding>
             <marker date="1553873598887" expanded="false" signature="6:122" ph="..." />
             <marker date="1553873598887" expanded="true" signature="167:20244" ph="{...}" />
@@ -1824,34 +1851,6 @@
             <marker date="1553873598887" expanded="true" signature="19849:20124" ph="{...}" />
             <marker date="1553873598887" expanded="true" signature="19894:20114" ph="{...}" />
             <marker date="1553873598887" expanded="true" signature="20164:20237" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boat.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="143" column="75" selection-start-line="143" selection-start-column="75" selection-end-line="143" selection-end-column="75" />
-          <folding>
-            <marker date="1553890776519" expanded="false" signature="6:78" ph="..." />
-            <marker date="1553890776519" expanded="true" signature="109:4087" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="586:669" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="616:663" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="693:890" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="836:884" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="922:2269" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="969:1135" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="1060:1124" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="1148:1694" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="1210:1275" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="2287:2620" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="2302:2533" ph="/* actualSpeed = Mathf.Clamp(actualSpeed + input.y * speed, minSpeed, maxSpeed); ... */" />
-            <marker date="1553890776519" expanded="true" signature="2641:2724" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="2741:3630" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="3648:3669" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="3723:3943" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="3784:3880" ph="{...}" />
-            <marker date="1553890776519" expanded="true" signature="3978:4085" ph="{...}" />
           </folding>
         </state>
       </provider>
