@@ -20,21 +20,26 @@
         <e p="Scripts" t="Include">
           <e p="AnimationListener.cs" t="Include" />
           <e p="Block.cs" t="Include" />
+          <e p="Boat.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
           <e p="Emotions.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
           <e p="Manager.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
           <e p="TextureAnimation.cs" t="Include" />
+          <e p="Transport.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
+          <e p="Iridescent Mask.shader" t="Include" />
           <e p="S_Clay.shader" t="Include" />
           <e p="S_ClayTriPlanar.shader" t="Include" />
           <e p="S_Ground.shader" t="Include" />
           <e p="S_ParticlemMesh.shader" t="Include" />
           <e p="S_ParticleNormal.shader" t="Include" />
           <e p="S_PBR.shader" t="Include" />
+          <e p="S_PlantPP.shader" t="Include" />
           <e p="S_UVScaleCenter.shader" t="Include" />
+          <e p="S_WaterPP.shader" t="Include" />
           <e p="S_Wood.shader" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">

@@ -163,7 +163,7 @@ public class Manager : MonoBehaviour
     
     IEnumerator StartLevelCor()
     {
-        print("transition");
+        //print("transition");
         float _y = 1;
 
         while (_y >0)
