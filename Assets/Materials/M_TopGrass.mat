@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_TopGrass
-  m_Shader: {fileID: 4800000, guid: ebd6726a464cdb7448d4576be598ba47, type: 3}
+  m_Shader: {fileID: 4800000, guid: fd3c809660771994d99f8e7db9a6c996, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -22,6 +22,10 @@ Material:
     - _ARM:
         m_Texture: {fileID: 2800000, guid: 66d59e96d067d034f9b667bc6420a4b8, type: 3}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ARMC:
+        m_Texture: {fileID: 2800000, guid: 32de17ce8a4256d4da2b6e9e51c01dc7, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: d4f15384286bd5c479edf3a766277226, type: 3}
@@ -51,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 57abb4349406f5c42b5a597dbe878e5b, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,13 +78,17 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Tess: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.98324263, g: 0.990566, b: 0, a: 1}
+    - _ColorA: {r: 0.99737024, g: 1, b: 0, a: 1}
+    - _ColorB: {r: 1, g: 0.892648, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _PaintColor: {r: 1, g: 1, b: 1, a: 1}
