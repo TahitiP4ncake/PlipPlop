@@ -12,6 +12,7 @@ public class CameraRotation : MonoBehaviour
     
     public Transform camXRotation;
     public Vector2 xLimits;
+
     
     //Internal Data
 
@@ -28,7 +29,13 @@ public class CameraRotation : MonoBehaviour
         
         
         transform.localEulerAngles += new Vector3(0,input.x * xSpeed ,0);
-        camXRotation.localEulerAngles = new Vector3( Mathf.Clamp( input.y *-ySpeed  + camXRotation.localEulerAngles.x, xLimits.x, xLimits.y),0,0);
+        camXRotation.localEulerAngles = new Vector3( Mathf.Clamp( input.y *-ySpeed  + 
+        ((camXRotation.localEulerAngles.x > 180)? camXRotation.localEulerAngles.x- 360 : camXRotation.localEulerAngles.x)
+        , xLimits.x, xLimits.y),0,0);
+
+        
+        
+    
 
     }
 
@@ -37,4 +44,6 @@ public class CameraRotation : MonoBehaviour
         input.x = Input.GetAxis("Mouse X") + Input.GetAxis("RightX");
         input.y = Input.GetAxis("Mouse Y") - Input.GetAxis("RightY");
     }
+
+
 }

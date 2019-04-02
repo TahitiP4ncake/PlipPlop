@@ -10292,7 +10292,7 @@ MonoBehaviour:
   xSpeed: 2
   ySpeed: 2
   camXRotation: {fileID: 6491549458742873491}
-  xLimits: {x: 5, y: 70}
+  xLimits: {x: -70, y: 70}
 --- !u!114 &223467405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10342,7 +10342,7 @@ GameObject:
   - component: {fileID: 1781894890}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10440,6 +10440,7 @@ MonoBehaviour:
   controlled: 1
   lastTransport: {fileID: 0}
   bodyCol: {fileID: 1794201271}
+  currentGround: {fileID: 0}
 --- !u!65 &1794201271
 BoxCollider:
   m_ObjectHideFlags: 0
