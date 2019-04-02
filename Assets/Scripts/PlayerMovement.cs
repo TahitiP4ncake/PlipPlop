@@ -141,7 +141,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 groundPosition;
 
     public Collider bodyCol;
-    
+
+    public Ground currentGround;
+
+
+    private Vector3 groundScale;
     
 
     void Start()
@@ -269,7 +273,9 @@ public class PlayerMovement : MonoBehaviour
 //YKILL TEMP
         if (transform.position.y < YKILL)
         {
-            transform.position = new Vector3(0,0,0);
+
+            transform.position = currentGround.respawnTransform.position;
+            //transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
             Jump();
         }
@@ -463,6 +469,7 @@ public class PlayerMovement : MonoBehaviour
 
                 groundPosition = hit.collider.gameObject.transform.position;
 
+                groundScale = hit.collider.gameObject.transform.localScale;
 
                 //Play stuck Animation
                 //anim.SetTrigger("Grounded");
@@ -646,7 +653,9 @@ public class PlayerMovement : MonoBehaviour
 
             objects.Remove(lastObject.gameObject);
 
-            lastObject.transform.localScale = Vector3.one;
+            lastObject.transform.localScale = groundScale;
+
+            transform.localScale = Vector3.one;
 
             //lastObject = _object;
             lastObject.transform.position = groundPosition;
@@ -797,6 +806,18 @@ public class PlayerMovement : MonoBehaviour
        
         if(grounded)
         walkingDust[_i].Play();
+    }
+
+    public void ChangeGround(Ground _ground)
+    {
+        if (currentGround != null)
+        {
+            currentGround.currentGround = false;
+
+        }
+        
+        currentGround = _ground;
+
     }
     
 }
