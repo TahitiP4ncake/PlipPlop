@@ -48,22 +48,25 @@ public class Habitant : MonoBehaviour
 
     void Update()
     {
+        
+        
+        
         if (canInteract)
         {
+ 
+            //Rotate the point toward the player
             Vector3 relativePos = player.transform.position - transform.position;
             relativePos.y = 0;
-
             // the second argument, upwards, defaults to Vector3.up
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
-            
+            points.transform.rotation = Quaternion.Slerp(points.transform.rotation, rotation, Time.deltaTime * 2);
 
-                points.transform.rotation = Quaternion.Slerp(points.transform.rotation, rotation, Time.deltaTime*2);
-               
-            
-            
-            
-            
+
+            if (player.IsGround)
+            {
+                return;
+            }
             
             
             if (Input.GetButtonDown("GamepadInterract"))
@@ -80,12 +83,7 @@ public class Habitant : MonoBehaviour
                     {
                         if (responded)
                         {
-                          
-                            
                             Close();
-                            
-                            
-                           
                         }
                         else
                         {
@@ -108,8 +106,6 @@ public class Habitant : MonoBehaviour
                         player.StartTalking(transform);
                         
                         StartTalking(player.transform);
-
-                       
                     }
                 }
 
@@ -152,8 +148,6 @@ public class Habitant : MonoBehaviour
         {
             scaleCor = StartCoroutine(Animate(0));
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
