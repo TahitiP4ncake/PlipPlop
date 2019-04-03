@@ -147,6 +147,17 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 groundScale;
     
+    
+    
+    //TALKING
+
+    public bool talking;
+    
+    
+    //Props
+
+    public GameObject[] props;
+    public int propsIndex;
 
     void Start()
     {
@@ -174,11 +185,31 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-        if (!controlled)
+        if (!controlled )
         {
             
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
 
+            return;
+        }
+
+        if (talking)
+        {
+            Stop();
+         
+            if (walking)
+            {
+                walking = false;
+                anim.SetBool("Walking", false);
+            }
+            
+            orientationTransform.localEulerAngles = new Vector3(0,0,0);
+
+            
+            
+            movement.y = rb.velocity.y;
+
+            rb.velocity = Vector3.Lerp(rb.velocity, movement, Mathf.Clamp01(influence));
             return;
         }
         
@@ -354,7 +385,29 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
+
+        if (Input.GetButtonDown("GamepadY"))
+        {
+            if (props[propsIndex] != null)
+            {
+                props[propsIndex].SetActive(false);
+            }
+
+
+            propsIndex++;
+
+            if (propsIndex > props.Length - 1)
+            {
+                propsIndex = 0;
+            }
+
+            if (props[propsIndex] != null)
+            {
+                props[propsIndex].SetActive(true);
+            }
+        }
+
+
     }
 
     void Move()
@@ -819,5 +872,17 @@ public class PlayerMovement : MonoBehaviour
         currentGround = _ground;
 
     }
-    
+
+    public void StartTalking(Transform _position)
+    {
+        
+        
+        talking = true;
+    }
+
+    public void StopTalking()
+    {
+        talking = false;
+    }
+
 }

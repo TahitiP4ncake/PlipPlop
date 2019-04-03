@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class Photo : MonoBehaviour
 {
     public GameObject flash;
    
@@ -11,6 +11,8 @@ public class Camera : MonoBehaviour
     {
         if (Input.GetButtonDown("GamepadInterract"))
         {
+          
+            
             flash.SetActive(true);
             
             flash.transform.localEulerAngles = new Vector3(Random.Range(-5f,5f), Random.Range(.5f,5f), Random.Range(0,361));

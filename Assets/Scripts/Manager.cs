@@ -29,6 +29,10 @@ public class Manager : MonoBehaviour
     public TextMeshProUGUI subtitleText;
 
     private Coroutine subtitleCor = null;
+
+    public GameObject answerObject;
+    
+    public TextMeshProUGUI answerText;
     
     void Awake()
     {
@@ -50,7 +54,7 @@ public class Manager : MonoBehaviour
     void Start()
     {
 
-      
+      //??
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -61,6 +65,9 @@ public class Manager : MonoBehaviour
         Color _col = subtitleText.color;
         _col.a = 0;
         subtitleText.color= _col;
+
+        //answerObject.SetActive(false);
+        answerText.text = "";
     }
 
     void Update()
@@ -198,7 +205,7 @@ public class Manager : MonoBehaviour
 
     }
 
-    public void SubtitleOn(string _text)
+    public void SubtitleOn(string _text , bool _fade)
     {
 
         if (subtitleCor != null)
@@ -210,13 +217,13 @@ public class Manager : MonoBehaviour
 
         
         
-        subtitleCor = StartCoroutine(SubtitleOnCor());
+        subtitleCor = StartCoroutine(SubtitleOnCor(_fade));
         
         
         
     }
 
-    IEnumerator SubtitleOnCor()
+    IEnumerator SubtitleOnCor(bool _fade)
     {
         float _y = subtitleText.color.a;
 
@@ -236,6 +243,11 @@ public class Manager : MonoBehaviour
         _col.a = _y;
 
         subtitleText.color = _col;
+
+        if (!_fade)
+        {
+            yield break;
+        }
         
         yield return new WaitForSecondsRealtime(1.5f);
         
@@ -258,5 +270,59 @@ public class Manager : MonoBehaviour
 
         subtitleCor = null;
     }
+
+    public void EndConversation()
+    {
+        if (subtitleCor != null)
+        {
+            StopCoroutine(subtitleCor);
+
+        }
+        
+        subtitleCor = StartCoroutine(HideSubtitle());
+    }
+    
+    IEnumerator HideSubtitle()
+    {
+
+        float _y = 1;
+
+        Color _col = subtitleText.color;
+        
+        while (_y >0)
+        {
+            subtitleText.color = _col;
+            
+            _col.a = _y;
+            
+            _y -= Time.deltaTime*3;
+            yield return null;
+        }
+        
+        _y = 0;
+        _col.a = _y;
+
+        subtitleText.color = _col;
+
+
+
+        subtitleCor = null;
+    }
+
+
+    public void AnswerOn()
+    {
+        //answerObject.SetActive(true);
+        answerText.text = "- plip -";
+    }
+
+    public void AnswerOff()
+    {
+        answerText.text = "";
+
+       // answerObject.SetActive(false);
+
+    }
+    
 
 }
