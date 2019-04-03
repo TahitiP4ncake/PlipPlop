@@ -159,6 +159,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject[] props;
     public int propsIndex;
 
+    
+    
+
     void Start()
     {
         if(lerpVisuals)
@@ -309,6 +312,8 @@ public class PlayerMovement : MonoBehaviour
             //transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
             Jump();
+            
+            print("Repop");
         }
 
 
@@ -352,6 +357,13 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckInputs()
     {
+        if (talking)
+        {
+            return;
+        }
+
+
+
         if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
         {
             Possess();
@@ -529,7 +541,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (hit.collider.gameObject.CompareTag("No"))
             {
-                print("NO!");
+                //print("NO!");
 
                 influence = -.5f;
                 rb.velocity += (transform.forward + Vector3.up) * 10;
@@ -542,7 +554,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Attach to boat
 
-                print("BOAT");
+               // print("BOAT");
 
                 bodyCol.enabled = false;
                 
@@ -638,7 +650,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Plop");
 
-            print("FREE!");
+            //print("FREE!");
             
             bodyCol.enabled = true;
 
@@ -833,6 +845,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 print("STOP MOVING");
                 
+                // ça c'est encore un problème , faut que je trouve comment détecter ça mieux
+                // TODO
+                
                 emotions.ChangeEmotion(Emotion.Sad);
 
             }
@@ -878,11 +893,37 @@ public class PlayerMovement : MonoBehaviour
         
         
         talking = true;
+
+        StartCoroutine(LookAtTarget(_position));
+
+    }
+    
+    IEnumerator LookAtTarget(Transform _target)
+    {
+        float _y = 0;
+        
+        Vector3 relativePos = transform.position - _target.position;
+        relativePos.y = 0;
+
+        // the second argument, upwards, defaults to Vector3.up
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
+        while (_y < 1)
+        {
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _y);
+            _y += Time.deltaTime*3;
+            yield return null;
+        }
+
     }
 
     public void StopTalking()
     {
         talking = false;
     }
+    
+    
+    
 
 }

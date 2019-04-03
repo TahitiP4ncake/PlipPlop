@@ -145,7 +145,7 @@ public class Boat : Transport
         }
 
         rb.isKinematic = false;
-        print("GETIN");
+//        print("GETIN");
     }
 
     public override void GetOut()
@@ -154,7 +154,7 @@ public class Boat : Transport
 
         rb.isKinematic = true;
         
-        print("GETOUT");
+        //print("GETOUT");
 
     }
 }

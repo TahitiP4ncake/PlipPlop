@@ -36,15 +36,43 @@ public class Habitant : MonoBehaviour
 
     public bool responded;
 
+    private Coroutine scaleCor;
+
+
+    public AnimationCurve[] curves;
+    
+    
+    //Points
+
+    public Animator points;
+
     void Update()
     {
         if (canInteract)
         {
+            Vector3 relativePos = player.transform.position - transform.position;
+            relativePos.y = 0;
+
+            // the second argument, upwards, defaults to Vector3.up
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
+            
+
+                points.transform.rotation = Quaternion.Slerp(points.transform.rotation, rotation, Time.deltaTime*2);
+               
+            
+            
+            
+            
+            
+            
             if (Input.GetButtonDown("GamepadInterract"))
             {
                 if (hasSomethingToSay == false)
                 {
                     Interract();
+               
+                   StartTalking(player.transform);
                 }
                 else
                 {
@@ -52,11 +80,22 @@ public class Habitant : MonoBehaviour
                     {
                         if (responded)
                         {
+                          
+                            
                             Close();
+                            
+                            
+                           
                         }
                         else
                         {
+                            if (scaleCor != null)
+                            {
+                                StopCoroutine(scaleCor);
+                            }
 
+                            scaleCor = StartCoroutine(Animate(1));
+                            
                             Respond();
                         }
                     }
@@ -64,24 +103,39 @@ public class Habitant : MonoBehaviour
                     {
                         Interract();
                         talking = true;
+                        
+                        if(player!=null)
                         player.StartTalking(transform);
+                        
+                        StartTalking(player.transform);
 
+                       
                     }
                 }
 
             }
 
-            if (!talking)
+            if (!talking || responded)
             {
                 return;
             }
 
-            if (Input.GetAxis("Horizontal") != 0 )
+            float _h = Input.GetAxis("Horizontal");
+            
+            if (_h >float.Epsilon )
             {
                 if (changedAnswer == false)
                 {
                     changedAnswer = true;
-                    NextAnswer();
+                    NextAnswer(1);
+                }
+            }
+            else if (_h < -float.Epsilon)
+            {
+                if (changedAnswer == false)
+                {
+                    changedAnswer = true;
+                    NextAnswer(0);
                 }
             }
             else
@@ -91,6 +145,16 @@ public class Habitant : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+         
+        if (scaleCor == null)
+        {
+            scaleCor = StartCoroutine(Animate(0));
+        }
+
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -110,15 +174,21 @@ public class Habitant : MonoBehaviour
         player = other.gameObject.GetComponentInParent<PlayerMovement>();
         if (player)
         {
-            canInteract = true;
+
+            if (!canInteract)
+            {
+                canInteract = true;
+                points.SetBool("Question", true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        points.SetBool("Question", false);
         //print("OUT");
-        player = other.gameObject.GetComponentInParent<PlayerMovement>();
+        //TEMP
+        //player = other.gameObject.GetComponentInParent<PlayerMovement>();
         if (player)
         {
             canInteract = false;
@@ -140,6 +210,14 @@ public class Habitant : MonoBehaviour
         {
             Manager.SINGLETON.AnswerOn();
         }
+        
+        
+        if (scaleCor != null)
+        {
+            StopCoroutine(scaleCor);
+        }
+
+        scaleCor = StartCoroutine(Animate(1));
     }
 
     void Respond()
@@ -150,46 +228,103 @@ public class Habitant : MonoBehaviour
         responded = true;
     }
 
-    void NextAnswer()
+    void NextAnswer(int _value)
     {
-        if (answerIndex == 0)
-        {
-            Manager.SINGLETON.answerText.text = "- plop -";
-    
-            answerIndex++;
-        }
-        else
-        {
-            answerIndex = 0;
-            Manager.SINGLETON.answerText.text = "- plip -";
+        
+        Manager.SINGLETON.ChangeAnswer(_value);
 
-        }
+        answerIndex = _value;
     }
 
-    void Close()
+    void Close(bool _scream = false)
     {
         responded = false;
         talking = false;
         answerIndex = 0;
-        player.StopTalking();
-        Manager.SINGLETON.EndConversation();
+        if (player != null)
+        {
+            player.StopTalking();
+        }
+
+        Manager.SINGLETON.EndConversation(_scream);
+        points.SetBool("Question", false);
+
     }
     
     
 
     void Scream()
     {
+        points.SetTrigger("Surprise");
+        
+        
         print("scream");
         Manager.SINGLETON.SubtitleOn(screams[Random.Range(0,screams.Length)], true);
         screaming = true;
         
         Invoke("ScreamOff", Time.fixedDeltaTime);
+        
+        Close(true);
+        
+        if (scaleCor != null)
+        {
+            StopCoroutine(scaleCor);
+        }
+
+        scaleCor = StartCoroutine(Animate(1));
     }
 
     void ScreamOff()
     {
         screaming = false;
     }
+
+    void StartTalking(Transform _player)
+    {
+        StartCoroutine(LookAtPlayer(_player));
+    }
+
+    IEnumerator LookAtPlayer(Transform _player)
+    {
+        float _y = 0;
+        
+        Vector3 relativePos = _player.position - transform.position;
+        relativePos.y = 0;
+
+        // the second argument, upwards, defaults to Vector3.up
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
+        while (_y < 1)
+        {
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _y);
+            _y += Time.deltaTime*3;
+            yield return null;
+        }
+
+    }
+
+    IEnumerator Animate(int _index)
+    {
+        float _y = 0;
+        
+        while (_y < 1)
+        {
+            transform.localScale = Vector3.one * curves[_index].Evaluate(_y);
+            
+            _y += Time.deltaTime;
+            yield return null;
+        }
+        
+        transform.localScale = Vector3.one;
+
+
+        scaleCor = null;
+    }
+    
+    
+    
+    
 }
 
 

@@ -33,6 +33,9 @@ public class Manager : MonoBehaviour
     public GameObject answerObject;
     
     public TextMeshProUGUI answerText;
+
+    public GameObject right;
+    public GameObject left;
     
     void Awake()
     {
@@ -68,6 +71,9 @@ public class Manager : MonoBehaviour
 
         //answerObject.SetActive(false);
         answerText.text = "";
+
+        right.SetActive(false);
+        left.SetActive(false);
     }
 
     void Update()
@@ -271,8 +277,19 @@ public class Manager : MonoBehaviour
         subtitleCor = null;
     }
 
-    public void EndConversation()
+    public void EndConversation(bool _scream = false)
     {
+        right.SetActive(false);
+        left.SetActive(false);
+        
+        answerText.text = "";
+
+        if (_scream)
+        {
+            return;
+        }
+        
+        
         if (subtitleCor != null)
         {
             StopCoroutine(subtitleCor);
@@ -313,14 +330,35 @@ public class Manager : MonoBehaviour
     public void AnswerOn()
     {
         //answerObject.SetActive(true);
-        answerText.text = "- plip -";
+        answerText.text = "plip";
+        right.SetActive(true);
+    }
+
+    public void ChangeAnswer(int _index)
+    {
+        if (_index == 1)
+        {
+            right.SetActive(false);
+            left.SetActive(true);
+            answerText.text = "plop";
+        }
+        else
+        {
+            right.SetActive(true);
+            left.SetActive(false);
+
+            answerText.text = "plip";
+
+        }
     }
 
     public void AnswerOff()
     {
         answerText.text = "";
 
-       // answerObject.SetActive(false);
+        right.SetActive(false);
+        left.SetActive(false);
+        // answerObject.SetActive(false);
 
     }
     
