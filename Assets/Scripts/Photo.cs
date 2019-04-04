@@ -13,7 +13,7 @@ public class Photo : MonoBehaviour
     {
             if (Input.GetButtonDown("GamepadInterract"))
             {
-
+                Manager.SINGLETON.PlaySound("flash",.4f);
 
                 flash.SetActive(true);
 
