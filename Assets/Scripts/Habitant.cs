@@ -143,11 +143,16 @@ public class Habitant : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-         
-        if (scaleCor == null)
+        Manager.SINGLETON.PlaySound("bump",.7f);
+
+
+        if (scaleCor != null)
         {
-            scaleCor = StartCoroutine(Animate(0));
+            StopCoroutine(scaleCor);
         }
+        
+            scaleCor = StartCoroutine(Animate(0));
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -315,8 +320,8 @@ public class Habitant : MonoBehaviour
 
         scaleCor = null;
     }
-    
-    
+
+
     
     
 }

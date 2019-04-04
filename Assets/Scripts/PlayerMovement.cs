@@ -158,8 +158,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject[] props;
     public int propsIndex;
-
     
+ 
     
 
     void Start()
@@ -461,6 +461,8 @@ public class PlayerMovement : MonoBehaviour
         
         rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
         landDust.Play();
+        
+       Manager.SINGLETON.PlaySound("jump",.2f);
     }
 
     bool CheckGround()
@@ -476,6 +478,9 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Grounded", true);
                 
                 landDust.Play();
+                Manager.SINGLETON.PlaySound("land",.15f);
+
+                
 
             }
             
@@ -538,6 +543,8 @@ public class PlayerMovement : MonoBehaviour
 
                 //Play stuck Animation
                 //anim.SetTrigger("Grounded");
+                
+
             }
             else if (hit.collider.gameObject.CompareTag("No"))
             {
@@ -571,6 +578,9 @@ public class PlayerMovement : MonoBehaviour
 
                 lastTransport = hit.collider.GetComponent<Transport>();
                 lastTransport.GetIn();
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
 
                 return;
             }
@@ -615,6 +625,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject = _block.transform;
                 
                 transform.position += new Vector3(0,.1f,0);
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
 
                 //transform.position -= offsets[offsets.Count - 1]; //
             }
@@ -640,6 +653,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject.SetParent(_block.transform);
 
                 lastObject = _block.transform;
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
             }
         }
     }
@@ -669,6 +685,9 @@ public class PlayerMovement : MonoBehaviour
             
             anim.SetBool("IsGround", false);
             emotions.ChangeEmotion(Emotion.Smile);
+            
+            Manager.SINGLETON.PlaySound("plop",.4f);
+
             return;
         }
         
@@ -738,7 +757,8 @@ public class PlayerMovement : MonoBehaviour
             
             anim.SetBool("IsGround", false);
             
-            
+            Manager.SINGLETON.PlaySound("plop",.4f);
+
 
 
             return;
@@ -789,6 +809,8 @@ public class PlayerMovement : MonoBehaviour
             lastObject = objects[objects.Count - 1].transform;
                 
             emotions.ChangeEmotion(Emotion.Smile);
+            
+            Manager.SINGLETON.PlaySound("plop",.4f);
 
             
             //Uniquement si on release tout les cubes
@@ -839,6 +861,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject = objects[objects.Count - 1].transform;
                 
                 emotions.ChangeEmotion(Emotion.Smile);
+                
+                Manager.SINGLETON.PlaySound("plop",.4f);
+
 
             }
             else
@@ -865,15 +890,21 @@ public class PlayerMovement : MonoBehaviour
                 landDust.Play();
                 grounded = true;
                 anim.SetBool("Grounded", true);
+                
+                Manager.SINGLETON.PlaySound("land",.4f);
             }
         }
     }
 
     public void FootStep(int _i)
     {
-       
-        if(grounded)
-        walkingDust[_i].Play();
+
+        if (grounded)
+        {
+            walkingDust[_i].Play();
+
+            Manager.SINGLETON.PlaySound("step",.4f);
+        }
     }
 
     public void ChangeGround(Ground _ground)
@@ -922,8 +953,6 @@ public class PlayerMovement : MonoBehaviour
     {
         talking = false;
     }
-    
-    
-    
+
 
 }
