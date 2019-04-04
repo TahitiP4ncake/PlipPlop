@@ -243,7 +243,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.4
+  m_fontSize: 54.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -502,6 +502,20 @@ MonoBehaviour:
   answerText: {fileID: 1353113895}
   right: {fileID: 1237554616}
   left: {fileID: 362813541}
+  sonsName:
+  - bump
+  - jump
+  - land
+  - plip
+  - plop
+  - step
+  sonsFiles:
+  - {fileID: 8300000, guid: 69466eed1cadbce479a6fd8f5b523d5c, type: 3}
+  - {fileID: 8300000, guid: 7ee4a18cd6c751a469461d0088745187, type: 3}
+  - {fileID: 8300000, guid: 491c7ea9992d6ad46b83d2024841af5a, type: 3}
+  - {fileID: 8300000, guid: c64aa93148ff4344ca98bd1e1d9d5a5d, type: 3}
+  - {fileID: 8300000, guid: 8a0063145a00e634a94e1d36ce561f4b, type: 3}
+  - {fileID: 8300000, guid: b4fad20f2f57819438f943454a4708c5, type: 3}
 --- !u!82 &770819279
 AudioSource:
   m_ObjectHideFlags: 0
@@ -512,9 +526,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 06e78bb205777ce4e83ebf88f40c1fe3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1637d541b9d33454cb94aa60157fe2e2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.517
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -692,7 +706,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 69.25
+  m_fontSize: 69.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -853,7 +867,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 64.55
+  m_fontSize: 64.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1089,7 +1103,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 48.65
+  m_fontSize: 49
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

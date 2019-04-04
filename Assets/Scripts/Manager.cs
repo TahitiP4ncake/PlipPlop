@@ -37,6 +37,17 @@ public class Manager : MonoBehaviour
     public GameObject right;
     public GameObject left;
     
+    
+    //SON
+
+    [Header("SON")] 
+    
+    public string[] sonsName;
+    public AudioClip[] sonsFiles;
+    
+    Dictionary<string, AudioClip> sons = new Dictionary<string, AudioClip>();
+
+    
     void Awake()
     {
         transitionMat.SetFloat("_Scale",610);
@@ -56,7 +67,14 @@ public class Manager : MonoBehaviour
     
     void Start()
     {
-
+        for (int i = 0; i < sonsName.Length; i++)
+        {
+            sons.Add(sonsName[i], sonsFiles[i]);
+        }
+        
+        
+        
+        
       //??
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -359,6 +377,25 @@ public class Manager : MonoBehaviour
         right.SetActive(false);
         left.SetActive(false);
         // answerObject.SetActive(false);
+
+    }
+
+    public void PlaySound(string _clip, float _volume = 1)
+    {
+        AudioSource _son = Instantiate(new GameObject(), transform).AddComponent<AudioSource>();
+        _son.Stop();
+        _son.clip = sons[_clip];
+
+        _son.volume = _volume;
+
+        _son.pitch = Random.Range(.9f, 1.1f);
+
+        _son.loop = false;
+
+
+        _son.Play();
+        
+        Destroy(_son.gameObject,_son.clip.length);
 
     }
     
