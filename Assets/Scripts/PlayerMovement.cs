@@ -147,6 +147,20 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 groundScale;
     
+    
+    
+    //TALKING
+
+    public bool talking;
+    
+    
+    //Props
+
+    public GameObject[] props;
+    public int propsIndex;
+    
+ 
+    
 
     void Start()
     {
@@ -174,11 +188,31 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-        if (!controlled)
+        if (!controlled )
         {
             
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
 
+            return;
+        }
+
+        if (talking)
+        {
+            Stop();
+         
+            if (walking)
+            {
+                walking = false;
+                anim.SetBool("Walking", false);
+            }
+            
+            orientationTransform.localEulerAngles = new Vector3(0,0,0);
+
+            
+            
+            movement.y = rb.velocity.y;
+
+            rb.velocity = Vector3.Lerp(rb.velocity, movement, Mathf.Clamp01(influence));
             return;
         }
         
@@ -278,6 +312,8 @@ public class PlayerMovement : MonoBehaviour
             //transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
             Jump();
+            
+            print("Repop");
         }
 
 
@@ -321,6 +357,13 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckInputs()
     {
+        if (talking)
+        {
+            return;
+        }
+
+
+
         if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
         {
             Possess();
@@ -354,7 +397,29 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
+
+        if (Input.GetButtonDown("GamepadY"))
+        {
+            if (props[propsIndex] != null)
+            {
+                props[propsIndex].SetActive(false);
+            }
+
+
+            propsIndex++;
+
+            if (propsIndex > props.Length - 1)
+            {
+                propsIndex = 0;
+            }
+
+            if (props[propsIndex] != null)
+            {
+                props[propsIndex].SetActive(true);
+            }
+        }
+
+
     }
 
     void Move()
@@ -396,6 +461,8 @@ public class PlayerMovement : MonoBehaviour
         
         rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
         landDust.Play();
+        
+       Manager.SINGLETON.PlaySound("jump",.2f);
     }
 
     bool CheckGround()
@@ -411,6 +478,9 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Grounded", true);
                 
                 landDust.Play();
+                Manager.SINGLETON.PlaySound("land",.15f);
+
+                
 
             }
             
@@ -473,10 +543,12 @@ public class PlayerMovement : MonoBehaviour
 
                 //Play stuck Animation
                 //anim.SetTrigger("Grounded");
+                
+
             }
             else if (hit.collider.gameObject.CompareTag("No"))
             {
-                print("NO!");
+                //print("NO!");
 
                 influence = -.5f;
                 rb.velocity += (transform.forward + Vector3.up) * 10;
@@ -489,7 +561,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Attach to boat
 
-                print("BOAT");
+               // print("BOAT");
 
                 bodyCol.enabled = false;
                 
@@ -506,6 +578,9 @@ public class PlayerMovement : MonoBehaviour
 
                 lastTransport = hit.collider.GetComponent<Transport>();
                 lastTransport.GetIn();
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
 
                 return;
             }
@@ -550,6 +625,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject = _block.transform;
                 
                 transform.position += new Vector3(0,.1f,0);
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
 
                 //transform.position -= offsets[offsets.Count - 1]; //
             }
@@ -575,6 +653,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject.SetParent(_block.transform);
 
                 lastObject = _block.transform;
+                
+                Manager.SINGLETON.PlaySound("plip",.4f);
+
             }
         }
     }
@@ -585,7 +666,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Plop");
 
-            print("FREE!");
+            //print("FREE!");
             
             bodyCol.enabled = true;
 
@@ -604,6 +685,9 @@ public class PlayerMovement : MonoBehaviour
             
             anim.SetBool("IsGround", false);
             emotions.ChangeEmotion(Emotion.Smile);
+            
+            Manager.SINGLETON.PlaySound("plop",.4f);
+
             return;
         }
         
@@ -673,7 +757,8 @@ public class PlayerMovement : MonoBehaviour
             
             anim.SetBool("IsGround", false);
             
-            
+            Manager.SINGLETON.PlaySound("plop",.4f);
+
 
 
             return;
@@ -724,6 +809,8 @@ public class PlayerMovement : MonoBehaviour
             lastObject = objects[objects.Count - 1].transform;
                 
             emotions.ChangeEmotion(Emotion.Smile);
+            
+            Manager.SINGLETON.PlaySound("plop",.4f);
 
             
             //Uniquement si on release tout les cubes
@@ -774,11 +861,17 @@ public class PlayerMovement : MonoBehaviour
                 lastObject = objects[objects.Count - 1].transform;
                 
                 emotions.ChangeEmotion(Emotion.Smile);
+                
+                Manager.SINGLETON.PlaySound("plop",.4f);
+
 
             }
             else
             {
                 print("STOP MOVING");
+                
+                // ça c'est encore un problème , faut que je trouve comment détecter ça mieux
+                // TODO
                 
                 emotions.ChangeEmotion(Emotion.Sad);
 
@@ -797,15 +890,21 @@ public class PlayerMovement : MonoBehaviour
                 landDust.Play();
                 grounded = true;
                 anim.SetBool("Grounded", true);
+                
+                Manager.SINGLETON.PlaySound("land",.4f);
             }
         }
     }
 
     public void FootStep(int _i)
     {
-       
-        if(grounded)
-        walkingDust[_i].Play();
+
+        if (grounded)
+        {
+            walkingDust[_i].Play();
+
+            Manager.SINGLETON.PlaySound("step",.4f);
+        }
     }
 
     public void ChangeGround(Ground _ground)
@@ -819,5 +918,41 @@ public class PlayerMovement : MonoBehaviour
         currentGround = _ground;
 
     }
+
+    public void StartTalking(Transform _position)
+    {
+        
+        
+        talking = true;
+
+        StartCoroutine(LookAtTarget(_position));
+
+    }
     
+    IEnumerator LookAtTarget(Transform _target)
+    {
+        float _y = 0;
+        
+        Vector3 relativePos = transform.position - _target.position;
+        relativePos.y = 0;
+
+        // the second argument, upwards, defaults to Vector3.up
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
+        while (_y < 1)
+        {
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _y);
+            _y += Time.deltaTime*3;
+            yield return null;
+        }
+
+    }
+
+    public void StopTalking()
+    {
+        talking = false;
+    }
+
+
 }
