@@ -69,6 +69,8 @@ public class Habitant : MonoBehaviour
             }
             
             
+            
+            
             if (Input.GetButtonDown("GamepadInterract"))
             {
                 if (hasSomethingToSay == false)
@@ -197,6 +199,9 @@ public class Habitant : MonoBehaviour
     
     void Interract()
     {
+        Manager.SINGLETON.PlaySound("talk02",.5f);
+
+        
         Manager.SINGLETON.SubtitleOn(dialogues[dialogueIndex], !hasSomethingToSay);
         dialogueIndex++;
 
@@ -225,11 +230,15 @@ public class Habitant : MonoBehaviour
         Manager.SINGLETON.SubtitleOn(answers[answerIndex], !hasSomethingToSay);
 
         responded = true;
+        
+        Manager.SINGLETON.PlaySound("talk03",.4f);
+
     }
 
     void NextAnswer(int _value)
     {
-        
+        Manager.SINGLETON.PlaySound("talk01",.2f);
+
         Manager.SINGLETON.ChangeAnswer(_value);
 
         answerIndex = _value;
