@@ -1,18 +1,106 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slide : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Sprite[] slides;
+
+    public int slideIndex;
+
+    public bool slideOn;
+
+    [Space] 
+    
+    public Image slideImage;
+
+    public Animator anim;
+    
+    
+    void Update()
     {
+        if (Input.GetButtonDown("GamepadStart"))
+        {
+            if (!slideOn)
+            {
+                if (slideIndex < slides.Length - 1)
+                {
+                    slideIndex++;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
+            NextSlide();
+        }
+
+        if (Input.GetButtonDown("GamepadSelect"))
+        {
+            if (!slideOn)
+            {
+                if (slideIndex > 0)
+                {
+                    slideIndex--;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
+            PreviousSlide();
+        }
+    }
+
+    void NextSlide()
+    {
+        
+
+             ChangeState();
+        
+
+
+    }
+
+    void PreviousSlide()
+    {
+       
+
+            ChangeState();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void ChangeState()
     {
+        if (slideOn)
+        {
+            HideSlide();
+        }
+        else
+        {
+            ShowSlide();
+        }
+    }
+    
+    void ShowSlide()
+    {
+        slideImage.sprite = slides[slideIndex];
         
+        anim.SetTrigger("On");
+
+        slideOn = true;
+
+    }
+
+    void HideSlide()
+    {
+        anim.SetTrigger("Out");
+
+        slideOn = false;
+
     }
 }
