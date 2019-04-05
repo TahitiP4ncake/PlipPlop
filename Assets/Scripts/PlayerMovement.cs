@@ -313,6 +313,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             Jump();
             
+            Manager.SINGLETON.PlaySound("plouf", .6f);
+            
             print("Repop");
         }
 
@@ -478,7 +480,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Grounded", true);
                 
                 landDust.Play();
-                Manager.SINGLETON.PlaySound("land",.15f);
+                //Manager.SINGLETON.PlaySound("land",.15f);
 
                 
 
