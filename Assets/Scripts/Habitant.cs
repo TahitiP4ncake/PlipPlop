@@ -21,6 +21,8 @@ public class Habitant : MonoBehaviour
     public string[] screams;
 
     private bool screaming;
+
+    private int screamingIndex;
     
     //talking
 
@@ -267,7 +269,16 @@ public class Habitant : MonoBehaviour
         
         
         print("scream");
-        Manager.SINGLETON.SubtitleOn(screams[Random.Range(0,screams.Length)], true);
+        
+        
+        Manager.SINGLETON.SubtitleOn(screams[screamingIndex], true);
+
+        screamingIndex++;
+
+        if (screamingIndex >= screams.Length)
+        {
+            screamingIndex = 0;
+        }
         screaming = true;
         
         Invoke("ScreamOff", Time.fixedDeltaTime);
