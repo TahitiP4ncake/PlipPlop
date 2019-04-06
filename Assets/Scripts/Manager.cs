@@ -382,7 +382,7 @@ public class Manager : MonoBehaviour
 
     public void PlaySound(string _clip, float _volume = 1)
     {
-        AudioSource _son = Instantiate(new GameObject(), transform).AddComponent<AudioSource>();
+        AudioSource _son = new GameObject().AddComponent<AudioSource>();
         _son.Stop();
         _son.clip = sons[_clip];
 
