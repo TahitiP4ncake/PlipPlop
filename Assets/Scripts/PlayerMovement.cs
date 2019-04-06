@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform hipsTransform;
     public Transform headTransform;
 
+    public float climbForce;
+
 
     [Space] 
     
@@ -428,7 +430,9 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = Vector3.Lerp(movement, Vector3.ClampMagnitude(camTransform.right*input.x + camTransform.forward* input.y, 1f) * speed, moveLerpSpeed);
         
-
+        
+        
+        DetectObstacle();
     }
 
     void Stop()
@@ -501,18 +505,25 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
+    
+    //ULTRA TEMP PTN
     void DetectObstacle()
     {
-        if (Physics.Raycast(footTransform.position, transform.forward, 1))
+        if (Physics.Raycast(footTransform.position, -footTransform.forward, .5f))
         {
             print("Foot");
-            if (Physics.Raycast(hipsTransform.position, transform.forward, 1))
+            if (!Physics.Raycast(hipsTransform.position, -footTransform.forward, .5f))
             {
-                print("hips");
-                if (Physics.Raycast(headTransform.position, transform.forward, 1))
+                
+                print("climb!");
+                
+                rb.velocity+= new Vector3(0,climbForce,0);
+                /*
+                if (Physics.Raycast(headTransform.position, transform.forward, .2f))
                 {
                     print("head");
                 }
+                */
             }
         }
     }
