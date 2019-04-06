@@ -1,7 +1,7 @@
 ﻿ using UnityEngine;
  using System.Collections;
  using System.IO;
- using UnityEditor.Build;
+// using UnityEditor.Build;
 
 // Screen Recorder will save individual images of active scene in any resolution and of a specific image format
  // including raw, jpg, png, and ppm.  Raw and PPM are the fastest image formats for saving.

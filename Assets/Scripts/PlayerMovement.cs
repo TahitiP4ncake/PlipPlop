@@ -161,6 +161,16 @@ public class PlayerMovement : MonoBehaviour
     public GameObject[] props;
     public int propsIndex;
     
+    
+    
+    //COTTON
+    
+    [Header("Cotton")]
+    public bool cotton;
+
+    public float cottonForce;
+
+    public float cottonDownSpeedMax;
  
     
 
@@ -288,7 +298,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (CheckGround())
         {
-            rb.velocity += Vector3.down * gravityStrength;
+
+            if (!cotton)
+            {
+                rb.velocity += Vector3.down * gravityStrength;
+            }
+            else
+            {
+                rb.velocity +=Vector3.up* Time.fixedDeltaTime * cottonForce;
+
+
+                Vector3 _movement = rb.velocity;
+
+                _movement.y = Mathf.Clamp(_movement.y, cottonDownSpeedMax, Mathf.Infinity);
+
+                rb.velocity = Vector3.Lerp(rb.velocity,_movement,Time.fixedDeltaTime*2);
+            }
         }
         else
         {
@@ -484,7 +509,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Grounded", true);
                 
                 landDust.Play();
-                //Manager.SINGLETON.PlaySound("land",.15f);
+                Manager.SINGLETON.PlaySound("land",.15f);
 
                 
 
@@ -506,7 +531,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    //ULTRA TEMP PTN
+    //ULTRA TEMP PTN TODO
     void DetectObstacle()
     {
         if (Physics.Raycast(footTransform.position, -footTransform.forward, .5f))
@@ -640,6 +665,16 @@ public class PlayerMovement : MonoBehaviour
                 transform.position += new Vector3(0,.1f,0);
                 
                 Manager.SINGLETON.PlaySound("plip",.4f);
+
+                Block _blockType = _block.GetComponent<Block>();
+
+                if (_blockType)
+                {
+                    if (_blockType.type == BlockType.Cotton)
+                    {
+                        cotton = true;
+                    }
+                }
 
 
                 //transform.position -= offsets[offsets.Count - 1]; //
@@ -782,6 +817,18 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.SphereCast(transform.position, .45f, Vector3.down, out hit, checkGroundDistance))
         {
 
+            
+            Block _blockType = lastObject.GetComponent<Block>();
+
+            if (_blockType)
+            {
+                if (_blockType.type == BlockType.Cotton)
+                {
+                    cotton = false;
+                }
+            }
+            
+            
 
             Transform _object = objects[objects.Count - 2].transform;
 
