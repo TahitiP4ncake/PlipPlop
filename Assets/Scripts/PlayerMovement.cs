@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform hipsTransform;
     public Transform headTransform;
 
+    public float climbForce;
+
 
     [Space] 
     
@@ -147,21 +149,24 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 groundScale;
     
-    
-    
     //TALKING
 
     public bool talking;
-    
     
     //Props
 
     public GameObject[] props;
     public int propsIndex;
     
- 
+    //COTTON
     
+    [Header("Cotton")]
+    public bool cotton;
 
+    public float cottonForce;
+
+    public float cottonDownSpeedMax;
+ 
     void Start()
     {
         if(lerpVisuals)
@@ -286,7 +291,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (CheckGround())
         {
-            rb.velocity += Vector3.down * gravityStrength;
+
+            if (!cotton)
+            {
+                rb.velocity += Vector3.down * gravityStrength;
+            }
+            else
+            {
+                rb.velocity +=Vector3.up* Time.fixedDeltaTime * cottonForce;
+
+
+                Vector3 _movement = rb.velocity;
+
+                _movement.y = Mathf.Clamp(_movement.y, cottonDownSpeedMax, Mathf.Infinity);
+
+                rb.velocity = Vector3.Lerp(rb.velocity,_movement,Time.fixedDeltaTime*2);
+            }
         }
         else
         {
@@ -312,6 +332,8 @@ public class PlayerMovement : MonoBehaviour
             //transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
             Jump();
+            
+            Manager.SINGLETON.PlaySound("plouf", .6f);
             
             print("Repop");
         }
@@ -426,7 +448,9 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = Vector3.Lerp(movement, Vector3.ClampMagnitude(camTransform.right*input.x + camTransform.forward* input.y, 1f) * speed, moveLerpSpeed);
         
-
+        
+        
+        DetectObstacle();
     }
 
     void Stop()
@@ -499,18 +523,25 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
+    
+    //ULTRA TEMP PTN TODO
     void DetectObstacle()
     {
-        if (Physics.Raycast(footTransform.position, transform.forward, 1))
+        if (Physics.Raycast(footTransform.position, -footTransform.forward, .5f))
         {
             print("Foot");
-            if (Physics.Raycast(hipsTransform.position, transform.forward, 1))
+            if (!Physics.Raycast(hipsTransform.position, -footTransform.forward, .5f))
             {
-                print("hips");
-                if (Physics.Raycast(headTransform.position, transform.forward, 1))
+                
+                print("climb!");
+                
+                rb.velocity+= new Vector3(0,climbForce,0);
+                /*
+                if (Physics.Raycast(headTransform.position, transform.forward, .2f))
                 {
                     print("head");
                 }
+                */
             }
         }
     }
@@ -627,6 +658,16 @@ public class PlayerMovement : MonoBehaviour
                 transform.position += new Vector3(0,.1f,0);
                 
                 Manager.SINGLETON.PlaySound("plip",.4f);
+
+                Block _blockType = _block.GetComponent<Block>();
+
+                if (_blockType)
+                {
+                    if (_blockType.type == BlockType.Cotton)
+                    {
+                        cotton = true;
+                    }
+                }
 
 
                 //transform.position -= offsets[offsets.Count - 1]; //
@@ -769,6 +810,18 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.SphereCast(transform.position, .45f, Vector3.down, out hit, checkGroundDistance))
         {
 
+            
+            Block _blockType = lastObject.GetComponent<Block>();
+
+            if (_blockType)
+            {
+                if (_blockType.type == BlockType.Cotton)
+                {
+                    cotton = false;
+                }
+            }
+            
+            
 
             Transform _object = objects[objects.Count - 2].transform;
 
@@ -863,7 +916,6 @@ public class PlayerMovement : MonoBehaviour
                 emotions.ChangeEmotion(Emotion.Smile);
                 
                 Manager.SINGLETON.PlaySound("plop",.4f);
-
 
             }
             else

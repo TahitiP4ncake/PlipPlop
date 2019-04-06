@@ -30,6 +30,14 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Basket"))
+        {
+            Manager.SINGLETON.PlaySound("victory", .15f);
+        }
+    }
+
 
     private void FixedUpdate()
     {

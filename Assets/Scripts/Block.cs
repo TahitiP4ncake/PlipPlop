@@ -2,8 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BlockType
+{
+   Wood,
+   Plastic,
+   Cotton,
+   Ground
+}
+
 public class Block : MonoBehaviour
 {
+
+
+   public BlockType type;
+   
    private void Start()
    {
       Ground();

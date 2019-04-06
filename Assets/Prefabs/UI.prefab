@@ -708,10 +708,12 @@ MonoBehaviour:
   - talk03
   - bounce
   - flash
+  - plouf
+  - victory
   sonsFiles:
   - {fileID: 8300000, guid: 69466eed1cadbce479a6fd8f5b523d5c, type: 3}
   - {fileID: 8300000, guid: 7ee4a18cd6c751a469461d0088745187, type: 3}
-  - {fileID: 8300000, guid: 491c7ea9992d6ad46b83d2024841af5a, type: 3}
+  - {fileID: 8300000, guid: c26ff6ef6c61d42489cb5a91338c4e1c, type: 3}
   - {fileID: 8300000, guid: c64aa93148ff4344ca98bd1e1d9d5a5d, type: 3}
   - {fileID: 8300000, guid: 8a0063145a00e634a94e1d36ce561f4b, type: 3}
   - {fileID: 8300000, guid: b4fad20f2f57819438f943454a4708c5, type: 3}
@@ -720,6 +722,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2347983342af9274e904ec9dc2e4458d, type: 3}
   - {fileID: 8300000, guid: 8d613cd01cf67ce4f903007b8edbd1c1, type: 3}
   - {fileID: 8300000, guid: 6a875fa78f07cb548b8e5567f7d97a45, type: 3}
+  - {fileID: 8300000, guid: 7f4a58f01b145d940a2e05662b147915, type: 3}
+  - {fileID: 8300000, guid: 6cfd5b28a3b1f454db80156426012aff, type: 3}
 --- !u!82 &770819279
 AudioSource:
   m_ObjectHideFlags: 0
@@ -732,7 +736,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1637d541b9d33454cb94aa60157fe2e2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.005
+  m_Volume: 0.007
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -154,6 +154,11 @@ public class Boat : Transport
 
         rb.isKinematic = true;
         
+        if (fx.activeSelf == true)
+        {
+            fx.SetActive(false);
+        }
+        
         //print("GETOUT");
 
     }
