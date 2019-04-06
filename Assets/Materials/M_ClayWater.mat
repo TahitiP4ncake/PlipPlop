@@ -49,7 +49,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Height:
         m_Texture: {fileID: 2800000, guid: 89920c8cf2820eb4d86849f5ee35b321, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 871b56c6256649f4e999ad4d09f26165, type: 3}
@@ -88,16 +88,16 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.7
+    - _Speed: 0.4
     - _SrcBlend: 1
-    - _Tess: 2.3
+    - _Tess: 15.2
     - _UVSec: 0
     - _ZWrite: 1
-    - _offset: 1.83
+    - _offset: 3
     - _xScale: 1
     - _zScale: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 0, g: 0.13382907, b: 0.6117647, a: 1}
-    - _ColorB: {r: 0, g: 0.10841657, b: 0.6117647, a: 1}
+    - _ColorA: {r: 0, g: 0.39058012, b: 0.745283, a: 1}
+    - _ColorB: {r: 0, g: 0.48538658, b: 0.7735849, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
