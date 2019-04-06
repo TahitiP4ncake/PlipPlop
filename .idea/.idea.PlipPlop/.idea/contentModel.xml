@@ -8,6 +8,17 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="FbxExporters" t="Include">
+          <e p="Editor" t="Include">
+            <e p="FbxSdk" t="Include">
+              <e p="LICENSE.txt" t="Include" />
+              <e p="README.txt" t="Include" />
+            </e>
+          </e>
+          <e p="LICENSE.txt" t="Include" />
+          <e p="README.txt" t="Include" />
+          <e p="RELEASE_NOTES.txt" t="Include" />
+        </e>
         <e p="PanoramaToCubemap" t="Include">
           <e p="Documents" t="Include">
             <e p="PanoramaToCubemap_en.txt" t="Include" />

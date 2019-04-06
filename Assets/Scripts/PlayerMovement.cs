@@ -670,11 +670,16 @@ public class PlayerMovement : MonoBehaviour
                 }
 
 
+                //hit.collider.gameObject.GetComponent<MeshCollider>().convex = true;
+
                 //transform.position -= offsets[offsets.Count - 1]; //
             }
             else
             {
                 //IS GROUND
+                
+                hit.collider.gameObject.GetComponent<MeshCollider>().convex = true;
+
                 
                 orientationTransform.localEulerAngles = new Vector3(0,0,0);
 
@@ -784,6 +789,8 @@ public class PlayerMovement : MonoBehaviour
 
             //lastObject = _object;
             lastObject.transform.position = groundPosition;
+
+            lastObject.GetComponent<MeshCollider>().convex = false;
             
             lastObject = objects[objects.Count - 1].transform;
                 
@@ -859,6 +866,9 @@ public class PlayerMovement : MonoBehaviour
             lastObject.gameObject.GetComponent<Block>().Drop(true);
             
             
+            //lastObject.GetComponent<MeshCollider>().convex = false;
+
+            
             lastObject = objects[objects.Count - 1].transform;
                 
             emotions.ChangeEmotion(Emotion.Smile);
@@ -911,6 +921,9 @@ public class PlayerMovement : MonoBehaviour
                 lastObject.gameObject.GetComponent<Block>().Drop(false);
 
             
+                lastObject.GetComponent<MeshCollider>().convex = false;
+
+                
                 lastObject = objects[objects.Count - 1].transform;
                 
                 emotions.ChangeEmotion(Emotion.Smile);
