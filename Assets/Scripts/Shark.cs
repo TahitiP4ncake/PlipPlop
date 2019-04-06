@@ -17,9 +17,20 @@ public class Shark : MonoBehaviour
 
     private Vector3 startPosition;
 
+    public bool shaking;
+    
     void Start()
     {
         startPosition = transform.position;
+
+        speed = Random.Range(speed / 2, speed * 2);
+
+        radius = Random.Range(radius / 2, radius * 2);
+
+        if (Random.Range(0, 2) > 0)
+        {
+            speed *= -1;
+        }
     }
     
     void Update()
@@ -27,6 +38,13 @@ public class Shark : MonoBehaviour
         Vector3 _pos = GetPosition(Time.time);
 
         transform.position = startPosition + _pos;
+
+        if (shaking)
+        {
+            transform.position = Vector3.Lerp(transform.position, transform.position + Random.insideUnitSphere *2,
+                Time.deltaTime * 5);
+        }
+        
 
         Vector3 _target = GetPosition(Time.time + Time.deltaTime);
 

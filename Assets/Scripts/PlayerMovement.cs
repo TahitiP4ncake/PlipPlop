@@ -149,19 +149,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 groundScale;
     
-    
-    
     //TALKING
 
     public bool talking;
-    
     
     //Props
 
     public GameObject[] props;
     public int propsIndex;
-    
-    
     
     //COTTON
     
@@ -172,8 +167,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float cottonDownSpeedMax;
  
-    
-
     void Start()
     {
         if(lerpVisuals)
@@ -923,7 +916,6 @@ public class PlayerMovement : MonoBehaviour
                 emotions.ChangeEmotion(Emotion.Smile);
                 
                 Manager.SINGLETON.PlaySound("plop",.4f);
-
 
             }
             else
