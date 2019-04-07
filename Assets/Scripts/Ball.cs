@@ -11,6 +11,8 @@ public class Ball : MonoBehaviour
 
     public float gravity;
 
+    public ParticleSystem confettis;
+
 
     private Vector3 startPosition;
     
@@ -34,7 +36,9 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("Basket"))
         {
-            Manager.SINGLETON.PlaySound("victory", .15f);
+            Manager.SINGLETON.PlaySound("victory", .05f);
+            
+            confettis.Play();
         }
     }
 
