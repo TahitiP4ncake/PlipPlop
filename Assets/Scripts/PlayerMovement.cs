@@ -166,6 +166,14 @@ public class PlayerMovement : MonoBehaviour
     public float cottonForce;
 
     public float cottonDownSpeedMax;
+
+
+    public float idleTime;
+
+    private float idleTimer;
+
+
+    public bool sitting;
  
     void Start()
     {
@@ -183,8 +191,9 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+
       
-        
+
         CheckInputs();
         
         JumpBuffer();
@@ -259,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         
         //Apply Inputs
         
-        if (input.x != 0 || input.y != 0)
+        if (( input.x != 0 || input.y != 0 ) && !sitting)
         {
 
             if (!walking)
@@ -385,18 +394,25 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
-        if (Input.GetMouseButtonDown(0)|| Input.GetButtonDown("LeftBumper"))
+        if (!sitting)
         {
-            Possess();
+
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("LeftBumper"))
+            {
+                Possess();
+
+                idleTimer = 0;
+            }
+
+            if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
+            {
+                UnPossess();
+                idleTimer = 0;
+
+            }
         }
 
-        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"))
-        {
-            UnPossess();
-        }
-        
-        
+
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
@@ -411,11 +427,14 @@ public class PlayerMovement : MonoBehaviour
             if (!CheckGround())
             {
                 Jump();
+                idleTimer = 0;
+
             }
             else
             {
                 pressedJump = true;
                 jumpBufferTimer = 0;
+                
             }
         }
 
@@ -440,15 +459,33 @@ public class PlayerMovement : MonoBehaviour
                 props[propsIndex].SetActive(true);
             }
         }
+        
+        if (sitting == false)
+        {
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer > idleTime)
+            {
+                idleTimer = 0;
+
+                anim.SetTrigger("Sit");
+
+                sitting = true;
+            }
+
+        }
 
 
     }
 
     void Move()
     {
+        
+        
         movement = Vector3.Lerp(movement, Vector3.ClampMagnitude(camTransform.right*input.x + camTransform.forward* input.y, 1f) * speed, moveLerpSpeed);
         
-        
+        idleTimer = 0;
+
         
         DetectObstacle();
     }
@@ -480,6 +517,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+
+        if (sitting)
+        {
+            sitting = false;
+        }
+        
         anim.SetTrigger("Jump");
         anim.SetBool("Grounded", false);
         

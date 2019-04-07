@@ -49,9 +49,10 @@ public class Ball : MonoBehaviour
             transform.position = startPosition;
             
             rb.velocity = new Vector3(0,BounceSpeed, 0);
+
+            rb.angularVelocity = Vector3.zero;
             
             Manager.SINGLETON.PlaySound("bounce", .4f);
-
         }
     }
 

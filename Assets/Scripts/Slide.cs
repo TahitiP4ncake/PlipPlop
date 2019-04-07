@@ -32,6 +32,8 @@ public class Slide : MonoBehaviour
                 }
                 else
                 {
+                    
+                    ShowSlide();
                     return;
                 }
             }
@@ -50,6 +52,8 @@ public class Slide : MonoBehaviour
                 }
                 else
                 {
+                    
+                    ShowSlide();
                     return;
                 }
             }
@@ -112,6 +116,10 @@ public class Slide : MonoBehaviour
 
     public void HideSlideObject()
     {
-        slides[slideIndex].SetActive(false);
+        for (int i = 0; i < slides.Length; i++)
+        {
+            slides[i].SetActive(false);
+
+        }
     }
 }
