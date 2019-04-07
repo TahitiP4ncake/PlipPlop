@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_BasketBall
-  m_Shader: {fileID: 4800000, guid: fd3c809660771994d99f8e7db9a6c996, type: 3}
+  m_Shader: {fileID: 4800000, guid: ebd6726a464cdb7448d4576be598ba47, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,12 +19,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _ARM:
+        m_Texture: {fileID: 2800000, guid: b55ef004002b85b4aa407f4faba28f87, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ARMC:
         m_Texture: {fileID: 2800000, guid: 871b56c6256649f4e999ad4d09f26165, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: cde94b70990d5d74b92236bc3016c6b7, type: 3}
+        m_Texture: {fileID: 2800000, guid: f5893e0c265b1cf4685fa85105f28fad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -48,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 879e40bb101aeec4b9d2dcee032e1cd2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
