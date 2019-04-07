@@ -56,7 +56,7 @@ public class Boat : Transport
             Move();
             Turn();
 
-            if (fx.activeSelf == false)
+            if (fx.activeSelf == false && controlled)
             {
                 fx.SetActive(true);
             }
@@ -154,10 +154,9 @@ public class Boat : Transport
 
         rb.isKinematic = true;
         
-        if (fx.activeSelf == true)
-        {
-            fx.SetActive(false);
-        }
+        
+        fx.SetActive(false);
+        
         
         //print("GETOUT");
 

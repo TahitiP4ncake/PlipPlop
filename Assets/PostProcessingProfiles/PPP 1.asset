@@ -64,12 +64,12 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   ldrLut:
-    overrideState: 0
-    value: {fileID: 0}
+    overrideState: 1
+    value: {fileID: 2800000, guid: 896ac63c5831c6c4286c5ec36598a9b6, type: 3}
     defaultState: 4
   ldrLutContribution:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.05
   temperature:
     overrideState: 1
     value: 9
@@ -84,7 +84,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 1
+    value: 7
   brightness:
     overrideState: 0
     value: 0
@@ -122,14 +122,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.9487561, z: 0.9260283, w: 0}
   gamma:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 0.8798958, y: 1, z: 0.97370934, w: 0}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.94486475, z: 0.9862156, w: 0}
   masterCurve:
     overrideState: 0
     value:
@@ -1495,10 +1495,10 @@ MonoBehaviour:
     value: 8.180001
   aperture:
     overrideState: 1
-    value: 10.4
+    value: 10.399999
   focalLength:
     overrideState: 1
-    value: 123
+    value: 123.00001
   kernelSize:
     overrideState: 1
     value: 3

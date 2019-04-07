@@ -999,7 +999,7 @@ public class PlayerMovement : MonoBehaviour
                 grounded = true;
                 anim.SetBool("Grounded", true);
                 
-                Manager.SINGLETON.PlaySound("land",.4f);
+               // Manager.SINGLETON.PlaySound("land",.4f);
             }
         }
     }
@@ -1011,7 +1011,7 @@ public class PlayerMovement : MonoBehaviour
         {
             walkingDust[_i].Play();
 
-            Manager.SINGLETON.PlaySound("step",.4f);
+            Manager.SINGLETON.PlaySound("step",.2f);
         }
     }
 
