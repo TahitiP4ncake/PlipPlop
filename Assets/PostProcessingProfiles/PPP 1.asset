@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1495,10 +1495,10 @@ MonoBehaviour:
     value: 8.180001
   aperture:
     overrideState: 1
-    value: 6.3999996
+    value: 10.4
   focalLength:
     overrideState: 1
-    value: 123.00001
+    value: 123
   kernelSize:
     overrideState: 1
     value: 3

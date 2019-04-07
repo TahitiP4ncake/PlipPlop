@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CotonBlock
-  m_Shader: {fileID: 4800000, guid: 408223fba4ddb1f4d8a429282a27252f, type: 3}
-  m_ShaderKeywords: _NORMALMAP
+  m_Name: M_Wood 2
+  m_Shader: {fileID: 4800000, guid: f5682bbf5df8d584ea7143842a3e622c, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,13 +19,13 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _ARMC:
-        m_Texture: {fileID: 2800000, guid: 1a747068b480dda409023996bb28b833, type: 3}
-        m_Scale: {x: 1, y: 1}
+    - _ARM:
+        m_Texture: {fileID: 2800000, guid: 696b5c54609b3f64ebe9614695686082, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6a4c5e1c44e4ef5429b604f208bdda4d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 3634e2315c349ea4e9ff8639d63bc71b, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
@@ -44,16 +44,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 53e8594f6f78fc04b9a0810791142b8a, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal:
-        m_Texture: {fileID: 2800000, guid: 33d77841d0381274a989a1510653b87d, type: 3}
-        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -64,31 +60,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AnimationScale: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FPS: 6
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Light: -0.3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0.18
     - _Parallax: 0.02
-    - _Shadow: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tess: 21.1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 0.9716981, g: 0.9285034, b: 0.88461196, a: 1}
-    - _ColorB: {r: 0.6037736, g: 0.5952296, b: 0.5952296, a: 1}
+    - _Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SSS: {r: 1, g: 0.7529412, b: 0.5294118, a: 1}
+    - _PaintColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.6
+  m_fontSize: 33.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 52.4
+  m_fontSize: 62
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 2314627055458975524}
   - component: {fileID: 2314627055458975522}
   - component: {fileID: 2314627055458975523}
+  - component: {fileID: 4097242850012115218}
   m_Layer: 5
   m_Name: Slide01
   m_TagString: Untagged
@@ -507,6 +508,24 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &4097242850012115218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2314627055458975525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d1547d8dcf41f43a4aa0746c107267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements:
+  - {fileID: 2314627055456835579}
+  - {fileID: 2314627055526748970}
+  - {fileID: 2314627056079233629}
+  elementIndex: 0
+  done: 0
 --- !u!1 &2314627055526748970
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +621,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 49.55
+  m_fontSize: 58.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -779,7 +798,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 51.7
+  m_fontSize: 61.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

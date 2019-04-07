@@ -424,7 +424,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"))
         {
-            if (!CheckGround())
+            if (!CheckGround() || sitting)
             {
                 Jump();
                 idleTimer = 0;

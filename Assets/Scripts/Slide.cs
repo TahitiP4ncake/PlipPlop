@@ -17,8 +17,16 @@ public class Slide : MonoBehaviour
     public Image slideImage;
 
     public Animator anim;
-    
-    
+
+
+    public SlideObject activeSlide;
+
+    private void Start()
+    {
+        activeSlide = slides[0].GetComponent<SlideObject>();
+
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("GamepadStart"))
@@ -64,10 +72,16 @@ public class Slide : MonoBehaviour
 
     void NextSlide()
     {
-        
 
-             ChangeState();
-        
+        if (activeSlide.done || !slideOn)
+        {
+            ChangeState();
+        }
+        else
+        {
+            activeSlide.NextElement();
+        }
+
 
 
     }
@@ -97,6 +111,8 @@ public class Slide : MonoBehaviour
         //slideImage.sprite = slides[slideIndex];
 
         slides[slideIndex].SetActive(true);
+
+        activeSlide = slides[slideIndex].GetComponent<SlideObject>();
         
         anim.SetTrigger("On");
 
