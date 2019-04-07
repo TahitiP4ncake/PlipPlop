@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Slide : MonoBehaviour
 {
 
-    public Sprite[] slides;
+    public GameObject[] slides;
 
     public int slideIndex;
 
@@ -25,6 +25,7 @@ public class Slide : MonoBehaviour
         {
             if (!slideOn)
             {
+
                 if (slideIndex < slides.Length - 1)
                 {
                     slideIndex++;
@@ -42,6 +43,7 @@ public class Slide : MonoBehaviour
         {
             if (!slideOn)
             {
+    
                 if (slideIndex > 0)
                 {
                     slideIndex--;
@@ -88,7 +90,9 @@ public class Slide : MonoBehaviour
     
     void ShowSlide()
     {
-        slideImage.sprite = slides[slideIndex];
+        //slideImage.sprite = slides[slideIndex];
+
+        slides[slideIndex].SetActive(true);
         
         anim.SetTrigger("On");
 
@@ -99,8 +103,15 @@ public class Slide : MonoBehaviour
     void HideSlide()
     {
         anim.SetTrigger("Out");
+        
+
 
         slideOn = false;
 
+    }
+
+    public void HideSlideObject()
+    {
+        slides[slideIndex].SetActive(false);
     }
 }
