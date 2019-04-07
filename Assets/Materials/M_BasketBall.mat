@@ -21,7 +21,7 @@ Material:
     m_TexEnvs:
     - _ARMC:
         m_Texture: {fileID: 2800000, guid: 871b56c6256649f4e999ad4d09f26165, type: 3}
-        m_Scale: {x: 0.05, y: 0.05}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: cde94b70990d5d74b92236bc3016c6b7, type: 3}
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Normal:
         m_Texture: {fileID: 2800000, guid: 93950d3498177374db0688bfd1dc3fa6, type: 3}
-        m_Scale: {x: 0.05, y: 0.05}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -80,7 +80,7 @@ Material:
     - _Mode: 0
     - _NoiseContribution: 0
     - _OcclusionStrength: 1
-    - _Offset: 2
+    - _Offset: 0.1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -94,7 +94,7 @@ Material:
     - _zScale: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 1, g: 0.96550816, b: 0.15566039, a: 1}
-    - _ColorB: {r: 0.9811321, g: 0.86465806, b: 0.27305093, a: 1}
+    - _ColorA: {r: 1, g: 0.64831424, b: 0.15686274, a: 1}
+    - _ColorB: {r: 0.98039216, g: 0.5264271, b: 0.27450985, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SSS: {r: 1, g: 1, b: 1, a: 1}
