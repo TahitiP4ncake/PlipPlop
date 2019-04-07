@@ -1,16 +1,26 @@
 fileFormatVersion: 2
-guid: c260179fa333b0a43b829567ac1600e0
+guid: 073ad146797cc1c41a60cc2cc9238fec
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere024
-    4300002: Sphere026
-    4300004: Box050
+    100000: Box051
+    100002: Box054
+    100004: Cylinder060
+    100006: //RootNode
+    400000: Box051
+    400002: Box054
+    400004: Cylinder060
+    400006: //RootNode
+    2100000: 'Material #25'
+    2300000: Box051
+    2300002: Box054
+    2300004: Cylinder060
+    3300000: Box051
+    3300002: Box054
+    3300004: Cylinder060
+    4300000: Box051
+    4300002: Box054
+    4300004: Cylinder060
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -66,9 +76,9 @@ ModelImporter:
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
-    normalSmoothAngle: 55
-    normalImportMode: 1
-    tangentImportMode: 2
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
