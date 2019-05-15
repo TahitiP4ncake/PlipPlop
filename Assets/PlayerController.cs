@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move(inputs.direction);
-        Debug.Log(inputs.jump + " " + IsGrounded());
         if(inputs.jump && IsGrounded()) Jump(jumpForce);
 
         if(!IsGrounded()) rb.velocity += Vector3.down * gravityStrength;
