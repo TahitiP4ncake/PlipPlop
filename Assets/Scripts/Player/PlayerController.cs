@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputs inputs;
     private CameraRotation cam;
     private LegsController legs;
+    private Absorber absorber;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
+        absorber = GetComponent<Absorber>();
 
         cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
         cam.playerTransform = transform;
