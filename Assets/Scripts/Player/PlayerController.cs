@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     // Referencies
     private Rigidbody rb;
     private PlayerInputs inputs;
+    private CameraRotation cam;
+    private LegsController legs;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -28,39 +30,52 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputs = GetComponent<PlayerInputs>();
+        legs = GetComponentInChildren<LegsController>();
+
+        cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
+        cam.playerTransform = transform;
     }
 
     void FixedUpdate()
     {
         Move(inputs.direction);
-        if(inputs.jump && IsGrounded()) Jump(jumpForce);
 
         if(!IsGrounded()) rb.velocity += Vector3.down * gravityStrength;
+    }
+
+    void Update()
+    {
+        bool isGrounded = IsGrounded();
+
+        if(inputs.jump && isGrounded) Jump(jumpForce);
+
+        legs.SetGrounded(isGrounded);
     }
 
     private void Jump(float force)
     {
         rb.velocity = new Vector3(rb.velocity.x, force, rb.velocity.z);
+        legs.Jump();
     }
 
     private void Move(Vector2 direction) // Apply inputs to move the player 
     {
         // Prevents players from going faster in diagonals
         direction = Vector3.ClampMagnitude(direction, 1f);
-
-        // Apply the direction to the velocity of the rigidbody
-        Vector3 moveDirection = new Vector3(direction.x, 0f, direction.y);
-
-        if(!IsGrounded()) moveDirection *= airControlRatio;
-
-        rb.velocity = Vector3.Lerp(rb.velocity, moveDirection * moveSpeed + new Vector3(0f, rb.velocity.y, 0f), moveLerpSpeed * Time.deltaTime);
+        rb.velocity = Vector3.Lerp(
+            rb.velocity,
+            (cam.transform.right * direction.x + cam.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
+            moveLerpSpeed * Time.deltaTime
+        );
 
         // Lerp the orientation of the player
-        if(moveDirection.magnitude > 0.1f) 
+        if(direction.magnitude > 0.1f) 
         {
-            currentOrientation = moveDirection;
+            currentOrientation = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             transform.forward = Vector3.Lerp(transform.forward, currentOrientation, RotationLerpSpeed * Time.deltaTime);
         }
+
+        legs.SetSpeed(direction.magnitude);
     }    
 
     private bool IsGrounded() // Simple check if player is on something 
