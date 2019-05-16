@@ -19,8 +19,8 @@ public class PlayerInputs : MonoBehaviour
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         // Get Possess Inputs
-        possess = (Input.GetMouseButtonDown(0) || Input.GetButtonDown("LeftBumper"));
-        unpossess = (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"));
+        possess = (Input.GetMouseButtonDown(1) || Input.GetButtonDown("RightBumper"));
+        unpossess = (Input.GetMouseButtonDown(0) || Input.GetButtonDown("LeftBumper"));
 
         // Get Jump Inputs
         jump = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"));

@@ -8,15 +8,25 @@ public class Absorbable : MonoBehaviour, IAbsorbable
     MeshRenderer meshRenderer;
     Rigidbody rigidbody;
 
+    void Awake()
+    {
+        collider = GetComponent<Collider>();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
     public virtual void Absorb()
     {
-         
+        gameObject.layer = 14; // Ignore Player collision
+        if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public virtual  void Release()
     {
-
+        transform.SetParent(null);
+        gameObject.layer = 0;
+        if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints.None;
     }
     
     public virtual  void Update()

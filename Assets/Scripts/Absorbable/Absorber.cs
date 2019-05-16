@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Absorber : MonoBehaviour
 {
+    public Transform head;
     public float range = 1f;
     public float hipsHeight = 0f;
     public List<IAbsorbable> absorbed = new List<IAbsorbable>();
@@ -18,18 +19,26 @@ public class Absorber : MonoBehaviour
         }
     }
 
-    public void Absorb(IAbsorbable element)
+    public void Absorb(IAbsorbable a)
     {
-        element.Absorb();
-        absorbed.Add(element);
+        a.Absorb();
+        a.GetTransform().SetParent(transform);
+        a.GetTransform().localPosition = new Vector3(0f, GetBodyHeight() + a.GetMeshFilter().mesh.bounds.size.y/2, 0f);
+        absorbed.Add(a);
+        RefreshHead();
     }
 
     public void Release(int index)
     {
         if(index < 0 && index >= absorbed.Count) return;
-
-        absorbed[index].Absorb();
+        absorbed[index].Release();
         absorbed.RemoveAt(index);
+        RefreshHead();
+    }
+
+    public void ReleaseLast()
+    {
+        if(absorbed.Count > 0) Release(absorbed.Count - 1);
     }
 
     public void ReleaseAll()
@@ -41,7 +50,15 @@ public class Absorber : MonoBehaviour
     public float GetBodyHeight()
     {
         float height = hipsHeight;
-        foreach(IAbsorbable a in absorbed) hipsHeight += a.GetMeshFilter().mesh.bounds.size.y;
+        foreach(IAbsorbable a in absorbed) 
+        {
+            height += a.GetMeshFilter().mesh.bounds.size.y * a.GetTransform().localScale.y;
+        }
         return height;
+    }
+
+    public void RefreshHead()
+    {
+        head.localPosition = new Vector3(0f, GetBodyHeight(), 0f);
     }
 }

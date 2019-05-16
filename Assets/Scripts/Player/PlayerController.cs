@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
         if(inputs.jump && isGrounded) Jump(jumpForce);
 
+        if(inputs.possess) absorber.TryAbsorb();
+        else if(inputs.unpossess) absorber.ReleaseLast();
+
         legs.SetGrounded(isGrounded);
     }
 
