@@ -9,6 +9,11 @@ public class Absorber : MonoBehaviour
     public float hipsHeight = 0f;
     public List<IAbsorbable> absorbed = new List<IAbsorbable>();
 
+    void Start()
+    {
+        RefreshBody();
+    }
+
     public void TryAbsorb()
     {
         RaycastHit hit;
@@ -21,14 +26,11 @@ public class Absorber : MonoBehaviour
 
     public void Absorb(IAbsorbable a)
     {
-
         transform.position -= new Vector3(0f, a.GetVerticalSize(), 0f);
-
-        a.Absorb();
+        a.Absorb(this);
         RoundAngles(a.GetTransform());
         a.GetTransform().SetParent(transform);
         absorbed.Add(a);
-
         RefreshBody();
     }
 
@@ -36,7 +38,7 @@ public class Absorber : MonoBehaviour
     {
         if(index < 0 && index >= absorbed.Count) return;
 
-        absorbed[index].Release();
+        absorbed[index].Release(this);
         transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
         absorbed[index].GetTransform().position = transform.position;
         absorbed.RemoveAt(index);
@@ -84,7 +86,7 @@ public class Absorber : MonoBehaviour
 
     public void ReleaseAll()
     {
-        foreach(IAbsorbable a in absorbed) a.Release();
+        foreach(IAbsorbable a in absorbed) a.Release(this);
         absorbed.Clear();
     }
 

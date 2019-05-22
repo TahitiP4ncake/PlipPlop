@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump Settings")]
     public float jumpForce = 10f;
-    public float gravityStrength = 0.5f;
     public float airControlRatio = 0.5f;
 
     [Header("Grounded Check")]
@@ -42,8 +41,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move(inputs.direction);
-
-        if(!IsGrounded()) rb.velocity += Vector3.down * gravityStrength;
     }
 
     void Update()
