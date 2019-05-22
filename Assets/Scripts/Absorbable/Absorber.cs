@@ -27,9 +27,9 @@ public class Absorber : MonoBehaviour
         a.Absorb();
         RoundAngles(a.GetTransform());
         a.GetTransform().SetParent(transform);
-        a.GetTransform().localPosition = new Vector3(0f, GetBodyHeight() + a.GetVerticalSize()/2, 0f);
         absorbed.Add(a);
-        RefreshHead();
+
+        RefreshBody();
     }
 
     public void Release(int index)
@@ -40,7 +40,8 @@ public class Absorber : MonoBehaviour
         transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
         absorbed[index].GetTransform().position = transform.position;
         absorbed.RemoveAt(index);
-        RefreshHead();
+
+        RefreshBody();
     }
 
     public void RoundAngles(Transform t)
@@ -60,6 +61,18 @@ public class Absorber : MonoBehaviour
         else if(value > 225f && value <= 315f) return 270f;
         else if(value > 315f && value <= 360f) return 0f;
         else return 0f;
+    }
+
+    void RefreshBody()
+    {
+        float totalHeight = hipsHeight;
+        for(int i = absorbed.Count - 1; i >= 0; i--)
+        {
+            float myHeight = absorbed[i].GetVerticalSize();
+            absorbed[i].GetTransform().localPosition = new Vector3(0f, totalHeight + myHeight/2, 0f);
+            totalHeight += myHeight;
+        }
+        head.localPosition = new Vector3(0f, totalHeight, 0f);
     }
 
 
@@ -83,10 +96,5 @@ public class Absorber : MonoBehaviour
             height += a.GetVerticalSize();
         }
         return height;
-    }
-
-    public void RefreshHead()
-    {
-        head.localPosition = new Vector3(0f, GetBodyHeight(), 0f);
     }
 }
