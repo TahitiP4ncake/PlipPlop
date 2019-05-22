@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Absorber : MonoBehaviour
 {
+    [Header("Referencies")]
     public Transform head;
+    [Header("Settings")]
     public float range = 1f;
     public float hipsHeight = 0f;
-    public List<IAbsorbable> absorbed = new List<IAbsorbable>();
+    private List<IAbsorbable> absorbed = new List<IAbsorbable>();
 
     void Start()
     {
+        // Refresh the body to align the head with the hipsHeight
         RefreshBody();
     }
 
-    public void TryAbsorb()
+    public void TryAbsorb() // Check if there is an IAbsorbable under the absorber
     {
         RaycastHit hit;
         if(Physics.Raycast(transform.position + new Vector3(0f, 0.1f, 0f), -transform.up, out hit, range - 0.1f))
@@ -24,7 +27,7 @@ public class Absorber : MonoBehaviour
         }
     }
 
-    public void Absorb(IAbsorbable a)
+    public void Absorb(IAbsorbable a) // Absorbe the target IAbsorbable and attach it to the absorber
     {
         transform.position -= new Vector3(0f, a.GetVerticalSize(), 0f);
         a.Absorb(this);
@@ -34,19 +37,24 @@ public class Absorber : MonoBehaviour
         RefreshBody();
     }
 
-    public void Release(int index)
-    {
+    public void Release(int index) // Release the selected IAbsorbable in the scene 
+    {   
+        // Bug Checking
         if(index < 0 && index >= absorbed.Count) return;
 
+        // Release the IAbsorbable
         absorbed[index].Release(this);
+
+        // Move the IAbsorbable under the feet of the Absorber and move the absorber up
         transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
         absorbed[index].GetTransform().position = transform.position;
-        absorbed.RemoveAt(index);
 
+        // Remove from the list and Refresh the body
+        absorbed.RemoveAt(index);
         RefreshBody();
     }
 
-    public void RoundAngles(Transform t)
+    public void RoundAngles(Transform t) // Round the transform rotation of a transform 
     {
         Vector3 rot = new Vector3(t.eulerAngles.x, t.eulerAngles.y, t.eulerAngles.z);
         rot.x = CartesianRound(rot.x);
@@ -55,7 +63,7 @@ public class Absorber : MonoBehaviour
         t.rotation = Quaternion.Euler(rot);
     }
 
-    public float CartesianRound(float value)
+    public float CartesianRound(float value) // Round an EulerAngle into the cartesian orientation 
     {
         if(value > 0f && value <= 45f) return 0f;
         else if(value > 45f && value <= 135f) return 90f;
@@ -65,7 +73,7 @@ public class Absorber : MonoBehaviour
         else return 0f;
     }
 
-    void RefreshBody()
+    void RefreshBody() // Refresh the position of all the objects in the body (including the head) 
     {
         float totalHeight = hipsHeight;
         for(int i = absorbed.Count - 1; i >= 0; i--)
@@ -77,20 +85,18 @@ public class Absorber : MonoBehaviour
         head.localPosition = new Vector3(0f, totalHeight, 0f);
     }
 
-
-
-    public void ReleaseLast()
+    public void ReleaseLast() // Release the last absorbed IAbsorbable 
     {
         if(absorbed.Count > 0) Release(absorbed.Count - 1);
     }
 
-    public void ReleaseAll()
+    public void ReleaseAll() // Release all absorbed elements 
     {
         foreach(IAbsorbable a in absorbed) a.Release(this);
         absorbed.Clear();
     }
 
-    public float GetBodyHeight()
+    public float GetBodyHeight() // Get the total height of the absorber under his head 
     {
         float height = hipsHeight;
         foreach(IAbsorbable a in absorbed) 

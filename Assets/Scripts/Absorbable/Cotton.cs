@@ -13,13 +13,12 @@ public class Cotton : Absorbable
     {
         base.Absorb(a);
         
+        // Make the gravity lighter
         gravity = a.gameObject.GetComponent<Gravity>();
-
         if(gravity != null)
         {
             previousGravityStrength = gravity.strength;
             previousMaxFallSpeed = gravity.maxFallSpeed;
-
             gravity.strength = appliedGravityStrength;
             gravity.maxFallSpeed = appliedMaxFallSpeed;
         }
@@ -29,10 +28,12 @@ public class Cotton : Absorbable
     {
         base.Release(a);
         
+        // Reset the gravity to its values
         if(gravity != null)
         {
             gravity.strength = previousGravityStrength;
             gravity.maxFallSpeed = previousMaxFallSpeed;
+            gravity = null;
         }
     }
 }

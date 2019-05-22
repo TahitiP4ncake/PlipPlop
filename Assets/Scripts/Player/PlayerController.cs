@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // Spawn Camera
         cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
         cam.playerTransform = absorber.head;
     }
@@ -45,17 +46,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Check if player is grounded
         bool isGrounded = IsGrounded();
-
+        // Check Jump Inputs
         if(inputs.jump && isGrounded) Jump(jumpForce);
-
+        // Check Possess Inputs
         if(inputs.possess) absorber.TryAbsorb();
         else if(inputs.unpossess) absorber.ReleaseLast();
-
+        // Parse values to legs
         legs.SetGrounded(isGrounded);
     }
 
-    private void Jump(float force)
+    private void Jump(float force) // Make the player jump 
     {
         rb.velocity = new Vector3(rb.velocity.x, force, rb.velocity.z);
         legs.Jump();
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
     {
         // Prevents players from going faster in diagonals
         direction = Vector3.ClampMagnitude(direction, 1f);
+
+        // Lerp the rb velocity depending on the camera rotation and inputs
         rb.velocity = Vector3.Lerp(
             rb.velocity,
             (cam.transform.right * direction.x + cam.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
@@ -78,6 +82,7 @@ public class PlayerController : MonoBehaviour
             transform.forward = Vector3.Lerp(transform.forward, currentOrientation, RotationLerpSpeed * Time.deltaTime);
         }
 
+        // Parse speed to legs
         legs.SetSpeed(direction.magnitude);
     }    
 

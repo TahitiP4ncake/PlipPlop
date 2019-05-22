@@ -5,7 +5,6 @@ public interface IAbsorbable
     void Absorb(Absorber a);
     void Release(Absorber a);
     void Update();
-
     GameObject GetGameObject();
     Transform GetTransform();
     Collider GetCollider();
@@ -13,6 +12,5 @@ public interface IAbsorbable
     MeshRenderer GetMeshRenderer();
     Rigidbody GetRigidbody();
     Absorber GetAbsorber();
-
     float GetVerticalSize();
 }
