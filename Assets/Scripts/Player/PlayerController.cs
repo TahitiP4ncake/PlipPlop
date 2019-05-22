@@ -21,10 +21,8 @@ public class PlayerController : MonoBehaviour
     public float gravityStrength = 0.5f;
     public float airControlRatio = 0.5f;
 
-
     [Header("Grounded Check")]
     public float checkGroundDistance;
-
     Vector3 currentOrientation;
 
     void Awake()
@@ -33,9 +31,12 @@ public class PlayerController : MonoBehaviour
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
         absorber = GetComponent<Absorber>();
+    }
 
+    void Start()
+    {
         cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
-        cam.playerTransform = transform;
+        cam.playerTransform = absorber.head;
     }
 
     void FixedUpdate()

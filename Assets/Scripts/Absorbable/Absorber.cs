@@ -21,9 +21,13 @@ public class Absorber : MonoBehaviour
 
     public void Absorb(IAbsorbable a)
     {
+
+        transform.position -= new Vector3(0f, a.GetVerticalSize(), 0f);
+
         a.Absorb();
+        RoundAngles(a.GetTransform());
         a.GetTransform().SetParent(transform);
-        a.GetTransform().localPosition = new Vector3(0f, GetBodyHeight() + a.GetMeshFilter().mesh.bounds.size.y/2, 0f);
+        a.GetTransform().localPosition = new Vector3(0f, GetBodyHeight() + a.GetVerticalSize()/2, 0f);
         absorbed.Add(a);
         RefreshHead();
     }
@@ -31,10 +35,34 @@ public class Absorber : MonoBehaviour
     public void Release(int index)
     {
         if(index < 0 && index >= absorbed.Count) return;
+
         absorbed[index].Release();
+        transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
+        absorbed[index].GetTransform().position = transform.position;
         absorbed.RemoveAt(index);
         RefreshHead();
     }
+
+    public void RoundAngles(Transform t)
+    {
+        Vector3 rot = new Vector3(t.eulerAngles.x, t.eulerAngles.y, t.eulerAngles.z);
+        rot.x = CartesianRound(rot.x);
+        rot.y = CartesianRound(rot.y);
+        rot.z = CartesianRound(rot.z);
+        t.rotation = Quaternion.Euler(rot);
+    }
+
+    public float CartesianRound(float value)
+    {
+        if(value > 0f && value <= 45f) return 0f;
+        else if(value > 45f && value <= 135f) return 90f;
+        else if(value > 135f && value <= 225f) return 180f;
+        else if(value > 225f && value <= 315f) return 270f;
+        else if(value > 315f && value <= 360f) return 0f;
+        else return 0f;
+    }
+
+
 
     public void ReleaseLast()
     {
@@ -52,7 +80,7 @@ public class Absorber : MonoBehaviour
         float height = hipsHeight;
         foreach(IAbsorbable a in absorbed) 
         {
-            height += a.GetMeshFilter().mesh.bounds.size.y * a.GetTransform().localScale.y;
+            height += a.GetVerticalSize();
         }
         return height;
     }

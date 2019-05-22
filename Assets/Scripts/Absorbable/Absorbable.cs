@@ -34,6 +34,12 @@ public class Absorbable : MonoBehaviour, IAbsorbable
 
     }
 
+    public virtual float GetVerticalSize()
+    {
+        Vector3 boundsSize = Vector3.Scale(this.GetMeshFilter().mesh.bounds.size, GetTransform().localScale);
+        return Vector3.Scale(boundsSize, GetTransform().up).magnitude;
+    }
+
     // Get things
     public GameObject GetGameObject(){return gameObject;}
     public Transform GetTransform(){return transform;}

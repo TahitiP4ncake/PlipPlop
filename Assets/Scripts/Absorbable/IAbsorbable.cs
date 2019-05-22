@@ -12,4 +12,6 @@ public interface IAbsorbable
     MeshFilter GetMeshFilter();
     MeshRenderer GetMeshRenderer();
     Rigidbody GetRigidbody();
+
+    float GetVerticalSize();
 }
