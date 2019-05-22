@@ -14643,7 +14643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 0.35
-  maxFallSpeed: 10
+  maxFallSpeed: 100
   checkGroundDistance: 0.5
 --- !u!65 &1559339113
 BoxCollider:
@@ -15108,7 +15108,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5153e9ca80576f4ca9fffa180214c87, type: 2}
+  - {fileID: 2100000, guid: a691f0bdf03667a47a7524d33e65f555, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15241,7 +15241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6360063627359405919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53c1f6a0c30ba8145aa514e9b9fbfc96, type: 3}
   m_Name: 

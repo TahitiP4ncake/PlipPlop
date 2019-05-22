@@ -30,5 +30,10 @@ public class Gravity : MonoBehaviour
     private bool IsGrounded() // Simple check if player is on something 
     {
         return Physics.Raycast(transform.position + new Vector3(0f, 0.1f, 0f), -transform.up, checkGroundDistance - 0.1f);
-    } 
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return rb.velocity;
+    }
 }

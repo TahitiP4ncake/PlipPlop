@@ -1,27 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Cotton : Absorbable
 {
+    [Header("Settings")]
     public float appliedGravityStrength = 0.1f;
     public float appliedMaxFallSpeed = 1f;
-    float previousGravityStrength;
-    float previousMaxFallSpeed;
+    private float previousGravityStrength;
+    private float previousMaxFallSpeed;
+    private Gravity gravity;
 
     public override void Absorb(Absorber a)
     {
         base.Absorb(a);
         
-        Gravity g = a.gameObject.GetComponent<Gravity>();
+        gravity = a.gameObject.GetComponent<Gravity>();
 
-        if(g != null)
+        if(gravity != null)
         {
-            previousGravityStrength = g.strength;
-            previousMaxFallSpeed = g.maxFallSpeed;
+            previousGravityStrength = gravity.strength;
+            previousMaxFallSpeed = gravity.maxFallSpeed;
 
-            g.strength = appliedGravityStrength;
-            g.maxFallSpeed = appliedMaxFallSpeed;
+            gravity.strength = appliedGravityStrength;
+            gravity.maxFallSpeed = appliedMaxFallSpeed;
         }
     }
 
@@ -29,12 +29,10 @@ public class Cotton : Absorbable
     {
         base.Release(a);
         
-        Gravity g = a.gameObject.GetComponent<Gravity>();
-        
-        if(g != null)
+        if(gravity != null)
         {
-            g.strength = previousGravityStrength;
-            g.maxFallSpeed = previousMaxFallSpeed;
+            gravity.strength = previousGravityStrength;
+            gravity.maxFallSpeed = previousMaxFallSpeed;
         }
     }
 }
