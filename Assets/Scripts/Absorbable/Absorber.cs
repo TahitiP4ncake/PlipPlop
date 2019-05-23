@@ -47,7 +47,7 @@ public class Absorber : MonoBehaviour
 
         // Move the IAbsorbable under the feet of the Absorber and move the absorber up
         transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
-        absorbed[index].GetTransform().position = transform.position;
+        absorbed[index].GetTransform().position -= new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
 
         // Remove from the list and Refresh the body
         absorbed.RemoveAt(index);
@@ -79,7 +79,7 @@ public class Absorber : MonoBehaviour
         for(int i = absorbed.Count - 1; i >= 0; i--)
         {
             float myHeight = absorbed[i].GetVerticalSize();
-            absorbed[i].GetTransform().localPosition = new Vector3(0f, totalHeight + myHeight/2, 0f);
+            absorbed[i].GetTransform().localPosition = new Vector3(absorbed[i].GetTransform().localPosition.x, totalHeight + myHeight/2, absorbed[i].GetTransform().localPosition.z);
             totalHeight += myHeight;
         }
         head.localPosition = new Vector3(0f, totalHeight, 0f);
