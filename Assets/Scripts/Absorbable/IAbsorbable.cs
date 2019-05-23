@@ -13,4 +13,5 @@ public interface IAbsorbable
     Rigidbody GetRigidbody();
     Absorber GetAbsorber();
     float GetVerticalSize();
+    void SetHeightInBody(float currentHeight);
 }

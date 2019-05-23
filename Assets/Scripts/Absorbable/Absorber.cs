@@ -30,6 +30,7 @@ public class Absorber : MonoBehaviour
     public void Absorb(IAbsorbable a) // Absorbe the target IAbsorbable and attach it to the absorber
     {
         transform.position -= new Vector3(0f, a.GetVerticalSize(), 0f);
+
         a.Absorb(this);
         RoundAngles(a.GetTransform());
         a.GetTransform().SetParent(transform);
@@ -79,7 +80,7 @@ public class Absorber : MonoBehaviour
         for(int i = absorbed.Count - 1; i >= 0; i--)
         {
             float myHeight = absorbed[i].GetVerticalSize();
-            absorbed[i].GetTransform().localPosition = new Vector3(absorbed[i].GetTransform().localPosition.x, totalHeight + myHeight/2, absorbed[i].GetTransform().localPosition.z);
+            absorbed[i].SetHeightInBody(totalHeight);
             totalHeight += myHeight;
         }
         head.localPosition = new Vector3(0f, totalHeight, 0f);
@@ -99,10 +100,7 @@ public class Absorber : MonoBehaviour
     public float GetBodyHeight() // Get the total height of the absorber under his head 
     {
         float height = hipsHeight;
-        foreach(IAbsorbable a in absorbed) 
-        {
-            height += a.GetVerticalSize();
-        }
+        foreach(IAbsorbable a in absorbed) height += a.GetVerticalSize();
         return height;
     }
 }

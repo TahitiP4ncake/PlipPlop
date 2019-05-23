@@ -10,6 +10,9 @@ public class Library : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject playerCameraPrefab;
 
+    [Header("Physics Materials")]
+    public PhysicMaterial defaultPhysicMaterial;
+
     void Awake()
     {
         instance = this;

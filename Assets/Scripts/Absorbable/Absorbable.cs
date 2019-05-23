@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 
+public enum MeshPivot{ Down, Center }
+
 public class Absorbable : MonoBehaviour, IAbsorbable
 {
+    [Header("Settings")]
+    public MeshPivot pivot = MeshPivot.Center;
+
     // Referencies
     Collider collider;
     MeshFilter meshFilter;
@@ -15,6 +20,12 @@ public class Absorbable : MonoBehaviour, IAbsorbable
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         rigidbody = GetComponent<Rigidbody>();
+
+    }
+
+    void Start()
+    {
+        collider.material = Library.instance.defaultPhysicMaterial;
     }
 
     public virtual void Absorb(Absorber a) // Get Absorbed by the given absorber 
@@ -31,7 +42,7 @@ public class Absorbable : MonoBehaviour, IAbsorbable
         if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints.None;
         absorber = null;
     }
-    
+
     public virtual void Update() // Update 
     {
 
@@ -41,6 +52,17 @@ public class Absorbable : MonoBehaviour, IAbsorbable
     {
         Vector3 boundsSize = Vector3.Scale(this.GetMeshFilter().mesh.bounds.size, GetTransform().localScale);
         return Vector3.Scale(boundsSize, GetTransform().up).magnitude;
+    }
+
+    public void SetHeightInBody(float currentHeight)
+    {
+        switch(pivot)
+        {
+            case MeshPivot.Center: transform.localPosition = new Vector3(transform.localPosition.x, currentHeight + GetVerticalSize()/2, transform.localPosition.z);
+            break;
+            case MeshPivot.Down: transform.localPosition = new Vector3(transform.localPosition.x, currentHeight, transform.localPosition.z);
+            break;
+        }
     }
 
     // Get things
