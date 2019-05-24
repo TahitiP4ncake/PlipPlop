@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\doria\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_PlipPlop.-1315014447.00" t="ExcludeRecursive" />
-    <e p="C:\Users\doria\Documents\GitHub\PlipPlop" t="IncludeRecursive">
+    <e p="C:\Users\d.beaugendre\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\d.beaugendre\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_PlipPlop.407712316.00" t="ExcludeRecursive" />
+    <e p="C:\Users\d.beaugendre\Documents\GitHub\PlipPlop" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
@@ -34,11 +35,13 @@
           <e p="Bird.cs" t="Include" />
           <e p="Block.cs" t="Include" />
           <e p="Boat.cs" t="Include" />
+          <e p="BodyLerper.cs" t="Include" />
           <e p="ButterFly.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
           <e p="Emotions.cs" t="Include" />
           <e p="Ground.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
+          <e p="Leg.cs" t="Include" />
           <e p="Manager.cs" t="Include" />
           <e p="Photo.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
@@ -55,6 +58,7 @@
           <e p="S_ClayTriPlanar.shader" t="Include" />
           <e p="S_Cloud.shader" t="Include" />
           <e p="S_Ground.shader" t="Include" />
+          <e p="S_PalmTree.shader" t="Include" />
           <e p="S_PanTex.shader" t="Include" />
           <e p="S_ParticlemMesh.shader" t="Include" />
           <e p="S_ParticleNormal.shader" t="Include" />
