@@ -7,6 +7,8 @@ public class Boat : Vehicule
     private Vector3 direction;
     private Vector3 input;
 
+    private bool on;
+
     [Header("Settings")]
     public float speed;
     public float rotationSpeed;
@@ -24,6 +26,8 @@ public class Boat : Vehicule
 
     private void FixedUpdate()
     {
+        if(!on) return;
+
         if (input.y != 0 || input.x !=0)
         {
             Move();
@@ -52,12 +56,14 @@ public class Boat : Vehicule
         base.On();
         rb.isKinematic = false;
         input = Vector2.zero;
+        on = true;
     }
     public override void Off()
     {
         base.Off();
         rb.isKinematic = true;
         fx.SetActive(false);
+        on = false;
     }
 
     void Move()
