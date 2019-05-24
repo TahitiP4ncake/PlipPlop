@@ -4922,7 +4922,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!64 &8926431430656703927
 MeshCollider:
@@ -4950,8 +4950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e85d2340a8dd5458c58a107c3388d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlled: 0
-  rb: {fileID: 8926431430656703925}
   speed: 12
   rotationSpeed: 6
   lerpSpeed: 0.1
@@ -4959,7 +4957,6 @@ MonoBehaviour:
   sideTilt: 0.2
   frontTilt: 0.5
   maxTiltAngle: 30
-  camTransform: {fileID: 0}
   fx: {fileID: 650404267772451651}
 --- !u!1 &8926431432286178551
 GameObject:

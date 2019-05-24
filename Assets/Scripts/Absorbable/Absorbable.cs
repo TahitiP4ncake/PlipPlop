@@ -77,7 +77,7 @@ public class Absorbable : MonoBehaviour, IAbsorbable
                     currentHeight,
                     transform.localPosition.z
                 );
-                transform.localPosition += Vector3.Scale(-transform.up, new Vector3(0f,GetVerticalSize(),0f));
+                //transform.localPosition += Vector3.Scale(-transform.up, new Vector3(0f,GetVerticalSize(),0f));
             break;
         }
     }
