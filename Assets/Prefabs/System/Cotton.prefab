@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 396654827140045187}
   - component: {fileID: 396654827141143363}
   - component: {fileID: 396654827139105568}
-  - component: {fileID: 396654827139105569}
+  - component: {fileID: 1141820248}
   m_Layer: 0
   m_Name: Cotton
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 396654827139204483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.08, y: -0, z: -4.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,7 +93,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300002, guid: 310f43d84cf8e9c4fbe58dcd0d33159d, type: 3}
---- !u!114 &396654827139105569
+--- !u!114 &1141820248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 396654827139204483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be60ffc472e6bf545a7641c7dd9e674e, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3b7d34357f7de4f8e9b8ac4cff290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  appliedGravityStrength: 0.1
+  appliedMaxFallSpeed: 1

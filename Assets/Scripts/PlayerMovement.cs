@@ -191,41 +191,28 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-
-      
-
         CheckInputs();
-        
         JumpBuffer();
     }
 
     void FixedUpdate()
     {
-        
         if (!controlled )
         {
-            
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
-
             return;
         }
 
         if (talking)
         {
             Stop();
-         
             if (walking)
             {
                 walking = false;
                 anim.SetBool("Walking", false);
             }
-            
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
-
-            
-            
             movement.y = rb.velocity.y;
-
             rb.velocity = Vector3.Lerp(rb.velocity, movement, Mathf.Clamp01(influence));
             return;
         }
@@ -235,54 +222,36 @@ public class PlayerMovement : MonoBehaviour
         {
             cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z,cameraZ.x + cameraOffset, .3f));
 //            cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, Mathf.Clamp(cameraZ.x + cameraOffset,cameraZ.x,cameraZ.y), .3f));
-
-
             depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, closeFocal, .3f);
             depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, closeDistance, .3f);
             depth.aperture.value = Mathf.Lerp(depth.aperture.value, closeAperture, .3f);
-            
-            
         }
         else
         {
             cameraZObject.localPosition = new Vector3(0,0,Mathf.Lerp(cameraZObject.localPosition.z, cameraZ.y, .2f));
-            
             depth.focalLength.value = Mathf.Lerp(depth.focalLength.value, farFocal, .2f);
             depth.focusDistance.value = Mathf.Lerp(depth.focusDistance.value, farDistance, .2f);
             depth.aperture.value = Mathf.Lerp(depth.aperture.value, farAperture, .2f);
-
         }
         
         //Inclinaison du personnage à tweaker en fonction de la taille
         orientationTransform.localEulerAngles = new Vector3(Mathf.Lerp(orientationTransform.localEulerAngles.x, Mathf.Clamp(movement.magnitude*frontTilt, -maxTiltAngle, maxTiltAngle), .5f),0,orientationTransform.localEulerAngles.z);
-
         
         if (IsGround)
         {
-            
-            
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
-
             return;
         }
-        
         //Apply Inputs
-        
         if (( input.x != 0 || input.y != 0 ) && !sitting)
         {
-
             if (!walking)
             {
                 walking = true;
                 anim.SetBool("Walking", true);
             }
-            
             Move();
-            
-            if (!IsGround)
-            {
-                Turn();
-            }
+            if (!IsGround) Turn();
         }
         else
         {
@@ -291,16 +260,12 @@ public class PlayerMovement : MonoBehaviour
                 walking = false;
                 anim.SetBool("Walking", false);
             }
-            
             orientationTransform.localEulerAngles = new Vector3(orientationTransform.localEulerAngles.x,0,0);
-
-            
             Stop();
         }
 
         if (CheckGround())
         {
-
             if (!cotton)
             {
                 rb.velocity += Vector3.down * gravityStrength;
@@ -308,12 +273,8 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rb.velocity +=Vector3.up* Time.fixedDeltaTime * cottonForce;
-
-
                 Vector3 _movement = rb.velocity;
-
                 _movement.y = Mathf.Clamp(_movement.y, cottonDownSpeedMax, Mathf.Infinity);
-
                 rb.velocity = Vector3.Lerp(rb.velocity,_movement,Time.fixedDeltaTime*2);
             }
         }
@@ -325,31 +286,21 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
             }
         }
-        
         movement.y = rb.velocity.y;
-
         rb.velocity = Vector3.Lerp(rb.velocity, movement, Mathf.Clamp01(influence));
-        
-        if (lerpVisuals)
-            LerpVisuals();
+
+        if(lerpVisuals) LerpVisuals();
 
 //YKILL TEMP
         if (transform.position.y < YKILL)
         {
-
             transform.position = currentGround.respawnTransform.position;
             //transform.position = new Vector3(0,0,0);
             rb.velocity = Vector3.zero;
             Jump();
-            
             Manager.SINGLETON.PlaySound("plouf", .6f);
-            
             print("Repop");
         }
-
-
-        
-        
         UpdateInfluence();
     }
 
@@ -358,7 +309,6 @@ public class PlayerMovement : MonoBehaviour
         if (influence < 1)
         {
             influence += Time.fixedDeltaTime;
-
             if (influence >= 1)
             {
                 influence = 1;
@@ -382,7 +332,6 @@ public class PlayerMovement : MonoBehaviour
     void LerpVisuals()
     {
         visualsObject.transform.eulerAngles = visualsParent.transform.eulerAngles;
-
         visualsObject.transform.position = Vector3.Lerp(visualsObject.position, visualsParent.position,visualsLerpSpeed);
     }
 
@@ -393,14 +342,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-
         if (!sitting)
         {
-
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("LeftBumper"))
             {
                 Possess();
-
                 idleTimer = 0;
             }
 
@@ -408,7 +354,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 UnPossess();
                 idleTimer = 0;
-
             }
         }
 
@@ -428,13 +373,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Jump();
                 idleTimer = 0;
-
             }
             else
             {
                 pressedJump = true;
-                jumpBufferTimer = 0;
-                
+                jumpBufferTimer = 0;   
             }
         }
 
@@ -445,48 +388,28 @@ public class PlayerMovement : MonoBehaviour
             {
                 props[propsIndex].SetActive(false);
             }
-
-
             propsIndex++;
 
-            if (propsIndex > props.Length - 1)
-            {
-                propsIndex = 0;
-            }
-
-            if (props[propsIndex] != null)
-            {
-                props[propsIndex].SetActive(true);
-            }
+            if (propsIndex > props.Length - 1) propsIndex = 0;
+            if (props[propsIndex] != null) props[propsIndex].SetActive(true);
         }
         
         if (sitting == false)
         {
             idleTimer += Time.deltaTime;
-
             if (idleTimer > idleTime)
             {
                 idleTimer = 0;
-
                 anim.SetTrigger("Sit");
-
                 sitting = true;
             }
-
         }
-
-
     }
 
     void Move()
     {
-        
-        
         movement = Vector3.Lerp(movement, Vector3.ClampMagnitude(camTransform.right*input.x + camTransform.forward* input.y, 1f) * speed, moveLerpSpeed);
-        
         idleTimer = 0;
-
-        
         DetectObstacle();
     }
 
@@ -498,37 +421,21 @@ public class PlayerMovement : MonoBehaviour
     void Turn()
     {
         direction = new Vector3(0, Mathf.Atan2(-input.y, input.x) * 180 / Mathf.PI-90 + camTransform.eulerAngles.y, 0);
-
         float _rotation = Mathf.DeltaAngle (transform.eulerAngles.y, direction.y);
-        
-        
         float step = rotationSpeed * Mathf.Abs (_rotation)/180;
-        
         _rotation = (_rotation > 180) ? _rotation - 360 : _rotation;
-        
         orientationTransform.localEulerAngles = new Vector3(orientationTransform.localEulerAngles.x,0,Mathf.Clamp(_rotation*sideTilt,  -maxTiltAngle, maxTiltAngle));
-
-        
-		
         Quaternion turnRotation = Quaternion.Euler(0f, direction.y, 0f);
-				
         transform.transform.localRotation = Quaternion.RotateTowards(transform.localRotation, turnRotation, step );
     }
 
     void Jump()
     {
-
-        if (sitting)
-        {
-            sitting = false;
-        }
-        
+        if (sitting) sitting = false;
         anim.SetTrigger("Jump");
         anim.SetBool("Grounded", false);
-        
         rb.velocity = new Vector3(rb.velocity.x,jumpForce, rb.velocity.z);
         landDust.Play();
-        
        Manager.SINGLETON.PlaySound("jump",.2f);
     }
 
@@ -538,31 +445,21 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if(Physics.SphereCast(transform.position, .45f,Vector3.down, out hit, checkGroundDistance))
         {
-
             if (!grounded)
             {
                 grounded = true;
                 anim.SetBool("Grounded", true);
-                
                 landDust.Play();
                 Manager.SINGLETON.PlaySound("land",.15f);
-
-                
-
             }
-            
-            
             return false;
         }
 
         if (grounded)
         {
             grounded = false;
-            //print("OFF THE GROUND");
-            
             anim.SetBool("Grounded", false);
         }
-
         return true;
     }
 
