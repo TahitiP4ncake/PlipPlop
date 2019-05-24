@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private CameraRotation cam;
     private LegsController legs;
     private Absorber absorber;
+    private Pilote pilote;
+    private bool froze = false;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
         absorber = GetComponent<Absorber>();
+        pilote = GetComponent<Pilote>();
     }
 
     void Start()
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move(inputs.direction);
+        if(!froze) Move(inputs.direction);
     }
 
     void Update()
@@ -49,10 +52,19 @@ public class PlayerController : MonoBehaviour
         // Check if player is grounded
         bool isGrounded = IsGrounded();
         // Check Jump Inputs
-        if(inputs.jump && isGrounded) Jump(jumpForce);
+        if(inputs.jump && isGrounded && !froze) Jump(jumpForce);
         // Check Possess Inputs
-        if(inputs.possess) absorber.TryAbsorb();
-        else if(inputs.unpossess) absorber.ReleaseLast();
+        if(inputs.possess) 
+        {
+            pilote.TryTakeControl();
+            absorber.TryAbsorb();
+        }
+        else if(inputs.unpossess)
+        {
+            pilote.TryLooseControl();
+            absorber.ReleaseLast();
+        }
+
         // Parse values to legs
         legs.SetGrounded(isGrounded);
     }
@@ -90,4 +102,18 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.Raycast(transform.position + new Vector3(0f, 0.1f, 0f), -transform.up, checkGroundDistance - 0.1f);
     } 
+
+    public void ActivateMovement(){froze = false;}
+    public void StopMovement(){froze = true;}
+
+    public void ActivePhysics()
+    {
+        rb.useGravity = true;
+        rb.isKinematic = false;
+    }
+    public void StopPhysics()
+    {
+        rb.useGravity = false;
+        rb.isKinematic = true;
+    }
 }

@@ -54,13 +54,30 @@ public class Absorbable : MonoBehaviour, IAbsorbable
         return Vector3.Scale(boundsSize, GetTransform().up).magnitude;
     }
 
+    public virtual float GetHorizontalSize() // Return the vertical height depending on the bounds and rotation
+    {
+        Vector3 boundsSize = Vector3.Scale(this.GetMeshFilter().mesh.bounds.size, GetTransform().localScale);
+        return Vector3.Scale(boundsSize, GetTransform().right).magnitude;
+    }
+
     public void SetHeightInBody(float currentHeight)
     {
         switch(pivot)
         {
-            case MeshPivot.Center: transform.localPosition = new Vector3(transform.localPosition.x, currentHeight + GetVerticalSize()/2, transform.localPosition.z);
+            case MeshPivot.Center: 
+                transform.localPosition = new Vector3(
+                    transform.localPosition.x,
+                    currentHeight + GetVerticalSize()/2,
+                    transform.localPosition.z
+                );
             break;
-            case MeshPivot.Down: transform.localPosition = new Vector3(transform.localPosition.x, currentHeight, transform.localPosition.z);
+            case MeshPivot.Down: 
+                transform.localPosition = new Vector3(
+                    transform.localPosition.x,
+                    currentHeight,
+                    transform.localPosition.z
+                );
+                transform.localPosition += Vector3.Scale(-transform.up, new Vector3(0f,GetVerticalSize(),0f));
             break;
         }
     }
