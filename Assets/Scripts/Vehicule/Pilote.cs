@@ -33,8 +33,8 @@ public class Pilote : MonoBehaviour
     {
         controller.StopMovement();
         controller.StopPhysics();
-
         transform.SetParent(v.transform);
+
         vehicule = v;
         vehicule.On();
     }
@@ -43,6 +43,8 @@ public class Pilote : MonoBehaviour
     {
         controller.ActivateMovement();
         controller.ActivePhysics();
+        transform.SetParent(null);
+
         vehicule.Off();
         vehicule = null;
     }
