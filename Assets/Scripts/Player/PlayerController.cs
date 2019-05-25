@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Referencies
-    private Rigidbody rb;
-    private PlayerInputs inputs;
-    private CameraRotation cam;
-    private LegsController legs;
-    private Absorber absorber;
+    Rigidbody rb;
+    PlayerInputs inputs;
+    CameraRotation cam;
+    LegsController legs;
+    Absorber absorber;
+    PlayerChatter chatter;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
         absorber = GetComponent<Absorber>();
+        chatter = GetComponent<PlayerChatter>();
     }
 
     void Start()
@@ -48,11 +50,16 @@ public class PlayerController : MonoBehaviour
     {
         // Check if player is grounded
         bool isGrounded = IsGrounded();
+
         // Check Jump Inputs
         if(inputs.jump && isGrounded) Jump(jumpForce);
+
         // Check Possess Inputs
         if(inputs.possess) absorber.TryAbsorb();
         else if(inputs.unpossess) absorber.ReleaseLast();
+
+        if (inputs.talk) chatter.TryTalk();
+
         // Parse values to legs
         legs.SetGrounded(isGrounded);
     }

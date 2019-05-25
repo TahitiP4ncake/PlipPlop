@@ -20,4 +20,6 @@ public class InhabitantSheet : ScriptableObject
     public float runningSpeed = 6f;
     public Appearance appearance;
     public int navMeshAreaMask;
+    public List<Inhabitant.Line> dialogSequence;
+    public List<Inhabitant.Line> screams;
 }

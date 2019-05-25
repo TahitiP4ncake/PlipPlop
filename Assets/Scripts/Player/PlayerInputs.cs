@@ -7,6 +7,7 @@ public class PlayerInputs : MonoBehaviour
     public bool possess;
     public bool unpossess;
     public bool jump;
+    public bool talk;
 
     void Update()
     {
@@ -24,5 +25,7 @@ public class PlayerInputs : MonoBehaviour
 
         // Get Jump Inputs
         jump = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"));
+
+        talk = (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("GamepadInteract"));
     }
 }
