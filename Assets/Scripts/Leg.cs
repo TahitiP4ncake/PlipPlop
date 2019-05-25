@@ -46,12 +46,26 @@ public class Leg : MonoBehaviour
 
         if (Vector3.Distance(foot.position, hip.position) > maxFootDistance)
         {
-            foot.position = hip.position + Vector3.down/1.5f  + GetNoise();
+            //foot.position = hip.position + Vector3.down/1.5f  + GetNoise();
             foot.SetParent(hip);
             //knee.SetParent(hip);
             
             UpdateKnee(player.rb.velocity);
-        }   
+        }
+
+        if (foot.parent != null)
+        {
+            foot.position = Vector3.Lerp(foot.position, hip.position + Vector3.down / 1.5f, Time.deltaTime * 10);
+            
+            UpdateKnee(player.rb.velocity, 0);
+        }
+        else
+        {
+            //Trouver un moyen de les faire wobbler plus lentement
+            UpdateKnee(player.rb.velocity,0);
+
+        }
+        
         
 
     }
@@ -98,12 +112,12 @@ public class Leg : MonoBehaviour
         
     }
 
-    void UpdateKnee(Vector3 _vel)
+    void UpdateKnee(Vector3 _vel, float _noise = 1)
     {
         _vel = Vector3.ClampMagnitude(_vel, 1);
         
         _vel.y = 0;
-        knee.position = (hip.position + foot.position) / 2 + GetNoise() + _vel * kneeVelInfluence;
+        knee.position = (hip.position + foot.position) / 2 + GetNoise() * _noise + _vel * kneeVelInfluence;
     }
 
     Vector3 GetNoise(float _y = 1)
