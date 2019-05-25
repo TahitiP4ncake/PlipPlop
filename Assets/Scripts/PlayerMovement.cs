@@ -1009,7 +1009,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
-            walkingDust[_i].Play();
+            //walkingDust[_i].Play();
 
             Manager.SINGLETON.PlaySound("step",.2f);
         }
