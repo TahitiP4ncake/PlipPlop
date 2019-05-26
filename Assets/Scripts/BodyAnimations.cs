@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class BodyLerper : MonoBehaviour
+public class BodyAnimations : MonoBehaviour
 {
     public float fps = 1;
 
@@ -11,7 +12,7 @@ public class BodyLerper : MonoBehaviour
     public Leg[] legs;
     public bool rightLeg;
 
-    public Rigidbody rb;
+    public Vector3 velocity;
     
     void Start()
     {
@@ -22,19 +23,16 @@ public class BodyLerper : MonoBehaviour
     {
         while (true)
         {
-
             if (rightLeg)
             {
-                legs[0].UpdateLeg(rb.velocity);
+                legs[0].UpdateLeg(velocity);
             }
             else
             {
-                legs[1].UpdateLeg(rb.velocity);
+                legs[1].UpdateLeg(velocity);
             }
-
             rightLeg = !rightLeg;
-            
-            
+
             if (lerpLeg)
             {
                 yield return new WaitForSeconds(1/fps);

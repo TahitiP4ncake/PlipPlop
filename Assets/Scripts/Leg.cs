@@ -10,10 +10,6 @@ public class Leg : MonoBehaviour
 
     private RaycastHit hit;
 
-    public bool lerping;
-
-    public float fps = 4;
-
     public float forwardDistance = 1;
 
     public float rayDistance = 2;
@@ -23,7 +19,7 @@ public class Leg : MonoBehaviour
     public float kneeNoise = .2f;
     public float kneeVelInfluence = 0;
 
-    public PlayerMovement player;
+    public BodyAnimations body;
 
     private Vector3 kneeOffset;
     
@@ -36,67 +32,26 @@ public class Leg : MonoBehaviour
 
     private void Update()
     {
-       // hip.eulerAngles = foot.eulerAngles;
-        //knee.eulerAngles = foot.eulerAngles;
-        //knee.LookAt(foot);
-        //knee.localEulerAngles = new Vector3(0, 0, 90);
-        //knee.rotation = Quaternion.Slerp(foot.rotation, Quaternion.LookRotation(hip.position),.5f);
-        //knee.rotation = Quaternion.LookRotation(foot.position);
-       // knee.eulerAngles = new Vector3(knee.eulerAngles.x, foot.eulerAngles.y, knee.eulerAngles.z);
-        //knee.rotation = Quaternion.LookRotation(foot.position, transform.forward);
-        //hip.LookAt(foot);
-        //hip.localEulerAngles += new Vector3(90,-90,180);
-        
-
         if (Vector3.Distance(foot.position, hip.position) > maxFootDistance)
         {
-            //foot.position = hip.position + Vector3.down/1.5f  + GetNoise();
             foot.SetParent(hip);
-            //knee.SetParent(hip);
-            
-            UpdateKnee(player.rb.velocity);
+            UpdateKnee(body.velocity);
         }
-
+        
         if (foot.parent != null)
         {
             foot.position = Vector3.Lerp(foot.position, hip.position + Vector3.down / 1.5f, Time.deltaTime * 10);
-            
-            UpdateKnee(player.rb.velocity, 0);
+            UpdateKnee(body.velocity, 0);
         }
         else
         {
-            //Trouver un moyen de les faire wobbler plus lentement
-            UpdateKnee(player.rb.velocity);
-
-        }
-        
-        
-
-    }
-
-
-    IEnumerator UpdateBody()
-    {
-        while (true)
-        {
-            //UpdateLeg();
-            
-            if (lerping)
-            {
-                yield return new WaitForSeconds(1/fps);
-            }
-            else
-            {
-                yield return null;
-            }
+            UpdateKnee(body.velocity);
         }
     }
-
+    
     public void UpdateLeg(Vector3 _vel)
     {
-        
         _vel.y = 0;
-        
         _vel = Vector3.ClampMagnitude(_vel, 1);
       
         if (Physics.Raycast(transform.position, Vector3.down + _vel * forwardDistance, out hit, rayDistance))
@@ -113,16 +68,13 @@ public class Leg : MonoBehaviour
         }
 
         kneeOffset = GetNoise();
-        
-        
-        UpdateKnee(_vel);
-        
+
+        UpdateKnee(_vel); 
     }
 
     void UpdateKnee(Vector3 _vel, float _noise = 1)
     {
         _vel = Vector3.ClampMagnitude(_vel, 1);
-        
         _vel.y = 0;
         knee.position = (hip.position + foot.position) / 2 + kneeOffset * _noise + _vel * kneeVelInfluence;
     }
