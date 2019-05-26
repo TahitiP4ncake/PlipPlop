@@ -34,10 +34,21 @@ public class Inhabitant : MonoBehaviour
     public InhabitantSheet sheet;
     public EmotionDisplayers emotionDisplayers;
     public float textFadeSpeed = 60f;
+    public float changeFunStanceMaxEvery = 5f;
 
     NavMeshAgent navMeshAgent;
     GameObject visual;
     int currentLine = -1;
+
+    #region AI
+
+    float currentAmusement = 0f;
+    bool isWalkingTowardsTarget = false;
+    int targetPOI = 0;
+    bool isHavingFun = false;
+    List<NPCPointOfInterest> pointsOfInterests = new List<NPCPointOfInterest>();
+
+    #endregion
 
     private void Awake()
     {
@@ -57,20 +68,128 @@ public class Inhabitant : MonoBehaviour
         }
 
         HideEmotions();
+
+        UpdatePointsOfInterest();
+    }
+
+    void UpdatePointsOfInterest()
+    {
+        pointsOfInterests.Clear();
+        var potentialPOIs = FindObjectsOfType<NPCPointOfInterest>();
+        foreach(var POI in potentialPOIs) {
+            if (navMeshAgent.CalculatePath(POI.transform.position, new NavMeshPath())) {
+                pointsOfInterests.Add(POI);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        /// debug
-        if (Input.GetMouseButtonDown(0)) {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                navMeshAgent.SetDestination(hit.point);
+        if (!isHavingFun) {
+            if (!isWalkingTowardsTarget) { 
+                FindNewDiversion();
+                WalkTowardsTargetPOI();
             }
 
+            if (HasReachedTarget()) {
+                isWalkingTowardsTarget = false;
+                HaveFun();
+            }
         }
+    }
+
+    void HaveFun()
+    {
+        var POI = pointsOfInterests[targetPOI];
+        isHavingFun = true;
+        currentAmusement = POI.amusement / 2f + Random.value * (POI.amusement / 2f);
+        StartCoroutine(ProfitOfPOI());
+    }
+
+    IEnumerator ProfitOfPOI()
+    {
+        var POI = pointsOfInterests[targetPOI];
+        var stanceChanges = new List<float>();
+        var totalAmusement = currentAmusement;
+        while (totalAmusement > 0f) {
+            var cut = Random.value * changeFunStanceMaxEvery;
+            totalAmusement -= cut;
+            stanceChanges.Add(totalAmusement);
+        }
+        while (currentAmusement > 0f) {
+            currentAmusement -= Time.deltaTime;
+
+            if (POI.isDivertingToStayAround && 
+                stanceChanges.Count > 0 && currentAmusement < stanceChanges[0]) {
+                stanceChanges.RemoveAt(0);
+                navMeshAgent.SetDestination(
+                    GetRandomPointAroundTargetPOI(POI.divertingRadius)
+                );
+            }
+
+            if (POI.isDivertingToLookAt && navMeshAgent.remainingDistance == 0f) {
+                transform.LookAt(new Vector3(
+                    POI.transform.position.x,
+                    transform.position.y,
+                    POI.transform.position.z
+                ));
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        isHavingFun = false;
+    }
+
+    Vector3 GetRandomPointAroundTargetPOI(float range = 1f)
+    {
+        var pos = pointsOfInterests[targetPOI].transform.position;
+        return new Vector3(
+            pos.x - range / 2 + Random.value * range,
+            pos.y,
+            pos.z - range / 2 + Random.value * range
+        );
+    }
+
+    bool HasReachedTarget()
+    {
+        var POI = pointsOfInterests[targetPOI];
+        if (navMeshAgent.remainingDistance <= POI.divertingRadius) {
+            return true;
+        }
+
+        return false;
+    }
+
+    void PauseWalking()
+    {
+        navMeshAgent.isStopped = true;
+    }
+
+    void ResumeWalking()
+    {
+        navMeshAgent.isStopped = false;
+    }
+
+    void WalkTowardsTargetPOI()
+    {
+        var POI = pointsOfInterests[targetPOI];
+        navMeshAgent.SetDestination(GetRandomPointAroundTargetPOI(POI.divertingRadius));
+        isWalkingTowardsTarget = true;
+    }
+
+    void FindNewDiversion()
+    {
+        var candidatesArray = new NPCPointOfInterest[pointsOfInterests.Count];
+        pointsOfInterests.CopyTo(candidatesArray);
+        var candidates = new List<NPCPointOfInterest>(candidatesArray);
+        if (targetPOI < candidates.Count) candidates.RemoveAll(o => o == candidatesArray[targetPOI]);
+        if (candidates.Count == 0) return;
+        var candidate = candidates[Random.Range(0, candidates.Count)];
+
+        targetPOI = pointsOfInterests.FindIndex(o=>o== candidate);
+
     }
 
     public bool StartDialogue()

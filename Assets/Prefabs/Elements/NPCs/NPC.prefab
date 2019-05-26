@@ -78,7 +78,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2526303976420980466}
-  m_LocalRotation: {x: -0, y: 0.726762, z: -0, w: 0.6868894}
+  m_LocalRotation: {x: 0, y: 0.7267605, z: 0, w: 0.68689096}
   m_LocalPosition: {x: -7.855337, y: 0.5, z: 2.7174702}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -118,6 +118,7 @@ MonoBehaviour:
     questionMark: {fileID: 2526303976513425518}
     textMesh: {fileID: 4110169069193094242}
   textFadeSpeed: 15
+  changeFunStanceMaxEvery: 6
 --- !u!1 &4110169069193094255
 GameObject:
   m_ObjectHideFlags: 0
