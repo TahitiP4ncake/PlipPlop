@@ -46,10 +46,10 @@ public class Boat : Vehicule
         rb.velocity = movement;
     }
 
-    public override void Operate(Pilote pilote)
+    public override void Operate(Pilot pilot)
     {
-        base.Operate(pilote);
-        input = pilote.inputs.direction;
+        base.Operate(pilot);
+        input = pilot.inputs.direction;
     }
     public override void On()
     {

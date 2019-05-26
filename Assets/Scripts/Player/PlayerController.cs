@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Referencies
-    private Rigidbody rb;
-    private PlayerInputs inputs;
-    private CameraRotation cam;
-    private LegsController legs;
-    private Absorber absorber;
-    private Pilote pilote;
-    private bool froze = false;
+
+    Rigidbody rb;
+    PlayerInputs inputs;
+    CameraRotation cam;
+    LegsController legs;
+    Absorber absorber;
+    PlayerChatter chatter;
+    Pilot pilot;
+
+    bool isFrozen = false;
+
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -32,7 +36,8 @@ public class PlayerController : MonoBehaviour
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
         absorber = GetComponent<Absorber>();
-        pilote = GetComponent<Pilote>();
+        chatter = GetComponent<PlayerChatter>();
+        pilot = GetComponent<Pilot>();
     }
 
     void Start()
@@ -44,26 +49,31 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!froze) Move(inputs.direction);
+        if(!isFrozen) Move(inputs.direction);
     }
 
     void Update()
     {
         // Check if player is grounded
         bool isGrounded = IsGrounded();
+
         // Check Jump Inputs
-        if(inputs.jump && isGrounded && !froze) Jump(jumpForce);
+
+        if(inputs.jump && isGrounded) Jump(jumpForce);
+
         // Check Possess Inputs
-        if(inputs.possess) 
-        {
-            pilote.TryTakeControl();
+        if (inputs.jump && isGrounded && !isFrozen) Jump(jumpForce);
+        // Check Possess Inputs
+        if (inputs.possess) {
+            pilot.TryTakeControl();
             absorber.TryAbsorb();
         }
-        else if(inputs.unpossess)
-        {
-            pilote.TryLooseControl();
+        else if (inputs.unpossess) {
+            pilot.TryLooseControl();
             absorber.ReleaseLast();
         }
+
+        if (inputs.talk) chatter.TryTalk();
 
         // Parse values to legs
         legs.SetGrounded(isGrounded);
@@ -103,8 +113,8 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(transform.position + new Vector3(0f, 0.1f, 0f), -transform.up, checkGroundDistance - 0.1f);
     } 
 
-    public void ActivateMovement(){froze = false;}
-    public void StopMovement(){froze = true;}
+    public void ActivateMovement(){isFrozen = false;}
+    public void StopMovement(){ isFrozen = true;}
 
     public void ActivePhysics()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pilote : MonoBehaviour
+public class Pilot : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerInputs inputs;
