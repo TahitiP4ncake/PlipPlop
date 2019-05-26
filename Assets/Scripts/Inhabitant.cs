@@ -146,5 +146,10 @@ public class Inhabitant : MonoBehaviour
         emotionDisplayers.textMesh.enabled = false;
     }
 
+    public void Scream()
+    {
+        if (sheet.screams.Count < 0) return;
+        DisplayText(sheet.screams[Random.Range(0, sheet.screams.Count)]);
+    }
 
 }
