@@ -8,6 +8,7 @@ public class PlayerInputs : MonoBehaviour
     public bool unpossess;
     public bool jump;
     public bool talk;
+    public int answerDirection;
 
     void Update()
     {
@@ -27,5 +28,7 @@ public class PlayerInputs : MonoBehaviour
         jump = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("GamepadJump"));
 
         talk = (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("GamepadInteract"));
+        answerDirection = System.Convert.ToInt32(Input.GetKeyDown(KeyCode.RightArrow)) - System.Convert.ToInt32(Input.GetKeyDown(KeyCode.LeftArrow))
+            + Mathf.RoundToInt(Input.GetAxis("GamepadAnswerChoice"));
     }
 }

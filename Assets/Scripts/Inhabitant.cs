@@ -109,7 +109,7 @@ public class Inhabitant : MonoBehaviour
     }
 
     IEnumerator FadeTextIn()
-    {
+    {   
         while(emotionDisplayers.textMesh.alpha < 1f) {
             emotionDisplayers.textMesh.alpha += (textFadeSpeed*Time.deltaTime);
             yield return new WaitForEndOfFrame();
