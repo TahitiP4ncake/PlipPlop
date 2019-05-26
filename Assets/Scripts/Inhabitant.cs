@@ -38,6 +38,7 @@ public class Inhabitant : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     GameObject visual;
+    BodyAnimations bodyAnimations;
     int currentLine = -1;
 
     #region AI
@@ -53,6 +54,8 @@ public class Inhabitant : MonoBehaviour
     private void Awake()
     {
         if (sheet == null) throw new MissingComponentException("Inhabitant has no sheet : " + name);
+
+        bodyAnimations = GetComponentInChildren<BodyAnimations>();
 
         navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         navMeshAgent.areaMask = sheet.navMeshAreaMask;
@@ -98,6 +101,8 @@ public class Inhabitant : MonoBehaviour
                 HaveFun();
             }
         }
+
+        bodyAnimations.velocity = navMeshAgent.velocity / sheet.walkingSpeed;
     }
 
     void HaveFun()
