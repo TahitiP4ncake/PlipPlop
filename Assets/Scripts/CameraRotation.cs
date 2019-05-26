@@ -26,17 +26,10 @@ public class CameraRotation : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, playerTransform.position, lerpSpeed);
-        
-        
         transform.localEulerAngles += new Vector3(0,input.x * xSpeed ,0);
         camXRotation.localEulerAngles = new Vector3( Mathf.Clamp( input.y *-ySpeed  + 
         ((camXRotation.localEulerAngles.x > 180)? camXRotation.localEulerAngles.x- 360 : camXRotation.localEulerAngles.x)
         , xLimits.x, xLimits.y),0,0);
-
-        
-        
-    
-
     }
 
     void CheckInputs()
@@ -44,6 +37,4 @@ public class CameraRotation : MonoBehaviour
         input.x = Input.GetAxis("Mouse X") + Input.GetAxis("RightX");
         input.y = Input.GetAxis("Mouse Y") - Input.GetAxis("RightY");
     }
-
-
 }

@@ -12,9 +12,9 @@ public class Ground : MonoBehaviour
     {
         if (other.collider.CompareTag("Player") && !currentGround)
         {
-            currentGround = true;
+            //currentGround = true;
 
-            other.collider.gameObject.GetComponentInParent<PlayerMovement>().ChangeGround(this);
+            //other.collider.gameObject.GetComponentInParent<PlayerMovement>().ChangeGround(this);
         }
     }
 }
