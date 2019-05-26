@@ -76,11 +76,12 @@ public class Inhabitant : MonoBehaviour
     {
         pointsOfInterests.Clear();
         var potentialPOIs = FindObjectsOfType<NPCPointOfInterest>();
-        foreach(var POI in potentialPOIs) {
+        foreach (var POI in potentialPOIs) {
             if (navMeshAgent.CalculatePath(POI.transform.position, new NavMeshPath())) {
                 pointsOfInterests.Add(POI);
             }
         }
+        pointsOfInterests.RemoveAll(o => !o.concernedTeams.Contains(team));
     }
 
     // Update is called once per frame
