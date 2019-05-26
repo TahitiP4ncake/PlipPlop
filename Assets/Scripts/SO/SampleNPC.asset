@@ -22,7 +22,11 @@ MonoBehaviour:
     scale: {x: 2.1397, y: 2.1397, z: 2.1397}
   navMeshAreaMask: -1
   dialogSequence:
-  - answers: []
+  - answers:
+    - nextLineId: 1
+      text: euh
+    - nextLineId: 4
+      text: oui
     text: salut ca va
     nextLine: 1
   - answers: []
@@ -33,6 +37,9 @@ MonoBehaviour:
     nextLine: 3
   - answers: []
     text: bon...
+    nextLine: -1
+  - answers: []
+    text: dac
     nextLine: -1
   screams:
   - answers: []

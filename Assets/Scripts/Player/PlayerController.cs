@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Pilot pilot;
 
     bool isFrozen = false;
-
+    bool canSwitchAnswer = true;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Game.player = this;
+
         rb = GetComponent<Rigidbody>();
         inputs = GetComponent<PlayerInputs>();
         legs = GetComponentInChildren<LegsController>();
@@ -74,6 +76,17 @@ public class PlayerController : MonoBehaviour
         }
 
         if (inputs.talk) chatter.TryTalk();
+        if (inputs.answerDirection > 0 && canSwitchAnswer) {
+            chatter.NextAnswer();
+            canSwitchAnswer = false;
+        }
+        if (inputs.answerDirection < 0 && canSwitchAnswer) {
+            chatter.PreviousAnswer();
+            canSwitchAnswer = false;
+        }
+        if (inputs.answerDirection == 0) {
+            canSwitchAnswer = true;
+        }
 
         // Parse values to legs
         legs.SetGrounded(isGrounded);
@@ -125,5 +138,15 @@ public class PlayerController : MonoBehaviour
     {
         rb.useGravity = false;
         rb.isKinematic = true;
+    }
+
+    public bool IsAnswering()
+    {
+        return chatter.IsWaitingForAnswer();
+    }
+
+    public string GetCurrentAnswer()
+    {
+        return chatter.GetCurrentSelectedAnswer();
     }
 }

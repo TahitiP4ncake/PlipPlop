@@ -10,11 +10,21 @@ public class UserInterface : MonoBehaviour
 
     void Update()
     {
-        
+        if (Game.player.IsAnswering()) {
+            SetAnswerPreviewText(Game.player.GetCurrentAnswer());
+        }
+        else {
+            EmptyAnswerPreviewText();
+        }
     }
 
     void SetAnswerPreviewText(string answerString)
     {
         answerPreviewText.text = string.Format("< {0} >", answerString);
+    }
+
+    void EmptyAnswerPreviewText()
+    {
+        answerPreviewText.text = "";
     }
 }

@@ -22,11 +22,13 @@ public class PlayerChatter : MonoBehaviour
         talkableCollider.onTriggerExit += (x) => {
             var inhabitant = x.gameObject.GetComponent<Inhabitant>();
             if (inhabitant != null) talkableInhabitants.RemoveAll(o=>o==inhabitant);
+            if (inhabitant == currentInterlocutor) ResetInterlocutor();
         };
     }
 
     void ResetInterlocutor()
     {
+        if (currentInterlocutor!=null) currentInterlocutor.EndDiscussion();
         currentInterlocutor = null;
         currentAnswerIndex = 0;
         isWaitingForAnswer = false;
@@ -35,15 +37,38 @@ public class PlayerChatter : MonoBehaviour
     public void TryTalk()
     {
         if (currentInterlocutor != null && IsAtRange(currentInterlocutor)) {
-            currentInterlocutor.NextSentence();
+            if (currentInterlocutor.GetPossibleAnswers().Count > 0) {
+                PickAnswer();
+            }
+            else {
+                currentInterlocutor.NextSentence();
+                if (currentInterlocutor.GetPossibleAnswers().Count > 0) {
+                    isWaitingForAnswer = true;
+                }
+                else {
+                    isWaitingForAnswer = false;
+                }
+            }
         }
         else {
             ResetInterlocutor();
             if (IsAnyInhabitantAtRange()) {
                 currentInterlocutor = GetNearestInhabitantAtTalkingRange();
-                currentInterlocutor.StartDialogue();
+                isWaitingForAnswer = currentInterlocutor.StartDialogue();
             }
         }
+    }
+    
+    void PickAnswer()
+    {
+        isWaitingForAnswer = false;
+        int index = currentInterlocutor.GetPossibleAnswers()[currentAnswerIndex].nextLineId;
+        currentAnswerIndex = 0;
+        if (index < 0) {
+            ResetInterlocutor();
+            return;
+        }
+        currentInterlocutor.SetSentence(index);
     }
 
     bool IsAtRange(Inhabitant inhabitant)
@@ -72,4 +97,29 @@ public class PlayerChatter : MonoBehaviour
         return talkableInhabitants.Count > 0;
     }
 
+    public bool IsWaitingForAnswer()
+    {
+        return isWaitingForAnswer;
+    }
+
+    public string GetCurrentSelectedAnswer()
+    {
+        return currentInterlocutor.GetPossibleAnswers()[currentAnswerIndex].text;
+    }
+
+
+    public void NextAnswer()
+    {
+        if (currentInterlocutor == null) return;
+        currentAnswerIndex = (currentAnswerIndex + 1) % currentInterlocutor.GetPossibleAnswers().Count;
+    }
+
+    public void PreviousAnswer()
+    {
+        if (currentInterlocutor == null) return;
+        currentAnswerIndex = (currentAnswerIndex - 1);
+        if (currentAnswerIndex < 0) {
+            currentAnswerIndex = currentInterlocutor.GetPossibleAnswers().Count - 1;
+        }
+    }
 }

@@ -70,16 +70,38 @@ public class Inhabitant : MonoBehaviour
         }
     }
 
-    public void StartDialogue()
+    public bool StartDialogue()
     {
         currentLine = 0;
         DisplayText(sheet.dialogSequence[currentLine]);
+        return GetPossibleAnswers().Count > 0;
     }
 
     public void NextSentence()
     {
-        currentLine = (currentLine+1)%sheet.dialogSequence.Count;
+        currentLine = sheet.dialogSequence[currentLine].nextLine;
+        if (currentLine < 0) {
+            currentLine = 0;
+            EndDiscussion();
+            return;
+        }
         DisplayText(sheet.dialogSequence[currentLine]);
+    }
+
+    public void SetSentence(int index)
+    {
+        currentLine = index;
+        DisplayText(sheet.dialogSequence[currentLine]);
+    }
+
+    public List<Line.Answer> GetPossibleAnswers()
+    {
+        return sheet.dialogSequence[currentLine].answers;
+    }
+
+    public void EndDiscussion()
+    {
+        StartCoroutine(FadeTextOut(delegate { }));
     }
 
     void DisplayText(Line line)
