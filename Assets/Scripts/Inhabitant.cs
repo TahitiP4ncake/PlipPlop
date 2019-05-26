@@ -52,6 +52,9 @@ public class Inhabitant : MonoBehaviour
         visual.transform.localPosition = sheet.appearance.position;
         visual.transform.localEulerAngles = sheet.appearance.eulers;
         visual.transform.localScale = sheet.appearance.scale;
+        foreach(var renderer in visual.GetComponentsInChildren<Renderer>()) {
+            renderer.material = sheet.appearance.material;
+        }
 
         HideEmotions();
     }

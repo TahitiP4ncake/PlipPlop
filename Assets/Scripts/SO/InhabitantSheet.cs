@@ -10,6 +10,7 @@ public class InhabitantSheet : ScriptableObject
     public class Appearance
     {
         public GameObject FBXPrefab;
+        public Material material;
         public Vector3 position;
         public Vector3 eulers;
         public Vector3 scale;
