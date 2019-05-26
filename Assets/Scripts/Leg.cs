@@ -24,6 +24,8 @@ public class Leg : MonoBehaviour
     public float kneeVelInfluence = 0;
 
     public PlayerMovement player;
+
+    private Vector3 kneeOffset;
     
     private void Start()
     {
@@ -35,10 +37,12 @@ public class Leg : MonoBehaviour
     private void Update()
     {
        // hip.eulerAngles = foot.eulerAngles;
-        knee.eulerAngles = foot.eulerAngles;
+        //knee.eulerAngles = foot.eulerAngles;
         //knee.LookAt(foot);
         //knee.localEulerAngles = new Vector3(0, 0, 90);
         //knee.rotation = Quaternion.Slerp(foot.rotation, Quaternion.LookRotation(hip.position),.5f);
+        //knee.rotation = Quaternion.LookRotation(foot.position);
+       // knee.eulerAngles = new Vector3(knee.eulerAngles.x, foot.eulerAngles.y, knee.eulerAngles.z);
         //knee.rotation = Quaternion.LookRotation(foot.position, transform.forward);
         //hip.LookAt(foot);
         //hip.localEulerAngles += new Vector3(90,-90,180);
@@ -62,7 +66,7 @@ public class Leg : MonoBehaviour
         else
         {
             //Trouver un moyen de les faire wobbler plus lentement
-            UpdateKnee(player.rb.velocity,0);
+            UpdateKnee(player.rb.velocity);
 
         }
         
@@ -107,6 +111,9 @@ public class Leg : MonoBehaviour
                 //knee.parent = null;
             }
         }
+
+        kneeOffset = GetNoise();
+        
         
         UpdateKnee(_vel);
         
@@ -117,7 +124,7 @@ public class Leg : MonoBehaviour
         _vel = Vector3.ClampMagnitude(_vel, 1);
         
         _vel.y = 0;
-        knee.position = (hip.position + foot.position) / 2 + GetNoise() * _noise + _vel * kneeVelInfluence;
+        knee.position = (hip.position + foot.position) / 2 + kneeOffset * _noise + _vel * kneeVelInfluence;
     }
 
     Vector3 GetNoise(float _y = 1)

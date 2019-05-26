@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f3c0da8d5c5a6524fa5af968559262e9, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f3c0da8d5c5a6524fa5af968559262e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -544,7 +544,7 @@ Transform:
   m_LocalScale: {x: 3.3575, y: 12.719217, z: 3.3575}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -77.30701, y: 4.5540004, z: -3.3330002}
 --- !u!54 &517202763 stripped
 Rigidbody:
@@ -764,7 +764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1418306830
 Transform:
   m_ObjectHideFlags: 0
@@ -911,11 +911,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440594520}
   m_LocalRotation: {x: 0.70654845, y: 0.02809387, z: -0.02809387, w: 0.70654845}
-  m_LocalPosition: {x: -7.52, y: -2.01, z: 2.21}
+  m_LocalPosition: {x: -7.52, y: -2.08, z: 2.21}
   m_LocalScale: {x: 3.3575, y: 12.719217, z: 3.3575}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: 4.5540004, z: 0}
 --- !u!1 &1534552047 stripped
 GameObject:
@@ -1085,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899763699, guid: 985f2ad098daa9c4689ec616a8f97bb3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 899763699, guid: 985f2ad098daa9c4689ec616a8f97bb3, type: 3}
       propertyPath: m_Layer
@@ -1476,11 +1476,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572333800}
   m_LocalRotation: {x: 0.70654845, y: 0.02809387, z: -0.02809387, w: 0.70654845}
-  m_LocalPosition: {x: -10.08, y: -1.6, z: 6.38}
+  m_LocalPosition: {x: -10.08, y: -1.99, z: 6.38}
   m_LocalScale: {x: 3.3575, y: 6.470393, z: 3.3575}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 4.5540004, z: 0}
 --- !u!1001 &1710581767
 PrefabInstance:
@@ -1666,6 +1666,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: kneeNoise
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: kneeVelInfluence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1066182746}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: maxFootDistance
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: rayDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: forwardDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1720,41 +1755,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: kneeNoise
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: kneeVelInfluence
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1066182746}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: maxFootDistance
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: rayDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: forwardDistance
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2017412858367745577, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
@@ -1811,8 +1811,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fps: 4
-  target: {fileID: 1567804410}
-  lerping: 0
   lerpLeg: 1
   legs:
   - {fileID: 932956731}
@@ -1826,15 +1824,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821894497}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.394, z: 0}
+  m_LocalRotation: {x: -0.1736482, y: -0.00000007662731, z: -0.0000011344786, w: 0.9848077}
+  m_LocalPosition: {x: 0, y: 0.10272421, z: 0.018522218}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 932956732}
   - {fileID: 1418306830}
   - {fileID: 1721730369}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1567804410}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1976226139 stripped
 Transform:
@@ -1927,11 +1925,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996065625}
   m_LocalRotation: {x: 0.70654845, y: 0.02809387, z: -0.02809387, w: 0.70654845}
-  m_LocalPosition: {x: -14.12, y: -1.35, z: 4.81}
+  m_LocalPosition: {x: -14.12, y: -1.91, z: 4.81}
   m_LocalScale: {x: 5.576136, y: 9.741177, z: 3.3575}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 4.5540004, z: 0}
 --- !u!1 &1999871768 stripped
 GameObject:
@@ -2012,6 +2010,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Leg
       objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: kneeNoise
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: kneeVelInfluence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1066182746}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: maxFootDistance
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: rayDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: forwardDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2066,41 +2099,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: kneeNoise
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: kneeVelInfluence
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1066182746}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: maxFootDistance
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: rayDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
-        type: 3}
-      propertyPath: forwardDistance
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2017412858371346177, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
