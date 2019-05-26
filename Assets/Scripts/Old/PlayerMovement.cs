@@ -174,6 +174,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     public bool sitting;
+
+    public BodyAnimations body;
  
     void Start()
     {
@@ -197,6 +199,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        body.velocity = rb.velocity;
+        
         if (!controlled )
         {
             orientationTransform.localEulerAngles = new Vector3(0,0,0);
@@ -906,7 +910,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
-            walkingDust[_i].Play();
+            //walkingDust[_i].Play();
 
             Manager.SINGLETON.PlaySound("step",.2f);
         }
