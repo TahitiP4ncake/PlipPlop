@@ -5,12 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Referencies
+
     Rigidbody rb;
     PlayerInputs inputs;
     CameraRotation cam;
     LegsController legs;
     Absorber absorber;
     PlayerChatter chatter;
+    Pilot pilot;
+
+    bool isFrozen = false;
+
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -32,6 +37,7 @@ public class PlayerController : MonoBehaviour
         legs = GetComponentInChildren<LegsController>();
         absorber = GetComponent<Absorber>();
         chatter = GetComponent<PlayerChatter>();
+        pilot = GetComponent<Pilot>();
     }
 
     void Start()
@@ -43,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move(inputs.direction);
+        if(!isFrozen) Move(inputs.direction);
     }
 
     void Update()
@@ -52,11 +58,20 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = IsGrounded();
 
         // Check Jump Inputs
+
         if(inputs.jump && isGrounded) Jump(jumpForce);
 
         // Check Possess Inputs
-        if(inputs.possess) absorber.TryAbsorb();
-        else if(inputs.unpossess) absorber.ReleaseLast();
+        if (inputs.jump && isGrounded && !isFrozen) Jump(jumpForce);
+        // Check Possess Inputs
+        if (inputs.possess) {
+            pilot.TryTakeControl();
+            absorber.TryAbsorb();
+        }
+        else if (inputs.unpossess) {
+            pilot.TryLooseControl();
+            absorber.ReleaseLast();
+        }
 
         if (inputs.talk) chatter.TryTalk();
 
@@ -97,4 +112,18 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.Raycast(transform.position + new Vector3(0f, 0.1f, 0f), -transform.up, checkGroundDistance - 0.1f);
     } 
+
+    public void ActivateMovement(){isFrozen = false;}
+    public void StopMovement(){ isFrozen = true;}
+
+    public void ActivePhysics()
+    {
+        rb.useGravity = true;
+        rb.isKinematic = false;
+    }
+    public void StopPhysics()
+    {
+        rb.useGravity = false;
+        rb.isKinematic = true;
+    }
 }
