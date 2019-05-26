@@ -11,7 +11,7 @@ public class BodyAnimations : MonoBehaviour
     public Leg[] legs;
     public bool rightLeg;
 
-    public Vector3 velocity;
+    public Vector3 velocity = Vector3.zero;
     
     void Start()
     {

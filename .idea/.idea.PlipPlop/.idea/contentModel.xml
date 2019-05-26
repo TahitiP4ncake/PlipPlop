@@ -30,27 +30,59 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Absorbable" t="Include">
+            <e p="Absorbable.cs" t="Include" />
+            <e p="Absorber.cs" t="Include" />
+            <e p="Cotton.cs" t="Include" />
+            <e p="IAbsorbable.cs" t="Include" />
+            <e p="Lead.cs" t="Include" />
+          </e>
           <e p="AnimationListener.cs" t="Include" />
           <e p="Ball.cs" t="Include" />
           <e p="Bird.cs" t="Include" />
           <e p="Block.cs" t="Include" />
-          <e p="Boat.cs" t="Include" />
           <e p="BodyAnimations.cs" t="Include" />
           <e p="ButterFly.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
+          <e p="CollisionEventTransmitter.cs" t="Include" />
+          <e p="DestroyOnAwake.cs" t="Include" />
           <e p="Emotions.cs" t="Include" />
+          <e p="FaceMainCamera.cs" t="Include" />
           <e p="Ground.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
+          <e p="Inhabitant.cs" t="Include" />
           <e p="Leg.cs" t="Include" />
-          <e p="Manager.cs" t="Include" />
+          <e p="Manager" t="Include">
+            <e p="Library.cs" t="Include" />
+            <e p="Manager.cs" t="Include" />
+          </e>
+          <e p="Old" t="Include">
+            <e p="PlayerMovement.cs" t="Include" />
+            <e p="Transport.cs" t="Include" />
+          </e>
           <e p="Photo.cs" t="Include" />
-          <e p="PlayerMovement.cs" t="Include" />
+          <e p="Player" t="Include">
+            <e p="Gravity.cs" t="Include" />
+            <e p="LegsController.cs" t="Include" />
+            <e p="PlayerChatter.cs" t="Include" />
+            <e p="PlayerController.cs" t="Include" />
+            <e p="PlayerInputs.cs" t="Include" />
+          </e>
           <e p="ScreenRecorder.cs" t="Include" />
           <e p="Shark.cs" t="Include" />
           <e p="Slide.cs" t="Include" />
           <e p="SlideObject.cs" t="Include" />
+          <e p="Smashable.cs" t="Include" />
+          <e p="SO" t="Include">
+            <e p="InhabitantSheet.cs" t="Include" />
+          </e>
           <e p="TextureAnimation.cs" t="Include" />
-          <e p="Transport.cs" t="Include" />
+          <e p="UserInterface.cs" t="Include" />
+          <e p="Vehicule" t="Include">
+            <e p="Boat.cs" t="Include" />
+            <e p="Pilot.cs" t="Include" />
+            <e p="Vehicule.cs" t="Include" />
+          </e>
         </e>
         <e p="Shaders" t="Include">
           <e p="Iridescent Mask.shader" t="Include" />

@@ -523,6 +523,11 @@ PrefabInstance:
       propertyPath: forwardDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 4664179527312076975}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -670,6 +675,11 @@ PrefabInstance:
       propertyPath: forwardDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 4664179527312076975}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x
