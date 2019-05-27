@@ -20,7 +20,6 @@
           <e p="README.txt" t="Include" />
           <e p="RELEASE_NOTES.txt" t="Include" />
         </e>
-        <e p="ImageSlideShow.cs" t="Include" />
         <e p="PanoramaToCubemap" t="Include">
           <e p="Documents" t="Include">
             <e p="PanoramaToCubemap_en.txt" t="Include" />
@@ -30,7 +29,6 @@
             <e p="PanoramaToCubemap.cs" t="Include" />
           </e>
         </e>
-        <e p="PresentationManager.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Absorbable" t="Include">
             <e p="Absorbable.cs" t="Include" />
@@ -38,6 +36,7 @@
             <e p="Cotton.cs" t="Include" />
             <e p="IAbsorbable.cs" t="Include" />
             <e p="Lead.cs" t="Include" />
+            <e p="SpriteCube.cs" t="Include" />
           </e>
           <e p="AnimationListener.cs" t="Include" />
           <e p="Ball.cs" t="Include" />
@@ -45,6 +44,7 @@
           <e p="Block.cs" t="Include" />
           <e p="Breaking.cs" t="Include" />
           <e p="ButterFly.cs" t="Include" />
+          <e p="CameraController.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
           <e p="CollisionEventTransmitter.cs" t="Include" />
           <e p="DestroyOnAwake.cs" t="Include" />
@@ -74,6 +74,12 @@
             <e p="PlayerChatter.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="PlayerInputs.cs" t="Include" />
+          </e>
+          <e p="Presentation" t="Include">
+            <e p="CircleFrame.cs" t="Include" />
+            <e p="ImageSlideShow.cs" t="Include" />
+            <e p="PresentationManager.cs" t="Include" />
+            <e p="SlideImage.cs" t="Include" />
           </e>
           <e p="ScreenRecorder.cs" t="Include" />
           <e p="Shark.cs" t="Include" />
@@ -109,7 +115,6 @@
           <e p="S_WaterPP.shader" t="Include" />
           <e p="S_Wood.shader" t="Include" />
         </e>
-        <e p="SlideImage.cs" t="Include" />
         <e p="Standard Assets" t="Include">
           <e p="Editor" t="Include">
             <e p="ImageEffects" t="Include">
