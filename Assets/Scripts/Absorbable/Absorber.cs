@@ -46,10 +46,9 @@ public class Absorber : MonoBehaviour
         // Release the IAbsorbable
         absorbed[index].Release(this);
 
-        // Move the IAbsorbable under the feet of the Absorber and move the absorber up
-        transform.position += new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
-        absorbed[index].GetTransform().position -= new Vector3(0f, absorbed[index].GetVerticalSize(), 0f);
-
+        // Move the absorber up
+        transform.position += new Vector3(0f, absorbed[index].GetVerticalSize()/2, 0f);
+        
         // Remove from the list and Refresh the body
         absorbed.RemoveAt(index);
         RefreshBody();

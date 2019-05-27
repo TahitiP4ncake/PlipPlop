@@ -21,10 +21,20 @@ public class Slide : MonoBehaviour
 
     public SlideObject activeSlide;
 
+    public bool isSlideScene = true;
+
     private void Start()
     {
+        
+        
         activeSlide = slides[0].GetComponent<SlideObject>();
-
+        
+        
+        if (isSlideScene)
+        {
+            slideIndex++;
+                ShowSlide();
+        }
     }
 
     void Update()

@@ -14,6 +14,7 @@ public class SlideObject : MonoBehaviour
     {
         foreach (var _element in elements)
         {
+            if(_element!=null)
             _element.SetActive(false);
         }
     }
@@ -23,7 +24,20 @@ public class SlideObject : MonoBehaviour
     {
         if (elementIndex <= elements.Length - 1)
         {
-            elements[elementIndex].SetActive(true);
+            if (elements[elementIndex] == null)
+            {
+                foreach (var _e in elements)
+                {
+                    if(_e!=null)
+                    _e.SetActive(false);
+                }
+            }
+            else
+            {
+
+                elements[elementIndex].SetActive(true);
+
+            }
 
             elementIndex++;
         }
