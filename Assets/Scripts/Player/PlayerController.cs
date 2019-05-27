@@ -149,4 +149,19 @@ public class PlayerController : MonoBehaviour
     {
         return chatter.GetCurrentSelectedAnswer();
     }
+
+    public bool IsTalking()
+    {
+        return chatter.IsDiscussing();
+    }
+
+    public string GetCurrentLine()
+    {
+        return chatter.GetCurrentLine();
+    }
+
+    public Vector3 GetInterlocutorChatterPosition()
+    {
+        return chatter.GetInterlocutorChatterPosition();
+    }
 }

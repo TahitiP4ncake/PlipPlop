@@ -26,6 +26,16 @@ public class PlayerChatter : MonoBehaviour
         };
     }
 
+    public bool IsDiscussing()
+    {
+        return currentInterlocutor != null;
+    }
+
+    public string GetCurrentLine()
+    {
+        return currentInterlocutor.GetCurrentLineText();
+    }
+
     void ResetInterlocutor()
     {
         if (currentInterlocutor!=null) currentInterlocutor.EndDiscussion();
@@ -126,5 +136,10 @@ public class PlayerChatter : MonoBehaviour
         if (currentAnswerIndex < 0) {
             currentAnswerIndex = currentInterlocutor.GetPossibleAnswers().Count - 1;
         }
+    }
+
+    public Vector3 GetInterlocutorChatterPosition()
+    {
+        return currentInterlocutor.emotionDisplayers.dialogueAnchor.transform.position;
     }
 }

@@ -27,7 +27,7 @@ public class Inhabitant : MonoBehaviour
     {
         public GameObject exclamationMark;
         public GameObject questionMark;
-        public TextMeshPro textMesh;
+        public GameObject dialogueAnchor;
     }
 
     public TEAM team;
@@ -203,7 +203,6 @@ public class Inhabitant : MonoBehaviour
     public bool StartDialogue()
     {
         currentLine = 0;
-        DisplayText(sheet.dialogSequence[currentLine]);
         PauseWalking();
         transform.LookAt(
             new Vector3(
@@ -224,14 +223,17 @@ public class Inhabitant : MonoBehaviour
             EndDiscussion();
             return false;
         }
-        DisplayText(sheet.dialogSequence[currentLine]);
         return true;
+    }
+
+    public string GetCurrentLineText()
+    {
+        return sheet.dialogSequence[currentLine].text;
     }
 
     public void SetSentence(int index)
     {
         currentLine = index;
-        DisplayText(sheet.dialogSequence[currentLine]);
     }
 
     public List<Line.Answer> GetPossibleAnswers()
@@ -242,55 +244,18 @@ public class Inhabitant : MonoBehaviour
     public void EndDiscussion()
     {
         ResumeWalking();
-        StartCoroutine(FadeTextOut(delegate { }));
-    }
-
-    void DisplayText(Line line)
-    {
-        StartCoroutine(FadeTextOut(
-            delegate {
-                emotionDisplayers.textMesh.enabled = true;
-                emotionDisplayers.textMesh.text = line.text;
-                emotionDisplayers.textMesh.alpha = 0f;
-                StartCoroutine(FadeTextIn());
-            }
-        ));
-    }
-
-    IEnumerator FadeTextOut(System.Action callback)
-    {
-        if (!emotionDisplayers.textMesh.enabled) {
-            callback.Invoke();
-            yield break;
-        }
-        while (emotionDisplayers.textMesh.alpha > 0f) {
-            emotionDisplayers.textMesh.alpha -= (textFadeSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        callback.Invoke();
-        yield return true;
-    }
-
-    IEnumerator FadeTextIn()
-    {   
-        while(emotionDisplayers.textMesh.alpha < 1f) {
-            emotionDisplayers.textMesh.alpha += (textFadeSpeed*Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        yield return true;
     }
 
     void HideEmotions()
     { 
         emotionDisplayers.exclamationMark.SetActive(false);
         emotionDisplayers.questionMark.SetActive(false);
-        emotionDisplayers.textMesh.enabled = false;
     }
 
     public void Scream()
     {
         if (sheet.screams.Count < 0) return;
-        DisplayText(sheet.screams[Random.Range(0, sheet.screams.Count)]);
+        //DisplayText(sheet.screams[Random.Range(0, sheet.screams.Count)]);
     }
 
 }
