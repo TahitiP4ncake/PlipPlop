@@ -5262,6 +5262,11 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 2028411336308825388}
+    - target: {fileID: 4664179527312076975, guid: 94768440ee9ddad438226908b79377fc,
+        type: 3}
+      propertyPath: lerpBody
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6629300910584571118, guid: 94768440ee9ddad438226908b79377fc,
         type: 3}
       propertyPath: foot
