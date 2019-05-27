@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     PlayerChatter chatter;
     Pilot pilot;
 
-    bool isFrozen = false;
+    bool isFrozen = true;
 
 
     [Header("Movement Settings")]
@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Spawn Camera
-        cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
-        cam.playerTransform = absorber.head;
+        //cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
+        //cam.playerTransform = absorber.head;
     }
 
     void FixedUpdate()
