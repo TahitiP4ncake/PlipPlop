@@ -2,7 +2,12 @@
 
 public class ImageSlideShow : MonoBehaviour
 {
+    [Header("Referencies")]
     public Animation[] images;
+    [Header("Inputs")]
+    public KeyCode next;
+    public KeyCode previous;
+
     bool[] shown;
     bool[] smaller;
     int current;
@@ -55,7 +60,7 @@ public class ImageSlideShow : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow)) Next();
-        else if(Input.GetKeyDown(KeyCode.LeftArrow)) Previous();
+        if(Input.GetKeyDown(next)) Next();
+        else if(Input.GetKeyDown(previous)) Previous();
     }
 }
