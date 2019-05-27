@@ -12,15 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192d6f2e92b3c8d47841c9f390aa0589, type: 3}
   m_Name: SampleNPC
   m_EditorClassIdentifier: 
+  visual: {fileID: 533493299591825397, guid: f5ceb079bdc2ddf498856e42bd9215eb, type: 3}
   team: 0
   walkingSpeed: 4
   runningSpeed: 6
-  appearance:
-    FBXPrefab: {fileID: 100008, guid: 914b0a6ab9227664caabe6695b37cff3, type: 3}
-    material: {fileID: 2100000, guid: 32e5f3615ba05c648b6aed292d23b469, type: 2}
-    position: {x: 0, y: 0, z: 0}
-    eulers: {x: 0, y: -90, z: 0}
-    scale: {x: 2.1397, y: 2.1397, z: 2.1397}
   navMeshAreaMask: -1
   dialogSequence:
   - answers:

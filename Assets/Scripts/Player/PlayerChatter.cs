@@ -41,12 +41,17 @@ public class PlayerChatter : MonoBehaviour
                 PickAnswer();
             }
             else {
-                currentInterlocutor.NextSentence();
-                if (currentInterlocutor.GetPossibleAnswers().Count > 0) {
-                    isWaitingForAnswer = true;
+                bool stillTalking = currentInterlocutor.NextSentence();
+                if (!stillTalking) {
+                    ResetInterlocutor();
                 }
                 else {
-                    isWaitingForAnswer = false;
+                    if (currentInterlocutor.GetPossibleAnswers().Count > 0) {
+                        isWaitingForAnswer = true;
+                    }
+                    else {
+                        isWaitingForAnswer = false;
+                    }
                 }
             }
         }

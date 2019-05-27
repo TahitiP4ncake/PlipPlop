@@ -35,6 +35,7 @@ public class Inhabitant : MonoBehaviour
     public EmotionDisplayers emotionDisplayers;
     public float textFadeSpeed = 60f;
     public float changeFunStanceMaxEvery = 5f;
+    [Range(0f,1f)]public float stanceChangeMinimumProportion = 0.75f;
 
     NavMeshAgent navMeshAgent;
     GameObject visual;
@@ -55,20 +56,15 @@ public class Inhabitant : MonoBehaviour
     {
         if (sheet == null) throw new MissingComponentException("Inhabitant has no sheet : " + name);
 
-        bodyAnimations = GetComponentInChildren<BodyAnimations>();
-
         navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         navMeshAgent.areaMask = sheet.navMeshAreaMask;
         navMeshAgent.speed = sheet.walkingSpeed;
         navMeshAgent.angularSpeed = 720f;
         navMeshAgent.acceleration = 50f;
-        visual = Instantiate(sheet.appearance.FBXPrefab, transform);
-        visual.transform.localPosition = sheet.appearance.position;
-        visual.transform.localEulerAngles = sheet.appearance.eulers;
-        visual.transform.localScale = sheet.appearance.scale;
-        foreach(var renderer in visual.GetComponentsInChildren<Renderer>()) {
-            renderer.material = sheet.appearance.material;
-        }
+        visual = Instantiate(sheet.visual, transform);
+        bodyAnimations = GetComponentInChildren<BodyAnimations>();
+        bodyAnimations.body = visual.transform;
+        navMeshAgent.radius = 1.5f;
 
         HideEmotions();
 
@@ -119,7 +115,8 @@ public class Inhabitant : MonoBehaviour
         var stanceChanges = new List<float>();
         var totalAmusement = currentAmusement;
         while (totalAmusement > 0f) {
-            var cut = Random.value * changeFunStanceMaxEvery;
+            var cut = Random.value * changeFunStanceMaxEvery * (1f-stanceChangeMinimumProportion) 
+                + stanceChangeMinimumProportion * changeFunStanceMaxEvery;
             totalAmusement -= cut;
             stanceChanges.Add(totalAmusement);
         }
@@ -148,13 +145,18 @@ public class Inhabitant : MonoBehaviour
         isHavingFun = false;
     }
 
-    Vector3 GetRandomPointAroundTargetPOI(float range = 1f)
+    Vector3 GetRandomPointAroundTargetPOI(float range = 1f, float minRangePortion = 0.5f)
     {
         var pos = pointsOfInterests[targetPOI].transform.position;
+        var minRadius = range * minRangePortion;
+
+        var randomRadius = Random.value * (range - minRadius) + minRadius;
+        var randomAngle = Mathf.Deg2Rad * Random.value * 360f;
+        
         return new Vector3(
-            pos.x - range / 2 + Random.value * range,
+            pos.x + Mathf.Cos(randomAngle) * randomRadius,
             pos.y,
-            pos.z - range / 2 + Random.value * range
+            pos.z + Mathf.Sin(randomAngle) * randomRadius
         );
     }
 
@@ -202,18 +204,28 @@ public class Inhabitant : MonoBehaviour
     {
         currentLine = 0;
         DisplayText(sheet.dialogSequence[currentLine]);
+        PauseWalking();
+        transform.LookAt(
+            new Vector3(
+                Game.player.transform.position.x,
+                transform.position.y,
+                Game.player.transform.position.z
+            )
+        );
+
         return GetPossibleAnswers().Count > 0;
     }
 
-    public void NextSentence()
+    public bool NextSentence()
     {
         currentLine = sheet.dialogSequence[currentLine].nextLine;
         if (currentLine < 0) {
             currentLine = 0;
             EndDiscussion();
-            return;
+            return false;
         }
         DisplayText(sheet.dialogSequence[currentLine]);
+        return true;
     }
 
     public void SetSentence(int index)
@@ -229,6 +241,7 @@ public class Inhabitant : MonoBehaviour
 
     public void EndDiscussion()
     {
+        ResumeWalking();
         StartCoroutine(FadeTextOut(delegate { }));
     }
 

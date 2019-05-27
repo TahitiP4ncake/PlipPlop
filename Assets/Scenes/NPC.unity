@@ -1386,6 +1386,7 @@ MonoBehaviour:
   isDivertingToLookAt: 0
   isDivertingToStayAround: 1
   divertingRadius: 4.11
+  divertingSafeZone: 0.3
 --- !u!136 &1115135238
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1813,6 +1814,7 @@ MonoBehaviour:
   isDivertingToLookAt: 0
   isDivertingToStayAround: 1
   divertingRadius: 4.11
+  divertingSafeZone: 0.3
 --- !u!136 &1370203299
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1872,6 +1874,7 @@ MonoBehaviour:
   isDivertingToLookAt: 0
   isDivertingToStayAround: 1
   divertingRadius: 4.11
+  divertingSafeZone: 0.3
 --- !u!136 &1512935336
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2657,6 +2660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110169069193094245, guid: 8395868e1b737d148b39e584e2523704,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8395868e1b737d148b39e584e2523704, type: 3}
