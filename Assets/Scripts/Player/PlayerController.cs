@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     PlayerChatter chatter;
     Pilot pilot;
 
-    bool isFrozen = true;
-
+    public bool isFrozen = true;
+    public bool spawnWithCamera = false;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -43,8 +43,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Spawn Camera
-        //cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
-        //cam.playerTransform = absorber.head;
+        if(spawnWithCamera)
+        {
+            cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
+            cam.playerTransform = absorber.head;
+        }
     }
 
     void FixedUpdate()
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour
         // Lerp the rb velocity depending on the camera rotation and inputs
         rb.velocity = Vector3.Lerp(
             rb.velocity,
-            (cam.transform.right * direction.x + cam.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
+            (Camera.main.transform.right * direction.x + Camera.main.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
             moveLerpSpeed * Time.deltaTime
         );
 
