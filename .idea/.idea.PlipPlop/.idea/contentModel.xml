@@ -20,6 +20,7 @@
           <e p="README.txt" t="Include" />
           <e p="RELEASE_NOTES.txt" t="Include" />
         </e>
+        <e p="ImageSlideShow.cs" t="Include" />
         <e p="PanoramaToCubemap" t="Include">
           <e p="Documents" t="Include">
             <e p="PanoramaToCubemap_en.txt" t="Include" />
@@ -29,6 +30,7 @@
             <e p="PanoramaToCubemap.cs" t="Include" />
           </e>
         </e>
+        <e p="PresentationManager.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Absorbable" t="Include">
             <e p="Absorbable.cs" t="Include" />
@@ -41,7 +43,7 @@
           <e p="Ball.cs" t="Include" />
           <e p="Bird.cs" t="Include" />
           <e p="Block.cs" t="Include" />
-          <e p="BodyAnimations.cs" t="Include" />
+          <e p="Breaking.cs" t="Include" />
           <e p="ButterFly.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
           <e p="CollisionEventTransmitter.cs" t="Include" />
@@ -51,7 +53,11 @@
           <e p="Ground.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
           <e p="Inhabitant.cs" t="Include" />
-          <e p="Leg.cs" t="Include" />
+          <e p="ISmashable.cs" t="Include" />
+          <e p="Legs" t="Include">
+            <e p="BodyAnimations.cs" t="Include" />
+            <e p="Leg.cs" t="Include" />
+          </e>
           <e p="Manager" t="Include">
             <e p="Library.cs" t="Include" />
             <e p="Manager.cs" t="Include" />
@@ -60,6 +66,7 @@
             <e p="PlayerMovement.cs" t="Include" />
             <e p="Transport.cs" t="Include" />
           </e>
+          <e p="Panel.cs" t="Include" />
           <e p="Photo.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="Gravity.cs" t="Include" />
@@ -91,6 +98,7 @@
           <e p="S_Cloud.shader" t="Include" />
           <e p="S_Ground.shader" t="Include" />
           <e p="S_PalmTree.shader" t="Include" />
+          <e p="S_Panel.shader" t="Include" />
           <e p="S_PanTex.shader" t="Include" />
           <e p="S_ParticlemMesh.shader" t="Include" />
           <e p="S_ParticleNormal.shader" t="Include" />
@@ -101,6 +109,7 @@
           <e p="S_WaterPP.shader" t="Include" />
           <e p="S_Wood.shader" t="Include" />
         </e>
+        <e p="SlideImage.cs" t="Include" />
         <e p="Standard Assets" t="Include">
           <e p="Editor" t="Include">
             <e p="ImageEffects" t="Include">

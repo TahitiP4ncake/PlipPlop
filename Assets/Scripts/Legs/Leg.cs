@@ -20,6 +20,8 @@ public class Leg : MonoBehaviour
     public BodyAnimations body;
 
     private Vector3 kneeOffset;
+
+    public LayerMask raycastMask;
     
     private void Start()
     {
@@ -52,7 +54,7 @@ public class Leg : MonoBehaviour
         _vel.y = 0;
         _vel = Vector3.ClampMagnitude(_vel, 1);
       
-        if (Physics.Raycast(transform.position, Vector3.down + _vel * forwardDistance, out hit, rayDistance))
+        if (Physics.Raycast(transform.position, Vector3.down + _vel * forwardDistance, out hit, rayDistance, raycastMask))
         {
             foot.position = hit.point + GetNoise(0) * _vel.magnitude;
             foot.transform.up = hit.normal;
