@@ -38,6 +38,7 @@ public class Absorbable : MonoBehaviour, IAbsorbable
     public virtual void Release(Absorber a) // Get release free by the given absorber 
     {
         transform.SetParent(null);
+        transform.position =  a.transform.position + new Vector3(0f, GetVerticalSize()/2, 0f);
         gameObject.layer = 0;
         if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints.None;
         absorber = null;

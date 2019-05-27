@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PresentationManager : MonoBehaviour
 {
+    [Header("Referencies")]
     public string[] scenes;
     public TransitionFrame tf;
     int current = 0;
+
+     [Header("Inputs")]
+    public KeyCode next;
+    public KeyCode previous;
 
     void Awake()
     {
@@ -47,7 +52,7 @@ public class PresentationManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow)) Next();
-        else if(Input.GetKeyDown(KeyCode.LeftArrow)) Previous();
+        if(Input.GetKeyDown(next)) Next();
+        else if(Input.GetKeyDown(previous)) Previous();
     }
 }

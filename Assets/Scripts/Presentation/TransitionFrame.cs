@@ -26,7 +26,6 @@ public class TransitionFrame : MonoBehaviour
     {
         img = GetComponent<Image>();
         img.material = Instantiate(img.material);
-        DontDestroyOnLoad(transform.parent.gameObject);
     }
 
     public void Start()

@@ -5082,12 +5082,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5294d8af0a272f4083aaa2c5827352d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFrozen: 1
-  spawnWithCamera: 0
+  isFrozen: 0
+  spawnWithCamera: 1
   moveSpeed: 7.5
   moveLerpSpeed: 5
   RotationLerpSpeed: 10
-  jumpForce: 10
+  jumpForce: 15
   airControlRatio: 0.75
   checkGroundDistance: 0.5
 --- !u!114 &5869382504267226383
@@ -5122,7 +5122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 5869382504095096603}
   range: 1
-  hipsHeight: 0.5
+  hipsHeight: 1.3
 --- !u!114 &1559339119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5282,11 +5282,6 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 8068200642774125946}
-    - target: {fileID: 6629300910584571118, guid: 94768440ee9ddad438226908b79377fc,
-        type: 3}
-      propertyPath: raycastMask.m_Bits
-      value: 23863
-      objectReference: {fileID: 0}
     - target: {fileID: 6629300909320038760, guid: 94768440ee9ddad438226908b79377fc,
         type: 3}
       propertyPath: foot
@@ -5307,11 +5302,6 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 8068200642774125946}
-    - target: {fileID: 6629300909320038760, guid: 94768440ee9ddad438226908b79377fc,
-        type: 3}
-      propertyPath: raycastMask.m_Bits
-      value: 23863
-      objectReference: {fileID: 0}
     - target: {fileID: 6576720963805941671, guid: 94768440ee9ddad438226908b79377fc,
         type: 3}
       propertyPath: m_Bones.Array.data[0]
