@@ -41,6 +41,7 @@
           <e p="Ball.cs" t="Include" />
           <e p="Bird.cs" t="Include" />
           <e p="Block.cs" t="Include" />
+          <e p="Breaking.cs" t="Include" />
           <e p="ButterFly.cs" t="Include" />
           <e p="CameraRotation.cs" t="Include" />
           <e p="CollisionEventTransmitter.cs" t="Include" />
@@ -50,6 +51,7 @@
           <e p="Ground.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
           <e p="Inhabitant.cs" t="Include" />
+          <e p="ISmashable.cs" t="Include" />
           <e p="Legs" t="Include">
             <e p="BodyAnimations.cs" t="Include" />
             <e p="Leg.cs" t="Include" />

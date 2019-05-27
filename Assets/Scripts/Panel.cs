@@ -33,7 +33,6 @@ public class Panel : MonoBehaviour
         {
             StartCoroutine(Next());
         }
-
         if (Input.GetKeyDown(inputPrevious) && !sliding && slideIndex>0)
         {
             StartCoroutine(Previous());
