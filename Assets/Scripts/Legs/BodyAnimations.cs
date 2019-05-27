@@ -20,11 +20,16 @@ public class BodyAnimations : MonoBehaviour
     public float bodyAmp = .05f;
     public float bodyTilt = 1;
     public float bodyTurn = 10;
+    public float scaleScale = 1f;
+    public float talkWobbleSpeedVariation = 0.5f;
+    public float talkWobbleBaseSpeed = 1f;
 
-    private Vector3 bodyStartPosition;
+    Vector3 bodyStartPosition;
     Vector3 startLocalEulerAngles;
-    private bool up;
-    
+    bool up;
+    Coroutine talkingEnumerator;
+    float startTalkingTime;
+    float talkWobbleSpeed;
     
     void Start()
     {
@@ -32,6 +37,20 @@ public class BodyAnimations : MonoBehaviour
         startLocalEulerAngles = body.localEulerAngles;
         StartCoroutine(UpdateLegs());
         StartCoroutine(UpdateBody());
+    }
+
+    public void StartTalking()
+    {
+        if (talkingEnumerator != null) StopCoroutine(talkingEnumerator);
+        startTalkingTime = System.DateTime.Now.Millisecond;
+        talkWobbleSpeed = talkWobbleBaseSpeed + talkWobbleSpeedVariation * (Random.value-0.5f) ;
+        talkingEnumerator = StartCoroutine(UpdateTalkingAnimation());
+    }
+
+    public void EndTalking()
+    {
+        StopCoroutine(talkingEnumerator);
+        body.localScale = new Vector3(1f, 1f, 1f);
     }
 
     IEnumerator UpdateBody()
@@ -91,6 +110,17 @@ public class BodyAnimations : MonoBehaviour
             {
                 yield return null;
             }
+        }
+    }
+
+    IEnumerator UpdateTalkingAnimation()
+    {
+        while (true) {
+            var delta = System.DateTime.Now.Millisecond - startTalkingTime;
+            var scale = 1f + scaleScale * (Mathf.Sin(delta * talkWobbleSpeed) + 1) * 0.5f;
+            print(scale);
+            body.localScale = new Vector3(1f,1f,1f)* scale;
+            yield return null;
         }
     }
 

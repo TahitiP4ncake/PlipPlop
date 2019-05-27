@@ -35,12 +35,18 @@ public class Inhabitant : MonoBehaviour
     public EmotionDisplayers emotionDisplayers;
     public float textFadeSpeed = 60f;
     public float changeFunStanceMaxEvery = 5f;
+    public CollisionEventTransmitter chatterCollider;
     [Range(0f,1f)]public float stanceChangeMinimumProportion = 0.75f;
+    public float chatterCooldownSeconds = 2f;
+    public float conversationLength = 4f;
+    [Range(0f, 1f)] public float conversationLengthMinimumProportion = 0.4f;
 
+    bool isTalking = false;
     NavMeshAgent navMeshAgent;
     GameObject visual;
     BodyAnimations bodyAnimations;
     int currentLine = -1;
+    float lastTalkTime;
 
     #region AI
 
@@ -66,9 +72,58 @@ public class Inhabitant : MonoBehaviour
         bodyAnimations.body = visual.transform;
         navMeshAgent.radius = 1.5f;
 
+        chatterCollider.onTriggerEnter += (x) => {
+            var interlocutor = x.GetComponent<Inhabitant>();
+            if (interlocutor != null && interlocutor!= this) {
+                if (!interlocutor.IsInChatterCooldown() && !interlocutor.IsTalking() && !IsInChatterCooldown() && !IsTalking()) {
+                    float duration = conversationLength * conversationLengthMinimumProportion + Random.value * (1 - conversationLengthMinimumProportion) * conversationLength;
+                    StartDiscussionWith(interlocutor, duration);
+                    interlocutor.StartDiscussionWith(this, duration);
+                }
+            }
+        };
+
         HideEmotions();
 
         UpdatePointsOfInterest();
+    }
+
+    public void StartDiscussionWith(Inhabitant other, float duration)
+    {
+        isTalking = true;
+        bodyAnimations.StartTalking();
+        PauseWalking();
+        transform.LookAt(
+            new Vector3(
+                other.transform.position.x,
+                transform.position.y,
+                other.transform.position.z
+            )
+        );
+        StartCoroutine(ExecuteIn(
+                delegate {
+                    EndDiscussion();
+                    bodyAnimations.EndTalking();
+                },
+                duration
+            )
+        );
+    }
+
+    IEnumerator ExecuteIn(System.Action callback, float delay = 1f)
+    {
+        yield return new WaitForSeconds(delay);
+        callback.Invoke();
+    }
+
+    public bool IsTalking()
+    {
+        return isTalking;
+    }
+
+    public bool IsInChatterCooldown()
+    {
+        return lastTalkTime + chatterCooldownSeconds > System.DateTime.Now.Second;
     }
 
     void UpdatePointsOfInterest()
@@ -203,6 +258,7 @@ public class Inhabitant : MonoBehaviour
     public bool StartDialogue()
     {
         currentLine = 0;
+        isTalking = true;
         PauseWalking();
         transform.LookAt(
             new Vector3(
@@ -243,6 +299,8 @@ public class Inhabitant : MonoBehaviour
 
     public void EndDiscussion()
     {
+        isTalking = false;
+        lastTalkTime = System.DateTime.Now.Second;
         ResumeWalking();
     }
 

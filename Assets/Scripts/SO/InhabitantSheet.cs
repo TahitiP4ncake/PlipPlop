@@ -13,4 +13,5 @@ public class InhabitantSheet : ScriptableObject
     public int navMeshAreaMask;
     public List<Inhabitant.Line> dialogSequence;
     public List<Inhabitant.Line> screams;
+    public Color legsColor = Color.white;
 }
