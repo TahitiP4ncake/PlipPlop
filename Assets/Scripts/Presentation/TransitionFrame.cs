@@ -19,18 +19,13 @@ public class TransitionFrame : MonoBehaviour
     FrameAnimation currentAnimation;
     float timer = 0f;
 
-    public System.Action OnFrameAnimationStart;
-    public System.Action OnFrameAnimationEnd;
+    public event System.Action OnFrameAnimationStart;
+    public event System.Action OnFrameAnimationEnd;
 
     public void Awake()
     {
         img = GetComponent<Image>();
         img.material = Instantiate(img.material);
-    }
-
-    public void Start()
-    {
-        //layFrameAnimation("close");
     }
 
     public void Update()
@@ -45,7 +40,7 @@ public class TransitionFrame : MonoBehaviour
             else
             {
                 currentAnimation = null;
-                this.OnFrameAnimationEnd.Invoke();
+                OnFrameAnimationEnd?.Invoke();
             }
         }
     }
@@ -54,13 +49,13 @@ public class TransitionFrame : MonoBehaviour
     {
         timer = 0;
         currentAnimation = GetFrameAnimation(name);
-        this.OnFrameAnimationStart.Invoke();
+        OnFrameAnimationStart?.Invoke();
     }
     public void PlayFrameAnimation(FrameAnimation FrameAnimation)
     {
         timer = 0;
         currentAnimation = FrameAnimation;
-        this.OnFrameAnimationStart.Invoke();
+        OnFrameAnimationStart?.Invoke();
     }
 
     FrameAnimation GetFrameAnimation(string name)

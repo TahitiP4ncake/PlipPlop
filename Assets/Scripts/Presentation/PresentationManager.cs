@@ -17,8 +17,10 @@ public class PresentationManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        //Load(current);
+    }
 
+    void Start()
+    {
         tf.OnFrameAnimationEnd += () => { Transition(); };
     }
 
