@@ -473,11 +473,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.Raycast(footTransform.position, -footTransform.forward, .5f))
         {
-            print("Foot");
+            //print("Foot");
             if (!Physics.Raycast(hipsTransform.position, -footTransform.forward, .5f))
             {
                 
-                print("climb!");
+                //print("climb!");
                 
                 rb.velocity+= new Vector3(0,climbForce,0);
                 /*
