@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192d6f2e92b3c8d47841c9f390aa0589, type: 3}
+  m_Name: Bob
+  m_EditorClassIdentifier: 
+  visual: {fileID: 2976177771180720439, guid: 7c428185f6f8f2347874db40d6be98d2, type: 3}
+  team: 0
+  walkingSpeed: 4
+  runningSpeed: 6
+  navMeshAreaMask: -1
+  dialogSequence:
+  - answers:
+    - nextLineId: 1
+      text: euh
+    - nextLineId: 4
+      text: oui
+    text: salut ca va
+    nextLine: 1
+  - answers: []
+    text: ok repond pas surtout
+    nextLine: 2
+  - answers: []
+    text: dac super ambiance
+    nextLine: 3
+  - answers: []
+    text: bon...
+    nextLine: -1
+  - answers: []
+    text: dac
+    nextLine: -1
+  screams:
+  - answers: []
+    text: putain quoi
+    nextLine: 0
+  - answers: []
+    text: genre le mec
+    nextLine: 0
+  - answers: []
+    text: ok beast
+    nextLine: 0
+  - answers: []
+    text: casse toi
+    nextLine: 0
+  legsColor: {r: 0.9137255, g: 0.72905314, b: 0, a: 1}
