@@ -16,6 +16,5 @@ public class Library : MonoBehaviour
     void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
     }
 }
