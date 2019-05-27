@@ -70,6 +70,15 @@ public class Inhabitant : MonoBehaviour
         visual = Instantiate(sheet.visual, transform);
         bodyAnimations = GetComponentInChildren<BodyAnimations>();
         bodyAnimations.body = visual.transform;
+
+        Material inst = null;
+        foreach (var renderer in bodyAnimations.GetComponentsInChildren<Renderer>()) {
+            if (inst == null) {
+                inst = Instantiate(renderer.material);
+                inst.color = sheet.legsColor;
+            }
+            renderer.material = inst;
+        }
         navMeshAgent.radius = 1.5f;
 
         chatterCollider.onTriggerEnter += (x) => {

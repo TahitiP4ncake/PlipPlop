@@ -118,7 +118,6 @@ public class BodyAnimations : MonoBehaviour
         while (true) {
             var delta = System.DateTime.Now.Millisecond - startTalkingTime;
             var scale = 1f + scaleScale * (Mathf.Sin(delta * talkWobbleSpeed) + 1) * 0.5f;
-            print(scale);
             body.localScale = new Vector3(1f,1f,1f)* scale;
             yield return null;
         }
