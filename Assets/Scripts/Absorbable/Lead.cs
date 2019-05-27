@@ -37,7 +37,7 @@ public class Lead : Absorbable
             RaycastHit hit;
             if(Physics.Raycast(GetAbsorber().transform.position, -transform.up, out hit, 0.25f))
             {
-                Smashable s = hit.transform.gameObject.GetComponent<Smashable>();
+                ISmashable s = hit.transform.gameObject.GetComponent<ISmashable>();
                 if(s != null) s.Smash();
             }
         }
