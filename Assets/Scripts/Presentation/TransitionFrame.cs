@@ -19,15 +19,19 @@ public class TransitionFrame : MonoBehaviour
     FrameAnimation currentAnimation;
     float timer = 0f;
 
+    public System.Action OnFrameAnimationStart;
+    public System.Action OnFrameAnimationEnd;
+
     public void Awake()
     {
         img = GetComponent<Image>();
         img.material = Instantiate(img.material);
+        DontDestroyOnLoad(transform.parent.gameObject);
     }
 
     public void Start()
     {
-        PlayFrameAnimation("close");
+        //layFrameAnimation("close");
     }
 
     public void Update()
@@ -42,7 +46,7 @@ public class TransitionFrame : MonoBehaviour
             else
             {
                 currentAnimation = null;
-                Debug.Log("CircleFrameEnd");
+                this.OnFrameAnimationEnd.Invoke();
             }
         }
     }
@@ -51,11 +55,13 @@ public class TransitionFrame : MonoBehaviour
     {
         timer = 0;
         currentAnimation = GetFrameAnimation(name);
+        this.OnFrameAnimationStart.Invoke();
     }
     public void PlayFrameAnimation(FrameAnimation FrameAnimation)
     {
         timer = 0;
         currentAnimation = FrameAnimation;
+        this.OnFrameAnimationStart.Invoke();
     }
 
     FrameAnimation GetFrameAnimation(string name)
