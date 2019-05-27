@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class FrameAnimation
@@ -10,45 +11,42 @@ public class FrameAnimation
     public float duration;
 }
 
-public class CircleFrame : MonoBehaviour
+public class TransitionFrame : MonoBehaviour
 {
-    [Header("Referencies")]
-    public GameObject mask;
-    [Header("Settings")]
-    public float distanceToCamera = 10f;
-    [Header("Animations")]
     public FrameAnimation[] animations;
-    
 
+    Image img;
     FrameAnimation currentAnimation;
-    Vector3 initialMaskSize;
     float timer = 0f;
 
-    void Awake()
+    public System.Action OnFrameAnimationStart;
+    public System.Action OnFrameAnimationEnd;
+
+    public void Awake()
     {
-        initialMaskSize = mask.transform.localScale;
+        img = GetComponent<Image>();
+        img.material = Instantiate(img.material);
+        DontDestroyOnLoad(transform.parent.gameObject);
+    }
+
+    public void Start()
+    {
+        //layFrameAnimation("close");
     }
 
     public void Update()
     {
-        // Facing Camera
-        if(Camera.main != null)
-        {
-            transform.position = Camera.main.transform.position + Camera.main.transform.forward * distanceToCamera;
-            transform.forward = -(Camera.main.transform.position - transform.position);
-        }
-
         if(currentAnimation != null)
         {
             if(timer <= currentAnimation.duration)
             {
                 timer += Time.deltaTime;
-                mask.transform.localScale = initialMaskSize * currentAnimation.curve.Evaluate(timer/currentAnimation.duration);
+                img.material.SetFloat("_Value", currentAnimation.curve.Evaluate(timer/currentAnimation.duration));
             }
             else
             {
                 currentAnimation = null;
-                Debug.Log("CircleFrameEnd");
+                this.OnFrameAnimationEnd.Invoke();
             }
         }
     }
@@ -57,11 +55,13 @@ public class CircleFrame : MonoBehaviour
     {
         timer = 0;
         currentAnimation = GetFrameAnimation(name);
+        this.OnFrameAnimationStart.Invoke();
     }
     public void PlayFrameAnimation(FrameAnimation FrameAnimation)
     {
         timer = 0;
         currentAnimation = FrameAnimation;
+        this.OnFrameAnimationStart.Invoke();
     }
 
     FrameAnimation GetFrameAnimation(string name)
