@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ARMC:
-        m_Texture: {fileID: 2800000, guid: 1a747068b480dda409023996bb28b833, type: 3}
+        m_Texture: {fileID: 2800000, guid: e5776451e551aa642920daa6b77f795c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6a4c5e1c44e4ef5429b604f208bdda4d, type: 3}
+        m_Texture: {fileID: 2800000, guid: bfd23b40e862ed540a28b6a2a736a691, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -77,13 +77,13 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0.18
+    - _Offset: 0.5
     - _Parallax: 0.02
     - _Shadow: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tess: 21.1
+    - _Tess: 12.9
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

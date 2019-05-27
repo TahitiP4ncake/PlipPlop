@@ -68,13 +68,13 @@ public class BodyAnimations : MonoBehaviour
             if (rightLeg)
             {
                 legs[0].UpdateLeg(velocity);
-                body.localEulerAngles = new Vector3(Random.Range(-bodyTilt,bodyTilt),Random.Range(-bodyTurn,-bodyTurn + .5f),Random.Range(-bodyTilt,bodyTilt))* (Vector3.ClampMagnitude(velocity,1).magnitude + .1f);
+                if (lerpBody) body.localEulerAngles = new Vector3(Random.Range(-bodyTilt,bodyTilt),Random.Range(-bodyTurn,-bodyTurn + .5f),Random.Range(-bodyTilt,bodyTilt))* (Vector3.ClampMagnitude(velocity,1).magnitude + .1f);
 
             }
             else
             {
                 legs[1].UpdateLeg(velocity);
-                body.localEulerAngles = new Vector3(Random.Range(-bodyTilt,bodyTilt),Random.Range(bodyTurn,bodyTurn -5f),Random.Range(-bodyTilt,bodyTilt))* (Vector3.ClampMagnitude(velocity,1).magnitude + .1f);
+                if (lerpBody) body.localEulerAngles = new Vector3(Random.Range(-bodyTilt,bodyTilt),Random.Range(bodyTurn,bodyTurn -5f),Random.Range(-bodyTilt,bodyTilt))* (Vector3.ClampMagnitude(velocity,1).magnitude + .1f);
 
             }
             rightLeg = !rightLeg;
@@ -92,6 +92,4 @@ public class BodyAnimations : MonoBehaviour
             }
         }
     }
-
-    
 }
