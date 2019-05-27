@@ -370,6 +370,9 @@ MonoBehaviour:
   bodyAmp: 0.1
   bodyTilt: 2
   bodyTurn: 5
+  scaleScale: 1
+  talkWobbleSpeedVariation: 0.005
+  talkWobbleBaseSpeed: 0.01
 --- !u!1001 &4664179525822847855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,6 +536,11 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 4664179527312076975}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: raycastMask.m_Bits
+      value: 23863
+      objectReference: {fileID: 0}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -713,6 +721,11 @@ PrefabInstance:
       propertyPath: body
       value: 
       objectReference: {fileID: 4664179527312076975}
+    - target: {fileID: 2070103991540644070, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
+        type: 3}
+      propertyPath: raycastMask.m_Bits
+      value: 23863
+      objectReference: {fileID: 0}
     - target: {fileID: 2070103991540644065, guid: 4681cdb8cd1f0e94dbb372d8a6ca9391,
         type: 3}
       propertyPath: m_LocalPosition.x

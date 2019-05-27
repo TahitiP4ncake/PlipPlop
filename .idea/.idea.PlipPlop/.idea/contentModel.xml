@@ -50,6 +50,7 @@
           <e p="DestroyOnAwake.cs" t="Include" />
           <e p="Emotions.cs" t="Include" />
           <e p="FaceMainCamera.cs" t="Include" />
+          <e p="Game.cs" t="Include" />
           <e p="Ground.cs" t="Include" />
           <e p="Habitant.cs" t="Include" />
           <e p="Inhabitant.cs" t="Include" />
@@ -62,6 +63,7 @@
             <e p="Library.cs" t="Include" />
             <e p="Manager.cs" t="Include" />
           </e>
+          <e p="NPCPointOfInterest.cs" t="Include" />
           <e p="Old" t="Include">
             <e p="PlayerMovement.cs" t="Include" />
             <e p="Transport.cs" t="Include" />
@@ -76,10 +78,10 @@
             <e p="PlayerInputs.cs" t="Include" />
           </e>
           <e p="Presentation" t="Include">
-            <e p="CircleFrame.cs" t="Include" />
             <e p="ImageSlideShow.cs" t="Include" />
             <e p="PresentationManager.cs" t="Include" />
             <e p="SlideImage.cs" t="Include" />
+            <e p="TransitionFrame.cs" t="Include" />
           </e>
           <e p="ScreenRecorder.cs" t="Include" />
           <e p="Shark.cs" t="Include" />
@@ -110,6 +112,7 @@
           <e p="S_ParticleNormal.shader" t="Include" />
           <e p="S_PBR.shader" t="Include" />
           <e p="S_PlantPP.shader" t="Include" />
+          <e p="S_Transition.shader" t="Include" />
           <e p="S_UnlitBloom.shader" t="Include" />
           <e p="S_UVScaleCenter.shader" t="Include" />
           <e p="S_WaterPP.shader" t="Include" />

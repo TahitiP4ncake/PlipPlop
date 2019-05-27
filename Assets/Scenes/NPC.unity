@@ -825,6 +825,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869382504267226368, guid: e318dcdc7b37b8d4385721c2ed9e8c25,
+        type: 3}
+      propertyPath: spawnWithCamera
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869382504267226368, guid: e318dcdc7b37b8d4385721c2ed9e8c25,
+        type: 3}
+      propertyPath: isFrozen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e318dcdc7b37b8d4385721c2ed9e8c25, type: 3}
 --- !u!1 &785503676
@@ -1426,7 +1436,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 6d9a8fd3c67d1ed4e8b7ea7cf6e18882, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100010, guid: 5c176a6211219624a9e2989c6815fd9b, type: 3}
+      objectReference: {fileID: 2100000, guid: 6729e78313a290a4cb7d2caf281807a7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d9a8fd3c67d1ed4e8b7ea7cf6e18882, type: 3}
 --- !u!4 &1115135235 stripped
@@ -1857,6 +1867,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd1b586cd2d1ad4c9508a8c7797b55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1436095353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5869382504267226372, guid: e318dcdc7b37b8d4385721c2ed9e8c25,
+    type: 3}
+  m_PrefabInstance: {fileID: 615957942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1436095363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436095353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1bf249616b965458902edd529fe0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  concernedTeams: 00000000
+  amusement: 10
+  isDivertingToLookAt: 0
+  isDivertingToStayAround: 1
+  divertingRadius: 5.38
+  divertingSafeZone: 0.635
 --- !u!1 &1564668848
 GameObject:
   m_ObjectHideFlags: 0
