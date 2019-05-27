@@ -218,14 +218,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Absorbable/SpriteCube.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+            <state relative-caret-position="336">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
-                <marker date="1558974195046" expanded="false" signature="6:78" ph="..." />
-                <marker date="1558974195046" expanded="true" signature="116:632" ph="{...}" />
-                <marker date="1558974195046" expanded="true" signature="254:328" ph="{...}" />
-                <marker date="1558974195046" expanded="true" signature="358:630" ph="{...}" />
-                <marker date="1558974195046" expanded="true" signature="433:615" ph="{...}" />
+                <marker date="1558974632372" expanded="false" signature="6:78" ph="..." />
+                <marker date="1558974632372" expanded="true" signature="116:632" ph="{...}" />
+                <marker date="1558974632372" expanded="true" signature="254:328" ph="{...}" />
+                <marker date="1558974632372" expanded="true" signature="358:630" ph="{...}" />
+                <marker date="1558974632372" expanded="true" signature="433:615" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -266,13 +266,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Absorbable/SpriteCube.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@1.3.0/Scripts/Runtime/TMP_TextUtilities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Panel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Absorbable/Absorbable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Old/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@1.3.0/Scripts/Runtime/TMP_TextUtilities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Neighboors/Assets/Scripts/Voisin.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Block.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Legs/BodyAnimations.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Old/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Legs/Leg.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -407,7 +408,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66001000" />
+    <option name="totallyTimeSpent" value="66606000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -547,20 +548,8 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/BodyLerper.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Manager.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Leg.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/BodyAnimations.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="73" column="16" lean-forward="true" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Leg.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/BodyAnimations.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Old/PlayerMovement.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3951">
@@ -743,14 +732,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Absorbable/SpriteCube.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        <state relative-caret-position="336">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <marker date="1558974195046" expanded="false" signature="6:78" ph="..." />
-            <marker date="1558974195046" expanded="true" signature="116:632" ph="{...}" />
-            <marker date="1558974195046" expanded="true" signature="254:328" ph="{...}" />
-            <marker date="1558974195046" expanded="true" signature="358:630" ph="{...}" />
-            <marker date="1558974195046" expanded="true" signature="433:615" ph="{...}" />
+            <marker date="1558974632372" expanded="false" signature="6:78" ph="..." />
+            <marker date="1558974632372" expanded="true" signature="116:632" ph="{...}" />
+            <marker date="1558974632372" expanded="true" signature="254:328" ph="{...}" />
+            <marker date="1558974632372" expanded="true" signature="358:630" ph="{...}" />
+            <marker date="1558974632372" expanded="true" signature="433:615" ph="{...}" />
           </folding>
         </state>
       </provider>
