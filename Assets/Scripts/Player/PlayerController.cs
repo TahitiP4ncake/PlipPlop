@@ -9,13 +9,16 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     PlayerInputs inputs;
     CameraRotation cam;
-    LegsController legs;
+    BodyAnimations legs;
     Absorber absorber;
     PlayerChatter chatter;
     Pilot pilot;
 
-    bool isFrozen = false;
+
     bool canSwitchAnswer = true;
+
+    public bool isFrozen = true;
+    public bool spawnWithCamera = false;
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         inputs = GetComponent<PlayerInputs>();
-        legs = GetComponentInChildren<LegsController>();
+        legs = GetComponentInChildren<BodyAnimations>();
         absorber = GetComponent<Absorber>();
         chatter = GetComponent<PlayerChatter>();
         pilot = GetComponent<Pilot>();
@@ -45,13 +48,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Spawn Camera
-        cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
-        cam.playerTransform = absorber.head;
+        if(spawnWithCamera)
+        {
+            cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
+            cam.playerTransform = absorber.head;
+        }
     }
 
     void FixedUpdate()
     {
         if(!isFrozen) Move(inputs.direction);
+
+        legs.velocity = rb.velocity;
     }
 
     void Update()
@@ -89,13 +97,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Parse values to legs
-        legs.SetGrounded(isGrounded);
+        //legs.SetGrounded(isGrounded);
     }
 
     private void Jump(float force) // Make the player jump 
     {
         rb.velocity = new Vector3(rb.velocity.x, force, rb.velocity.z);
-        legs.Jump();
+        //legs.Jump();
     }
 
     private void Move(Vector2 direction) // Apply inputs to move the player 
@@ -106,7 +114,7 @@ public class PlayerController : MonoBehaviour
         // Lerp the rb velocity depending on the camera rotation and inputs
         rb.velocity = Vector3.Lerp(
             rb.velocity,
-            (cam.transform.right * direction.x + cam.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
+            (Camera.main.transform.right * direction.x + Camera.main.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
             moveLerpSpeed * Time.deltaTime
         );
 
@@ -118,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Parse speed to legs
-        legs.SetSpeed(direction.magnitude);
+        //legs.SetSpeed(direction.magnitude);
     }    
 
     private bool IsGrounded() // Simple check if player is on something 
