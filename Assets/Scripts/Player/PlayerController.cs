@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     PlayerInputs inputs;
     CameraRotation cam;
-    LegsController legs;
+    BodyAnimations legs;
     Absorber absorber;
     PlayerChatter chatter;
     Pilot pilot;
 
-    bool isFrozen = false;
+    bool isFrozen = true;
 
 
     [Header("Movement Settings")]
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputs = GetComponent<PlayerInputs>();
-        legs = GetComponentInChildren<LegsController>();
+        legs = GetComponentInChildren<BodyAnimations>();
         absorber = GetComponent<Absorber>();
         chatter = GetComponent<PlayerChatter>();
         pilot = GetComponent<Pilot>();
@@ -43,13 +43,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Spawn Camera
-        cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
-        cam.playerTransform = absorber.head;
+        //cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
+        //cam.playerTransform = absorber.head;
     }
 
     void FixedUpdate()
     {
         if(!isFrozen) Move(inputs.direction);
+
+        legs.velocity = rb.velocity;
     }
 
     void Update()
@@ -76,13 +78,13 @@ public class PlayerController : MonoBehaviour
         if (inputs.talk) chatter.TryTalk();
 
         // Parse values to legs
-        legs.SetGrounded(isGrounded);
+        //legs.SetGrounded(isGrounded);
     }
 
     private void Jump(float force) // Make the player jump 
     {
         rb.velocity = new Vector3(rb.velocity.x, force, rb.velocity.z);
-        legs.Jump();
+        //legs.Jump();
     }
 
     private void Move(Vector2 direction) // Apply inputs to move the player 
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Parse speed to legs
-        legs.SetSpeed(direction.magnitude);
+        //legs.SetSpeed(direction.magnitude);
     }    
 
     private bool IsGrounded() // Simple check if player is on something 
