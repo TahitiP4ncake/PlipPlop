@@ -98,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
         // Parse values to legs
         //legs.SetGrounded(isGrounded);
+
+        cam.offset = new Vector3(0f, -absorber.GetBodyHeight()/2, 0f);
     }
 
     private void Jump(float force) // Make the player jump 
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
         // Lerp the rb velocity depending on the camera rotation and inputs
         rb.velocity = Vector3.Lerp(
             rb.velocity,
-            (Camera.main.transform.right * direction.x + Camera.main.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
+            (cam.transform.right * direction.x + cam.transform.forward * direction.y) * moveSpeed + new Vector3(0f, rb.velocity.y, 0f),
             moveLerpSpeed * Time.deltaTime
         );
 
