@@ -35,7 +35,7 @@ public class Lead : Absorbable
         if(GetAbsorber() != null && gravity != null && gravity.GetVelocity().y < 0f)
         {
             RaycastHit hit;
-            if(Physics.Raycast(GetAbsorber().transform.position, -transform.up, out hit, 0.25f))
+            if(Physics.Raycast(GetAbsorber().transform.position, -transform.up, out hit, 1f))
             {
                 ISmashable s = hit.transform.gameObject.GetComponent<ISmashable>();
                 if(s != null) s.Smash();

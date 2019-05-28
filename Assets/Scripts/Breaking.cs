@@ -56,7 +56,7 @@ public class Breaking : MonoBehaviour, ISmashable
                     Random.Range(-1f, 1f),
                     Random.Range(-1f, 1f),
                     Random.Range(-1f, 1f)
-                ) * 10f,
+                ) * 50f,
                 ForceMode.Impulse
             );
             p.c.enabled = true;
