@@ -22,6 +22,8 @@ public class PresentationManager : MonoBehaviour
     void Start()
     {
         tf.OnFrameAnimationEnd += () => { Transition(); };
+
+        Cursor.visible = false;
     }
 
     public void Transition()
