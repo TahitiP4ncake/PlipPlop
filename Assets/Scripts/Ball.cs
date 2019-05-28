@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         
-        Manager.SINGLETON.PlaySound("bounce", .4f);
+        //Manager.SINGLETON.PlaySound("bounce", .4f);
 
         if (other.collider.CompareTag("Player"))
         {
