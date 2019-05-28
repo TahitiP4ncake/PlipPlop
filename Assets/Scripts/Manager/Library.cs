@@ -18,13 +18,4 @@ public class Library : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            PlayerController pc = FindObjectOfType<PlayerController>();
-            pc.isFrozen = !pc.isFrozen;
-        }
-    }
 }

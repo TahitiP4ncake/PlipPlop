@@ -12,6 +12,7 @@ public class CameraRotation : MonoBehaviour
     
     public Transform camXRotation;
     public Vector2 xLimits;
+    public Vector3 offset;
 
     
     //Internal Data
@@ -25,7 +26,7 @@ public class CameraRotation : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, playerTransform.position, lerpSpeed);
+        transform.position = Vector3.Lerp(transform.position, playerTransform.position + offset, lerpSpeed);
         transform.localEulerAngles += new Vector3(0,input.x * xSpeed ,0);
         camXRotation.localEulerAngles = new Vector3( Mathf.Clamp( input.y *-ySpeed  + 
         ((camXRotation.localEulerAngles.x > 180)? camXRotation.localEulerAngles.x- 360 : camXRotation.localEulerAngles.x)
