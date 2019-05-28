@@ -152,6 +152,7 @@ MonoBehaviour:
   - Slide 5
   - Slide 6
   - Slide 7
+  - LevelSP2_Dorian
   tf: {fileID: 1251560566}
   next: 275
   previous: 276
@@ -697,6 +698,16 @@ PrefabInstance:
         type: 3}
       propertyPath: animations.Array.data[0].curve.m_Curve.Array.data[0].time
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768052109187484612, guid: 0ce0dce6fc6bf7d4785f5405fd9c85d2,
+        type: 3}
+      propertyPath: animations.Array.data[0].duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768052109187484612, guid: 0ce0dce6fc6bf7d4785f5405fd9c85d2,
+        type: 3}
+      propertyPath: animations.Array.data[1].duration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8768052109187484613, guid: 0ce0dce6fc6bf7d4785f5405fd9c85d2,
         type: 3}
