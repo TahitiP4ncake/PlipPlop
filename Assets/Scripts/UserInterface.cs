@@ -41,6 +41,7 @@ public class UserInterface : MonoBehaviour
     {
         dialogueText.enabled = true;
         dialogueText.fontSize = 72f;
+        print(position);
         dialogueText.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(position);
         dialogueText.text = content;
     }
