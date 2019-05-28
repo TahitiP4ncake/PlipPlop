@@ -560,8 +560,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: 1
   appliedGravityStrength: 1
---- !u!64 &88940679
-MeshCollider:
+--- !u!65 &88940679
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -570,10 +570,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 4a852432e356f064ea66d47bba110928, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &98524175
 PrefabInstance:
   m_ObjectHideFlags: 0
