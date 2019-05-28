@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         {
             cam = Instantiate(Library.instance.playerCameraPrefab).GetComponent<CameraRotation>();
             cam.playerTransform = absorber.head;
+            cam.transform.position = absorber.head.position;
         }
     }
 
