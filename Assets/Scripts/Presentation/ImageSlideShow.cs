@@ -10,13 +10,13 @@ public class ImageSlideShow : MonoBehaviour
 
     bool[] shown;
     bool[] smaller;
-    int current;
+    int current = -1;
 
     void Start()
     {
         shown = new bool[images.Length];
         smaller = new bool[images.Length];
-        Show(current);
+        //Show(current);
     }
 
     public void Next()
